@@ -79,17 +79,8 @@
   .workspace-head p{margin:4px 0 0;color:#587065;font-size:14px}
   .management-frame-shell{background:#fff;border:1px solid #d8e8d9;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(27,67,50,.08)}
   #heroTrackerFrame{display:block;width:100%;height:min(82vh,1100px);min-height:780px;border:0;background:#f3f8f1}
-  .hero-map-card{align-self:stretch;background:linear-gradient(150deg,#1B4332,#2D6A4F);border-radius:24px;padding:clamp(22px,3vw,34px);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:14px;box-shadow:0 16px 36px rgba(27,67,50,.17);position:relative;overflow:hidden}
-  .hero-map-card:before{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-80px;top:-90px;box-shadow:0 0 0 25px rgba(255,255,255,.035),0 0 0 55px rgba(255,255,255,.025)}
-  .hero-map-card>*{position:relative}
-  .hero-map-card .map-kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#D8F3DC;margin:0}
-  .hero-map-card h2{font-size:clamp(24px,3vw,35px);line-height:1.25;margin:0}
-  .hero-map-card p{line-height:1.7;color:#e5f3e8;margin:0}
-  .hero-map-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0}
-  .hero-map-metrics div{padding:12px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.07)}
-  .hero-map-metrics b{display:block;font-size:21px;color:#fff}
-  .hero-map-metrics span{font-size:12px;color:#D8F3DC}
-  .hero-map-card .btn{align-self:flex-start;background:#F4A300;color:#1B4332;border:0}
+  /* The hero introduction card was removed; the interactive map appears in its own section below. */
+  .hero-grid{grid-template-columns:minmax(0,1fr)!important}
   .farm-map-section{padding:clamp(26px,4vw,54px) 0;background:#f3f8f1}
   .farm-map-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
   .farm-map-heading h2{margin:0;color:#1B4332}
@@ -101,7 +92,7 @@
   body.dashboard-mode #dashboardWorkspace{display:block!important}
   body.dashboard-mode .site-nav,body.dashboard-mode .nav-toggle{display:none!important}
   @media(max-width:1100px){.role-login-controls{width:100%;justify-content:flex-start;margin:0 0 4px;order:5}.header-row{flex-wrap:wrap}.role-login-btn{padding:9px 11px}}
-  @media(max-width:650px){.role-login-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.role-login-btn{white-space:normal;font-size:11px;padding:9px 5px;min-height:42px}.workspace-toggle{grid-column:1/-1;width:100%}.workspace-head{align-items:flex-start;flex-direction:column}.workspace-head .workspace-toggle{width:auto}.hero-map-card{min-height:320px}.farm-map-heading{align-items:flex-start;flex-direction:column}#farmMapFrame{height:1120px}#heroTrackerFrame{min-height:760px;height:82vh}}
+  @media(max-width:650px){.role-login-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.role-login-btn{white-space:normal;font-size:11px;padding:9px 5px;min-height:42px}.workspace-toggle{grid-column:1/-1;width:100%}.workspace-head{align-items:flex-start;flex-direction:column}.workspace-head .workspace-toggle{width:auto}.farm-map-heading{align-items:flex-start;flex-direction:column}#farmMapFrame{height:1120px}#heroTrackerFrame{min-height:760px;height:82vh}}
 </style>
 
 </head>
@@ -221,7 +212,6 @@
           <button type="button" class="btn btn-ghost" data-dashboard-action="btnProjectInfo">📄 Project সম্পর্কে</button>
           <button type="button" class="btn btn-ghost" data-dashboard-action="btnInvestInfo">📄 Invest সম্পর্কে</button>
           <button type="button" class="btn btn-ghost btn-youtube" data-dashboard-action="btnVideos">▶️ প্রজেক্টের ভিডিও</button>
-          <a href="interactive_farm_map.html" class="btn btn-ghost">🗺️ Interactive Farm Map</a>
           <a href="https://wa.me/8801581477854" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp-এ কথা বলুন</a>
           <span class="install-inline" id="installPill" hidden>
             <button type="button" class="btn btn-ghost install-btn-inline" id="installBtn">📲 অ্যাপ ইনস্টল করুন</button>
@@ -229,17 +219,6 @@
             <span class="install-hint" id="installHint" hidden>Safari-তে নিচের শেয়ার (⬆️) বাটন চেপে "Add to Home Screen" বাছুন।</span>
           </span>
         </div>
-      </div>
-      <div class="hero-map-card">
-        <p class="map-kicker">ডিজিটাল ফার্ম ম্যানেজমেন্ট</p>
-        <h2>জমির প্রতিটি অংশ, এক জায়গায়</h2>
-        <p>ইন্টারঅ্যাকটিভ ম্যাপে পুকুর, পশুপালন, বাগান, ফসল ও অন্যান্য জোন নির্বাচন করে কার্যক্রম ও অগ্রগতি দেখুন।</p>
-        <div class="hero-map-metrics">
-          <div><b>২৪০ × ১২০</b><span>জমির পরিকল্পিত মাপ (ফুট)</span></div>
-          <div><b>৭টি</b><span>ক্লিকযোগ্য ফার্ম জোন</span></div>
-        </div>
-        <a class="btn" href="#farm-map">🗺️ ফার্ম ম্যাপ দেখুন</a>
-        <p style="font-size:12px;color:#D8F3DC">অ্যাডমিন, স্টাফ ও ইনভেস্টর ড্যাশবোর্ড খুলতে উপরের লগইন অপশন ব্যবহার করুন।</p>
       </div>
     </div>
   </section>
