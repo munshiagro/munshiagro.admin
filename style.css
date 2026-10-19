@@ -315,6 +315,9 @@ a:focus-visible, button:focus-visible {
 }
 .btn-ghost:hover { border-color: var(--soil); background: rgba(46,33,21,0.05); }
 
+.btn-youtube { border-color: rgba(204,0,0,0.35); color: #a60000; }
+.btn-youtube:hover { border-color: #cc0000; background: rgba(204,0,0,0.06); }
+
 /* accent button — reserved for the one action we most want tapped (Invest) */
 .btn-accent {
   background: var(--harvest);

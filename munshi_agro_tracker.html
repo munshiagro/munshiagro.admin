@@ -526,6 +526,57 @@
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18); z-index: 5;
 }
 .install-hint[hidden] { display: none; }
+  /* ---------- Video gallery ---------- */
+  .video-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px; margin-top: 10px;
+  }
+  .video-card {
+    cursor: pointer; border: none; background: var(--bg); border-radius: 12px;
+    overflow: hidden; padding: 0; text-align: left; font-family: inherit;
+  }
+  .video-card .thumb-wrap {
+    position: relative; width: 100%; background: #000;
+    aspect-ratio: 16 / 9; overflow: hidden;
+  }
+  .video-card.vertical .thumb-wrap { aspect-ratio: 9 / 16; }
+  .video-card .thumb-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-card .play-badge {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .video-card .play-badge span {
+    width: 44px; height: 44px; border-radius: 50%; background: rgba(255,0,0,0.88);
+    color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .video-card .video-title {
+    padding: 8px 10px; font-size: 13px; font-weight: 600; color: var(--dark);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .video-card .orient-pill {
+    position: absolute; top: 6px; left: 6px; font-size: 10.5px; font-weight: 700;
+    background: rgba(0,0,0,0.6); color: #fff; padding: 2px 7px; border-radius: 999px;
+  }
+
+  .video-player-wrap {
+    width: 100%; margin: 0 auto; background: #000; border-radius: 12px; overflow: hidden;
+    aspect-ratio: 16 / 9; max-width: 100%;
+  }
+  .video-player-wrap.vertical { aspect-ratio: 9 / 16; max-width: 360px; }
+  .video-player-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+  .video-player-nav { display: flex; justify-content: space-between; gap: 10px; margin-top: 12px; }
+  .video-player-nav button {
+    flex: 1; padding: 10px; border-radius: 10px; border: 1.5px solid var(--soft);
+    background: var(--white); color: var(--dark); font-family: inherit; font-weight: 700; cursor: pointer;
+  }
+  .video-player-nav button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .video-admin-row {
+    display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    padding: 10px; border-radius: 10px; background: var(--bg); margin-bottom: 8px;
+  }
+  .video-admin-row .vtitle { flex: 1; min-width: 160px; font-size: 13.5px; color: var(--dark); font-weight: 600; }
+  .video-admin-row .vmeta { font-size: 12px; color: var(--muted); }
 </style>
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DZPQBGPBJ"></script>
@@ -556,6 +607,7 @@
     <button type="button" class="nav-card" id="btnProjectInfo"><span class="nav-icon">📄</span><span class="nav-label">Project সম্পর্কে</span></button>
     <button type="button" class="nav-card" id="btnInvestInfo"><span class="nav-icon">📄</span><span class="nav-label">Invest সম্পর্কে</span></button>
     <button type="button" class="nav-card" id="btnInvestNow"><span class="nav-icon">💰</span><span class="nav-label">Invest করুন</span></button>
+    <button type="button" class="nav-card" id="btnVideos"><span class="nav-icon">▶️</span><span class="nav-label">প্রজেক্টের ভিডিও</span></button>
     <span class="nav-card install-nav-card" id="installPill" hidden>
       <button type="button" class="install-btn-nav" id="installBtn"><span class="nav-icon">📲</span><span class="nav-label">অ্যাপ ইনস্টল করুন</span></button>
       <button type="button" class="install-close-inline" id="installClose" aria-label="বন্ধ করুন">✕</button>
@@ -933,6 +985,20 @@
         <span id="investPdfStatus" style="font-size:12.5px; color:var(--mid);"></span>
       </div>
     </div>
+
+    <h3 style="font-size:15px;margin:22px 0 8px;">▶️ প্রজেক্টের ভিডিও ব্যবস্থাপনা</h3>
+    <p class="view-note">ইউটিউব লিংক দিয়ে ভিডিও যোগ করুন — এটা পাবলিক ভিউয়ের "প্রজেক্টের ভিডিও" অপশনে দেখা যাবে। ভিডিও সরাসরি এই সাইটের ভেতরেই চলবে, দর্শক লিংক কপি/শেয়ার করতে পারবেন না। অনুভূমিক (সাধারণ) বা উল্লম্ব (Shorts) — দুই ধরনের ভিডিওই দেওয়া যাবে।</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;">
+      <input type="text" id="videoUrlInput" placeholder="ইউটিউব লিংক পেস্ট করুন"
+        style="flex:2; min-width:200px; padding:9px 12px; border-radius:8px; border:1.5px solid var(--soft); font-family:inherit; font-size:13.5px;">
+      <input type="text" id="videoTitleInput" placeholder="ভিডিওর শিরোনাম (ঐচ্ছিক)"
+        style="flex:1; min-width:150px; padding:9px 12px; border-radius:8px; border:1.5px solid var(--soft); font-family:inherit; font-size:13.5px;">
+      <label style="font-size:13px; display:flex; align-items:center; gap:4px;"><input type="radio" name="videoOrient" value="horizontal" checked> অনুভূমিক</label>
+      <label style="font-size:13px; display:flex; align-items:center; gap:4px;"><input type="radio" name="videoOrient" value="vertical"> উল্লম্ব</label>
+      <button type="button" id="addVideoBtn" class="staff-btn" style="width:auto;">+ যোগ করুন</button>
+    </div>
+    <p class="form-submit-error" id="videoAddError" style="display:none; color:#b3261e; font-size:13px; margin-bottom:10px;"></p>
+    <div id="videoAdminList"></div>
   </div>
 </div>
 </div>
@@ -1020,6 +1086,30 @@
     <h2 id="pdfInfoTitle">PDF</h2>
     <p id="pdfInfoBody" class="view-note"></p>
     <a id="pdfInfoLink" class="btn btn-primary" href="#" target="_blank" rel="noopener">PDF খুলুন</a>
+  </div>
+</div>
+
+<div class="modal-overlay" id="videoGalleryOverlay" style="display:none;">
+  <div class="modal-box">
+    <button type="button" class="modal-close" id="videoGalleryClose">✕</button>
+    <h2>▶️ প্রজেক্টের ভিডিও</h2>
+    <p class="view-note" id="videoGalleryEmpty" style="display:none;">এখনো কোনো ভিডিও যোগ করা হয়নি।</p>
+    <div class="video-grid" id="videoGalleryGrid"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="videoPlayerOverlay" style="display:none;">
+  <div class="modal-box" oncontextmenu="return false;">
+    <button type="button" class="modal-close" id="videoPlayerClose">✕</button>
+    <h2 id="videoPlayerTitle" style="font-size:17px;">ভিডিও</h2>
+    <div class="video-player-wrap" id="videoPlayerWrap">
+      <iframe id="videoPlayerIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="video-player-nav">
+      <button type="button" id="videoPrevBtn">⬅️ আগের ভিডিও</button>
+      <button type="button" id="videoNextBtn">পরের ভিডিও ➡️</button>
+    </div>
+    <p class="view-note" style="margin-top:10px; font-size:12px;">এই ভিডিও শুধু এখানেই দেখা যাবে — শেয়ার, ডাউনলোড বা লিংক কপির অপশন উপলব্ধ নয়।</p>
   </div>
 </div>
 
@@ -1186,6 +1276,7 @@ if (!DATA.staff) DATA.staff = { pending: [], approved: [] };
 if (!DATA.investors) DATA.investors = { pending: [], approved: [] };
 if (Array.isArray(DATA.investors)) DATA.investors = { pending: [], approved: DATA.investors };
 if (!DATA.pdfs) DATA.pdfs = { project: null, invest: null };
+if (!DATA.videos) DATA.videos = [];
 function ensureStaffExtras(rec){
   if (rec.salary === undefined || rec.salary === null) rec.salary = 0;
   if (!rec.attendance) rec.attendance = {};
@@ -1879,7 +1970,7 @@ function applyAdminUI(){
     staffCard.classList.remove("open");
     if (staffNavCard) staffNavCard.classList.remove("active");
   }
-  if (isAdmin) renderStaffLists();
+  if (isAdmin) { renderStaffLists(); renderVideoAdminList(); }
 
   const myWorkCard = document.getElementById("myWorkCard");
   const myWorkNavCard = document.getElementById("myWorkNavCard");
@@ -2820,6 +2911,139 @@ document.addEventListener("keydown", (ev) => {
   closeModal("dialogOverlay");
   closeModal("noticeOverlay");
 });
+
+/* ---------- YouTube video gallery ---------- */
+function extractYouTubeId(url){
+  if (!url) return null;
+  const patterns = [
+    /youtu\.be\/([A-Za-z0-9_-]{11})/,
+    /youtube\.com\/watch\?v=([A-Za-z0-9_-]{11})/,
+    /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/,
+    /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/,
+    /youtube\.com\/live\/([A-Za-z0-9_-]{11})/
+  ];
+  for (const p of patterns) {
+    const m = url.match(p);
+    if (m) return m[1];
+  }
+  return null;
+}
+
+function renderVideoAdminList(){
+  const wrap = document.getElementById("videoAdminList");
+  if (!wrap) return;
+  const videos = DATA.videos || [];
+  wrap.innerHTML = "";
+  if (!videos.length) {
+    wrap.innerHTML = `<div class="empty">এখনো কোনো ভিডিও যোগ করা হয়নি।</div>`;
+    return;
+  }
+  videos.forEach((v, i)=>{
+    const row = document.createElement("div");
+    row.className = "video-admin-row";
+    row.innerHTML = `
+      <span class="vtitle">${i+1}. ${v.title || "(শিরোনামহীন)"}</span>
+      <span class="vmeta">${v.orientation === "vertical" ? "উল্লম্ব" : "অনুভূমিক"} · ${v.videoId}</span>
+      <button type="button" class="del" data-id="${v.id}">মুছুন</button>
+    `;
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll(".del").forEach(b=>{
+    b.onclick = () => {
+      DATA.videos = DATA.videos.filter(v=>v.id !== b.dataset.id);
+      saveState();
+      renderVideoAdminList();
+      renderVideoGallery();
+    };
+  });
+}
+
+document.getElementById("addVideoBtn").addEventListener("click", () => {
+  const urlInput = document.getElementById("videoUrlInput");
+  const titleInput = document.getElementById("videoTitleInput");
+  const errEl = document.getElementById("videoAddError");
+  const orient = document.querySelector('input[name="videoOrient"]:checked').value;
+  const url = urlInput.value.trim();
+  const videoId = extractYouTubeId(url);
+  if (!videoId) {
+    errEl.textContent = "সঠিক ইউটিউব লিংক দিন (যেমন: https://youtu.be/XXXXXXXXXXX বা https://www.youtube.com/watch?v=XXXXXXXXXXX)।";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+  DATA.videos = DATA.videos || [];
+  DATA.videos.push({
+    id: makeId(),
+    videoId,
+    title: titleInput.value.trim(),
+    orientation: orient
+  });
+  saveState();
+  urlInput.value = ""; titleInput.value = "";
+  renderVideoAdminList();
+  renderVideoGallery();
+});
+
+function renderVideoGallery(){
+  const grid = document.getElementById("videoGalleryGrid");
+  const emptyEl = document.getElementById("videoGalleryEmpty");
+  if (!grid) return;
+  const videos = DATA.videos || [];
+  grid.innerHTML = "";
+  emptyEl.style.display = videos.length ? "none" : "block";
+  videos.forEach((v, i)=>{
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "video-card" + (v.orientation === "vertical" ? " vertical" : "");
+    card.innerHTML = `
+      <div class="thumb-wrap">
+        <span class="orient-pill">${v.orientation === "vertical" ? "উল্লম্ব" : "অনুভূমিক"}</span>
+        <img src="https://img.youtube.com/vi/${v.videoId}/hqdefault.jpg" alt="${v.title || "ভিডিও"}" loading="lazy">
+        <div class="play-badge"><span>▶</span></div>
+      </div>
+      <div class="video-title">${v.title || ("ভিডিও " + (i+1))}</div>
+    `;
+    card.onclick = () => openVideoPlayer(i);
+    grid.appendChild(card);
+  });
+}
+
+let currentVideoIndex = -1;
+function openVideoPlayer(index){
+  const videos = DATA.videos || [];
+  if (index < 0 || index >= videos.length) return;
+  currentVideoIndex = index;
+  const v = videos[index];
+  const wrap = document.getElementById("videoPlayerWrap");
+  const iframe = document.getElementById("videoPlayerIframe");
+  wrap.className = "video-player-wrap" + (v.orientation === "vertical" ? " vertical" : "");
+  iframe.src = `https://www.youtube.com/embed/${v.videoId}?rel=0&modestbranding=1&iv_load_policy=3&autoplay=1`;
+  document.getElementById("videoPlayerTitle").textContent = v.title || "ভিডিও";
+  document.getElementById("videoPrevBtn").disabled = index <= 0;
+  document.getElementById("videoNextBtn").disabled = index >= videos.length - 1;
+  closeModal("videoGalleryOverlay");
+  openModal("videoPlayerOverlay");
+}
+
+document.getElementById("btnVideos").addEventListener("click", () => {
+  renderVideoGallery();
+  openModal("videoGalleryOverlay");
+});
+document.getElementById("videoGalleryClose").addEventListener("click", () => closeModal("videoGalleryOverlay"));
+document.getElementById("videoGalleryOverlay").addEventListener("click", (ev)=>{
+  if (ev.target.id === "videoGalleryOverlay") closeModal("videoGalleryOverlay");
+});
+
+function closeVideoPlayer(){
+  document.getElementById("videoPlayerIframe").src = ""; // স্ক্রিন বন্ধ হওয়ার সাথে সাথে ভিডিও থেমে যাবে
+  closeModal("videoPlayerOverlay");
+}
+document.getElementById("videoPlayerClose").addEventListener("click", closeVideoPlayer);
+document.getElementById("videoPlayerOverlay").addEventListener("click", (ev)=>{
+  if (ev.target.id === "videoPlayerOverlay") closeVideoPlayer();
+});
+document.getElementById("videoPrevBtn").addEventListener("click", () => openVideoPlayer(currentVideoIndex - 1));
+document.getElementById("videoNextBtn").addEventListener("click", () => openVideoPlayer(currentVideoIndex + 1));
 
 document.getElementById("btnInvestNow").addEventListener("click", () => openModal("investFormOverlay"));
 document.getElementById("investFormClose").addEventListener("click", () => closeModal("investFormOverlay"));
