@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>মুন্সী এগ্রো — স্মার্ট কৃষি, সমৃদ্ধ আগামী | মো: সাইফুল ইসলাম</title>
-<meta name="description" content="মুন্সী এগ্রো — মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প ও লাইভ হিসাব-নিকাশ ট্র্যাকার। টেকসই কৃষি, পশুপালন, মৎস্য ও পোল্ট্রি খামারের সম্পূর্ণ তথ্য।">
-<link rel="canonical" href="https://munshirahad353-oss.github.io/saifulislam-cup/">
+<meta name="description" content="মুন্সী এগ্রো — মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প ও সমন্বিত কৃষি, ডিজিটাল খামার ব্যবস্থাপনা, ফার্ম ম্যাপ এবং অনুমোদিত অ্যাডমিন, স্টাফ ও ইনভেস্টর ড্যাশবোর্ড।">
+<link rel="canonical" href="https://munshiagro.github.io/munshiagro.admin/">
 <meta name="theme-color" content="#1B4332">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -20,16 +20,16 @@
 <meta property="og:locale" content="bn_BD">
 <meta property="og:site_name" content="মুন্সী এগ্রো">
 <meta property="og:title" content="মুন্সী এগ্রো — স্মার্ট কৃষি, সমৃদ্ধ আগামী">
-<meta property="og:description" content="মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প ও লাইভ হিসাব-নিকাশ ট্র্যাকার — টেকসই কৃষি, পশুপালন, মৎস্য ও পোল্ট্রি খামারের সম্পূর্ণ তথ্য।">
-<meta property="og:url" content="https://munshirahad353-oss.github.io/saifulislam-cup/">
-<meta property="og:image" content="https://munshirahad353-oss.github.io/saifulislam-cup/og-image.jpg">
+<meta property="og:description" content="মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প, ডিজিটাল ফার্ম ম্যাপ এবং ভূমিকা-ভিত্তিক ব্যবস্থাপনা ড্যাশবোর্ড।">
+<meta property="og:url" content="https://munshiagro.github.io/munshiagro.admin/">
+<meta property="og:image" content="https://munshiagro.github.io/munshiagro.admin/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="মুন্সী এগ্রো — স্মার্ট কৃষি, সমৃদ্ধ আগামী">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="মুন্সী এগ্রো — স্মার্ট কৃষি, সমৃদ্ধ আগামী">
-<meta name="twitter:description" content="মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প ও লাইভ হিসাব-নিকাশ ট্র্যাকার — টেকসই কৃষি, পশুপালন, মৎস্য ও পোল্ট্রি খামারের সম্পূর্ণ তথ্য।">
-<meta name="twitter:image" content="https://munshirahad353-oss.github.io/saifulislam-cup/og-image.jpg">
+<meta name="twitter:description" content="মো: সাইফুল ইসলামের সমন্বিত কৃষি প্রকল্প, ডিজিটাল ফার্ম ম্যাপ এবং ভূমিকা-ভিত্তিক ব্যবস্থাপনা ড্যাশবোর্ড।">
+<meta name="twitter:image" content="https://munshiagro.github.io/munshiagro.admin/og-image.jpg">
 
 <script type="application/ld+json">
 {
@@ -61,6 +61,49 @@
   gtag('js', new Date());
   gtag('config', 'G-3DZPQBGPBJ');
 </script>
+
+<style>
+  /* Main-site role login controls and embedded management workspace */
+  .role-login-controls{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-left:auto}
+  .role-login-btn,.workspace-toggle{font:600 12.5px/1.25 system-ui,sans-serif;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:10px 12px;cursor:pointer;white-space:nowrap;transition:transform .15s,opacity .15s,background .15s}
+  .role-login-btn{color:#fff;background:#28583f;box-shadow:0 2px 7px rgba(0,0,0,.08)}
+  .role-login-btn:hover{transform:translateY(-1px);background:#1B4332}
+  .role-login-btn.active{background:#F4A300;color:#1B4332;border-color:#F4A300}
+  .role-login-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .workspace-toggle{background:#fff;color:#1B4332;border-color:#D8F3DC}
+  .role-login-controls [hidden],#dashboardWorkspace[hidden]{display:none!important}
+  #dashboardWorkspace{background:#f3f8f1;min-height:65vh;padding:22px 0 36px}
+  .workspace-wrap{width:min(1200px,calc(100% - 28px));margin:0 auto}
+  .workspace-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border:1px solid #d8e8d9;border-radius:14px}
+  .workspace-head h2{margin:0;color:#1B4332;font-size:clamp(20px,3vw,28px)}
+  .workspace-head p{margin:4px 0 0;color:#587065;font-size:14px}
+  .management-frame-shell{background:#fff;border:1px solid #d8e8d9;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(27,67,50,.08)}
+  #heroTrackerFrame{display:block;width:100%;height:min(82vh,1100px);min-height:780px;border:0;background:#f3f8f1}
+  .hero-map-card{align-self:stretch;background:linear-gradient(150deg,#1B4332,#2D6A4F);border-radius:24px;padding:clamp(22px,3vw,34px);color:#fff;display:flex;flex-direction:column;justify-content:center;gap:14px;box-shadow:0 16px 36px rgba(27,67,50,.17);position:relative;overflow:hidden}
+  .hero-map-card:before{content:"";position:absolute;width:250px;height:250px;border:1px solid rgba(255,255,255,.15);border-radius:50%;right:-80px;top:-90px;box-shadow:0 0 0 25px rgba(255,255,255,.035),0 0 0 55px rgba(255,255,255,.025)}
+  .hero-map-card>*{position:relative}
+  .hero-map-card .map-kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#D8F3DC;margin:0}
+  .hero-map-card h2{font-size:clamp(24px,3vw,35px);line-height:1.25;margin:0}
+  .hero-map-card p{line-height:1.7;color:#e5f3e8;margin:0}
+  .hero-map-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0}
+  .hero-map-metrics div{padding:12px;border:1px solid rgba(255,255,255,.2);border-radius:12px;background:rgba(255,255,255,.07)}
+  .hero-map-metrics b{display:block;font-size:21px;color:#fff}
+  .hero-map-metrics span{font-size:12px;color:#D8F3DC}
+  .hero-map-card .btn{align-self:flex-start;background:#F4A300;color:#1B4332;border:0}
+  .farm-map-section{padding:clamp(26px,4vw,54px) 0;background:#f3f8f1}
+  .farm-map-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
+  .farm-map-heading h2{margin:0;color:#1B4332}
+  .farm-map-heading p{margin:6px 0 0;color:#587065}
+  .farm-map-frame-shell{border:1px solid #d8e8d9;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(27,67,50,.07)}
+  #farmMapFrame{display:block;width:100%;height:900px;border:0;background:#f3f8f1}
+  .farm-map-note{font-size:12.5px;color:#587065;margin:10px 2px 0}
+  body.dashboard-mode #main,body.dashboard-mode .site-footer{display:none!important}
+  body.dashboard-mode #dashboardWorkspace{display:block!important}
+  body.dashboard-mode .site-nav,body.dashboard-mode .nav-toggle{display:none!important}
+  @media(max-width:1100px){.role-login-controls{width:100%;justify-content:flex-start;margin:0 0 4px;order:5}.header-row{flex-wrap:wrap}.role-login-btn{padding:9px 11px}}
+  @media(max-width:650px){.role-login-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.role-login-btn{white-space:normal;font-size:11px;padding:9px 5px;min-height:42px}.workspace-toggle{grid-column:1/-1;width:100%}.workspace-head{align-items:flex-start;flex-direction:column}.workspace-head .workspace-toggle{width:auto}.hero-map-card{min-height:320px}.farm-map-heading{align-items:flex-start;flex-direction:column}#farmMapFrame{height:1120px}#heroTrackerFrame{min-height:760px;height:82vh}}
+</style>
+
 </head>
 <body>
 
@@ -80,11 +123,33 @@
       <a href="#about" data-nav>সম্পর্কে</a>
       <a href="#focus" data-nav>কাজের ক্ষেত্র</a>
       <a href="#projects" data-nav>প্রজেক্ট</a>
-      <a href="interactive_farm_map.html">🗺️ ফার্ম ম্যাপ</a>
+      <a href="#farm-map" data-nav>🗺️ ফার্ম ম্যাপ</a>
       <a href="#contact" data-nav>যোগাযোগ</a>
     </nav>
+    <div class="role-login-controls" aria-label="ব্যবহারকারী লগইন">
+      <button type="button" class="role-login-btn admin-role" data-role-login="admin" id="mainAdminLogin">🔒 Admin Login</button>
+      <button type="button" class="role-login-btn staff-role" data-role-login="staff" id="mainStaffLogin">👤 Staff Login</button>
+      <button type="button" class="role-login-btn investor-role" data-role-login="investor" id="mainInvestorLogin">💼 Investor Login</button>
+      <button type="button" class="workspace-toggle" id="workspaceToggle" hidden>হোমপেজে ফিরুন</button>
+    </div>
   </div>
 </header>
+
+
+<section id="dashboardWorkspace" hidden aria-label="ব্যবস্থাপনা ড্যাশবোর্ড">
+  <div class="workspace-wrap">
+    <div class="workspace-head">
+      <div>
+        <h2 id="workspaceTitle">মুন্সী এগ্রো ব্যবস্থাপনা ড্যাশবোর্ড</h2>
+        <p id="workspaceStatus" role="status">প্রবেশ করতে উপরের Admin, Staff অথবা Investor Login নির্বাচন করুন।</p>
+      </div>
+      <button type="button" class="workspace-toggle" id="workspaceBackButton">← হোমপেজে ফিরুন</button>
+    </div>
+    <div class="management-frame-shell">
+      <iframe id="heroTrackerFrame" class="tracker-frame management-frame" src="dashboard.html?embed=1" title="মুন্সী এগ্রো ব্যবস্থাপনা ড্যাশবোর্ড" allow="clipboard-read; clipboard-write"></iframe>
+    </div>
+  </div>
+</section>
 
 <main id="main">
 
@@ -147,15 +212,15 @@
         </p>
         <ul class="pitch-points" aria-label="কেন মুন্সী এগ্রো">
           <li><span class="pitch-icon" aria-hidden="true">♻️</span>জিরো-ওয়েস্ট সার্কুলার মডেল — পশুপালন, মাছ, ফসল একে অপরের বর্জ্য/সম্পদ কাজে লাগায়</li>
-          <li><span class="pitch-icon" aria-hidden="true">📊</span>ডিজিটাল হিসাব-নিকাশ — প্রতিটা আয়-ব্যয় লাইভ ট্র্যাকারে স্বচ্ছভাবে লিপিবদ্ধ</li>
+          <li><span class="pitch-icon" aria-hidden="true">📊</span>ডিজিটাল হিসাব-নিকাশ — অনুমোদিত ব্যবস্থাপনা ড্যাশবোর্ডে আয়-ব্যয়ের রেকর্ড</li>
           <li><span class="pitch-icon" aria-hidden="true">🗺️</span>১০ বছরের সুনির্দিষ্ট পরিকল্পনা — ধাপে ধাপে সম্প্রসারণ, অনুমানভিত্তিক নয়</li>
           <li><span class="pitch-icon" aria-hidden="true">🤝</span>স্থানীয় কর্মসংস্থান তৈরি — উপকূলীয় তরুণদের জন্য টেকসই কাজের সুযোগ</li>
         </ul>
         <div class="hero-actions">
-          <button type="button" class="btn btn-accent" data-tracker-btn="btnInvestNow">💰 Invest করুন</button>
-          <button type="button" class="btn btn-ghost" data-tracker-btn="btnProjectInfo">📄 Project সম্পর্কে</button>
-          <button type="button" class="btn btn-ghost" data-tracker-btn="btnInvestInfo">📄 Invest সম্পর্কে</button>
-          <button type="button" class="btn btn-ghost btn-youtube" data-tracker-btn="btnVideos">▶️ প্রজেক্টের ভিডিও</button>
+          <button type="button" class="btn btn-accent" data-dashboard-action="btnInvestNow">💰 Invest করুন</button>
+          <button type="button" class="btn btn-ghost" data-dashboard-action="btnProjectInfo">📄 Project সম্পর্কে</button>
+          <button type="button" class="btn btn-ghost" data-dashboard-action="btnInvestInfo">📄 Invest সম্পর্কে</button>
+          <button type="button" class="btn btn-ghost btn-youtube" data-dashboard-action="btnVideos">▶️ প্রজেক্টের ভিডিও</button>
           <a href="interactive_farm_map.html" class="btn btn-ghost">🗺️ Interactive Farm Map</a>
           <a href="https://wa.me/8801581477854" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 WhatsApp-এ কথা বলুন</a>
           <span class="install-inline" id="installPill" hidden>
@@ -165,15 +230,16 @@
           </span>
         </div>
       </div>
-      <div class="hero-tracker">
-        <p class="tracker-col-label">মুন্সী এগ্রো — হিসাব-নিকাশ (লাইভ)</p>
-        <iframe
-          id="heroTrackerFrame"
-          class="tracker-frame"
-          src="munshi_agro_tracker.html"
-          title="মুন্সী এগ্রো হিসাব-নিকাশ ট্র্যাকার">
-        </iframe>
-        <a class="btn btn-primary hero-tracker-link" href="munshi_agro_tracker.html" target="_blank" rel="noopener">নতুন ট্যাবে খুলুন (Open Tracker)</a>
+      <div class="hero-map-card">
+        <p class="map-kicker">ডিজিটাল ফার্ম ম্যানেজমেন্ট</p>
+        <h2>জমির প্রতিটি অংশ, এক জায়গায়</h2>
+        <p>ইন্টারঅ্যাকটিভ ম্যাপে পুকুর, পশুপালন, বাগান, ফসল ও অন্যান্য জোন নির্বাচন করে কার্যক্রম ও অগ্রগতি দেখুন।</p>
+        <div class="hero-map-metrics">
+          <div><b>২৪০ × ১২০</b><span>জমির পরিকল্পিত মাপ (ফুট)</span></div>
+          <div><b>৭টি</b><span>ক্লিকযোগ্য ফার্ম জোন</span></div>
+        </div>
+        <a class="btn" href="#farm-map">🗺️ ফার্ম ম্যাপ দেখুন</a>
+        <p style="font-size:12px;color:#D8F3DC">অ্যাডমিন, স্টাফ ও ইনভেস্টর ড্যাশবোর্ড খুলতে উপরের লগইন অপশন ব্যবহার করুন।</p>
       </div>
     </div>
   </section>
@@ -206,7 +272,7 @@
       </div>
 
       <h2 class="glance-title">এক নজরে</h2>
-      <p class="glance-sub" id="glanceSub">লাইভ ট্র্যাকার থেকে সরাসরি হালনাগাদ তথ্য</p>
+      <p class="glance-sub" id="glanceSub">অনুমোদিত ব্যবস্থাপনা ড্যাশবোর্ড থেকে হালনাগাদ সারাংশ</p>
 
       <div class="glance-row2">
         <div class="glance-chart-card">
@@ -228,10 +294,25 @@
     </div>
   </section>
 
+  <section id="farm-map" class="farm-map-section">
+    <div class="wrap">
+      <div class="farm-map-heading">
+        <div>
+          <h2>ইন্টারঅ্যাকটিভ ফার্ম ম্যাপ</h2>
+          <p>জমির জোনে ক্লিক করে কার্যক্রম, দায়িত্বপ্রাপ্ত ব্যক্তি ও কাজের অবস্থা দেখুন।</p>
+        </div>
+        <a class="btn btn-primary" href="interactive_farm_map.html" target="_blank" rel="noopener">পূর্ণ পেজে খুলুন ↗</a>
+      </div>
+      <div class="farm-map-frame-shell">
+        <iframe id="farmMapFrame" src="interactive_farm_map.html" title="মুন্সী এগ্রো ইন্টারঅ্যাকটিভ ফার্ম ম্যাপ" loading="lazy"></iframe>
+      </div>
+      <p class="farm-map-note">নোট: ম্যাপের অবস্থানগুলো ধারণাগত। ৪০ ফুট ফাঁকা অংশে কোনো রাস্তা দেখানো হয়নি। ম্যাপের নোট আপাতত এই ব্রাউজারে সংরক্ষিত হয়; ক্লাউড সিঙ্ক আলাদা ধাপে যুক্ত করতে হবে।</p>
+    </div>
+  </section>
+
   <div class="wrap divider" aria-hidden="true">
     <svg viewBox="0 0 400 20" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M0 10 Q 10 2 20 10 T 40 10 T 60 10 T 80 10 T 100 10 T 120 10 T 140 10 T 160 10 T 180 10 T 200 10 T 220 10 T 240 10 T 260 10 T 280 10 T 300 10 T 320 10 T 340 10 T 360 10 T 380 10 T 400 10" fill="none" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
   </div>
 
   <section id="dashboard" class="section dashboard-section">
@@ -279,7 +360,7 @@
                 <span><i class="legend-dot dot-income" aria-hidden="true"></i>আয়</span>
                 <span><i class="legend-dot dot-expense" aria-hidden="true"></i>ব্যয়</span>
               </div>
-              <p class="chart-note">*মুন্সী এগ্রো ১০ বছরের পরিকল্পনা অনুযায়ী প্রাক্কলিত হিসাব; প্রকৃত ফলাফল ভিন্ন হতে পারে। বিস্তারিত এন্ট্রি হিসাব-নিকাশ ট্র্যাকারে দেখা যাবে।</p>
+              <p class="chart-note">*মুন্সী এগ্রো ১০ বছরের পরিকল্পনা অনুযায়ী প্রাক্কলিত হিসাব; প্রকৃত ফলাফল ভিন্ন হতে পারে। বিস্তারিত রিপোর্ট অনুমোদিত ব্যবস্থাপনা ড্যাশবোর্ডে দেখা যাবে।</p>
             </div>
           </div>
         </div>
@@ -302,7 +383,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="20" x2="5" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="19" y1="20" x2="19" y2="14"/></svg>
               </div>
               <h3>কৃষি প্রযুক্তি ও ওয়েব অ্যাপ</h3>
-              <p>খামারের আয়-ব্যয়, ফলন ও রিসোর্স ম্যানেজমেন্ট ট্র্যাকিংয়ের জন্য নিজস্ব কোডিংয়ে তৈরি ব্রাউজার-ভিত্তিক ডিজিটাল সফটওয়্যার প্রস্তুতকরণ।</p>
+              <p>খামারের আয়-ব্যয়, ফলন, কর্মী ও রিসোর্স পরিচালনার জন্য নিজস্ব কোডিংয়ে তৈরি ব্রাউজার-ভিত্তিক ডিজিটাল ব্যবস্থাপনা প্ল্যাটফর্ম।</p>
             </article>
             <article class="focus-item">
               <div class="focus-icon">
@@ -356,18 +437,15 @@
           <div class="project-card">
             <div class="project-info">
               <div class="project-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="17" x2="12" y2="17"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h6M7 17h8"/></svg>
               </div>
-              <p class="project-tag">ওয়েব অ্যাপ</p>
-              <h3>মুন্সী এগ্রো — হিসাব-নিকাশ</h3>
-              <p class="project-desc">
-                আমার একক প্রচেষ্টায় কোডিং করে তৈরি একটি ব্রাউজার-ভিত্তিক কৃষি পরিকল্পনা ও
-                হিসাব-নিকাশ ট্র্যাকার অ্যাপ। উপরে সরাসরি ব্যবহার করুন, বা নতুন ট্যাবে খুলুন।
-              </p>
+              <p class="project-tag">ডিজিটাল প্ল্যাটফর্ম</p>
+              <h3>সমন্বিত খামার ব্যবস্থাপনা</h3>
+              <p class="project-desc">একটি ওয়েবসাইট থেকেই খামারের হিসাব-নিকাশ, কর্মী ব্যবস্থাপনা, বিনিয়োগ-সংক্রান্ত তথ্য, রিপোর্ট এবং ফার্ম ম্যাপ ব্যবহার করুন। উপরের তিনটি লগইন অপশন থেকে আপনার ভূমিকা নির্বাচন করুন।</p>
               <div class="project-meta">
-                <span lang="en">HTML</span><span lang="en">CSS</span><span>জাভাস্ক্রিপ্ট</span><span lang="en">LocalStorage</span>
+                <span lang="en">Admin</span><span lang="en">Staff</span><span lang="en">Investor</span><span>ফার্ম ম্যাপ</span>
               </div>
-              <a class="btn btn-primary" href="munshi_agro_tracker.html" target="_blank" rel="noopener">নতুন ট্যাবে খুলুন (Open Tracker)</a>
+              <button class="btn btn-primary" type="button" data-open-dashboard>ব্যবস্থাপনা ড্যাশবোর্ড খুলুন</button>
             </div>
           </div>
           </div>
@@ -428,6 +506,166 @@
 </div>
 
 <button type="button" id="backToTop" class="back-to-top" aria-label="উপরে যান">↑</button>
+
+
+<script>
+(() => {
+  'use strict';
+  const frame = document.getElementById('heroTrackerFrame');
+  const workspace = document.getElementById('dashboardWorkspace');
+  const status = document.getElementById('workspaceStatus');
+  const toggle = document.getElementById('workspaceToggle');
+  const back = document.getElementById('workspaceBackButton');
+  const loginButtons = [...document.querySelectorAll('[data-role-login]')];
+  let activeRole = null;
+  let pendingRole = null;
+  let pendingAction = null;
+  let firstRoleMessageSeen = false;
+  let dashboardMode = false;
+  let frameReady = false;
+  const roleNames = {admin:'Admin', staff:'Staff', investor:'Investor'};
+  const innerButtonIds = {admin:'adminBtn', staff:'staffBtn', investor:'investorBtn'};
+
+  function setDashboardMode(on) {
+    dashboardMode = !!on;
+    document.body.classList.toggle('dashboard-mode', dashboardMode);
+    workspace.hidden = !dashboardMode;
+    toggle.hidden = dashboardMode || !activeRole;
+    if (dashboardMode) {
+      toggle.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
+      back.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
+      window.scrollTo({top:0, behavior:'smooth'});
+    } else {
+      toggle.textContent = 'ড্যাশবোর্ডে ফিরুন';
+    }
+  }
+
+  function refreshRoleButtons() {
+    loginButtons.forEach(btn => {
+      const role = btn.dataset.roleLogin;
+      const loggedIn = activeRole === role;
+      btn.classList.toggle('active', loggedIn);
+      btn.disabled = !!activeRole && !loggedIn;
+      const labels = {admin:'🔒 Admin Login', staff:'👤 Staff Login', investor:'💼 Investor Login'};
+      const logoutLabels = {admin:'🔓 Admin Logout', staff:'🔓 Staff Logout', investor:'🔓 Investor Logout'};
+      btn.textContent = loggedIn ? logoutLabels[role] : labels[role];
+      if (btn.disabled) btn.title = `আগে ${roleNames[activeRole]} সেশন থেকে লগআউট করুন`;
+      else btn.title = loggedIn ? 'লগআউট করতে ক্লিক করুন' : `${roleNames[role]} হিসেবে প্রবেশ করুন`;
+    });
+    toggle.hidden = dashboardMode || !activeRole;
+    if (dashboardMode) {
+      toggle.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
+      back.textContent = toggle.textContent;
+      status.textContent = activeRole
+        ? `${roleNames[activeRole]} হিসেবে লগইন করা আছে। আপনার অনুমোদিত ড্যাশবোর্ড ব্যবহার করুন।`
+        : 'লগইন ফর্ম খুলেছে। অনুমোদিত অ্যাকাউন্ট দিয়ে প্রবেশ করুন।';
+    } else if (activeRole) {
+      toggle.textContent = 'ড্যাশবোর্ডে ফিরুন';
+    }
+  }
+
+  function clickInnerRole(role) {
+    if (!frame || !frame.contentWindow) return;
+    try {
+      const btn = frame.contentDocument && frame.contentDocument.getElementById(innerButtonIds[role]);
+      if (btn) {
+        btn.click();
+        pendingRole = null;
+      } else {
+        pendingRole = role;
+        status.textContent = 'ড্যাশবোর্ড প্রস্তুত হচ্ছে—আবার চেষ্টা করুন।';
+      }
+    } catch (error) {
+      status.textContent = 'ড্যাশবোর্ডে প্রবেশ করা যায়নি। একই ওয়েবসাইটের dashboard.html ফাইলটি আপলোড করা আছে কি না যাচাই করুন।';
+    }
+  }
+
+  function openRole(role) {
+    if (activeRole && activeRole !== role) {
+      status.textContent = `আপনি ইতিমধ্যে ${roleNames[activeRole]} হিসেবে লগইন আছেন। আগে সেই সেশন থেকে লগআউট করুন।`;
+      if (!dashboardMode) setDashboardMode(true);
+      refreshRoleButtons();
+      return;
+    }
+    if (activeRole === role) {
+      // The same inner app button changes to its built-in logout action.
+      setDashboardMode(true);
+      clickInnerRole(role);
+      return;
+    }
+    setDashboardMode(true);
+    status.textContent = `${roleNames[role]} লগইন ফর্ম খোলা হচ্ছে…`;
+    if (frameReady) clickInnerRole(role);
+    else pendingRole = role;
+  }
+
+  function clickDashboardAction(actionId) {
+    pendingRole = null;
+    setDashboardMode(true);
+    if (!frameReady) { pendingAction = actionId; return; }
+    try {
+      const target = frame.contentDocument && frame.contentDocument.getElementById(actionId);
+      if (target) { target.click(); pendingAction = null; }
+      else status.textContent = 'এই অপশনটি ড্যাশবোর্ডে পাওয়া যায়নি।';
+    } catch (error) {
+      status.textContent = 'অপশনটি খোলা যায়নি। dashboard.html ফাইলটি একই রিপোজিটরিতে আছে কি না যাচাই করুন।';
+    }
+  }
+
+  frame.addEventListener('load', () => {
+    frameReady = true;
+    if (pendingRole) clickInnerRole(pendingRole);
+    else if (pendingAction) clickDashboardAction(pendingAction);
+  });
+
+  window.addEventListener('message', (event) => {
+    if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
+    const data = event.data;
+    if (!data || data.type !== 'munshi-role-state') return;
+    const nextRole = ['admin','staff','investor'].includes(data.role) ? data.role : null;
+    const previousRole = activeRole;
+    activeRole = nextRole;
+    refreshRoleButtons();
+    if (!firstRoleMessageSeen) {
+      firstRoleMessageSeen = true;
+      if (activeRole) setDashboardMode(true);
+    } else if (activeRole && !previousRole && !dashboardMode) {
+      // A persisted Firebase session may be reported after the initial anonymous/public state.
+      setDashboardMode(true);
+    } else if (previousRole && !activeRole) {
+      // The existing dashboard has completed its normal logout process.
+      setDashboardMode(false);
+      status.textContent = 'আপনি লগআউট করেছেন। আবার প্রবেশ করতে উপরের লগইন অপশন ব্যবহার করুন।';
+    }
+  });
+
+  loginButtons.forEach(btn => btn.addEventListener('click', () => openRole(btn.dataset.roleLogin)));
+  document.querySelectorAll('[data-dashboard-action]').forEach(btn => btn.addEventListener('click', () => clickDashboardAction(btn.dataset.dashboardAction)));
+  [toggle, back].forEach(btn => btn.addEventListener('click', () => setDashboardMode(!dashboardMode)));
+  document.querySelectorAll('[data-open-dashboard]').forEach(btn => btn.addEventListener('click', () => {
+    if (activeRole) setDashboardMode(true);
+    else { setDashboardMode(true); status.textContent = 'ড্যাশবোর্ডে প্রবেশ করতে উপরের Admin, Staff অথবা Investor Login নির্বাচন করুন।'; }
+  }));
+
+  // If the iframe finished before this script attached its load listener, recognize it now.
+  try {
+    if (frame.contentDocument && frame.contentDocument.readyState === 'complete' && frame.contentDocument.getElementById('adminBtn')) frameReady = true;
+  } catch (error) {}
+
+  // Keep the public wording consistent after the existing site script refreshes the summary.
+  const glanceSub = document.getElementById('glanceSub');
+  if (glanceSub && 'MutationObserver' in window) {
+    const rewriteGlanceLabel = () => {
+      if (/tracker|ট্র্যাকার/i.test(glanceSub.textContent || '')) glanceSub.textContent = 'অনুমোদিত ব্যবস্থাপনা ড্যাশবোর্ড থেকে হালনাগাদ সারাংশ';
+    };
+    new MutationObserver(rewriteGlanceLabel).observe(glanceSub, { childList: true, characterData: true, subtree: true });
+    rewriteGlanceLabel();
+  }
+
+  // If a role session is restored by the existing authentication code, its state message reopens the dashboard.
+  refreshRoleButtons();
+})();
+</script>
 
 <script src="script.js" defer></script>
 </body>
