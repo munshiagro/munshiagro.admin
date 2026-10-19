@@ -587,7 +587,46 @@
   gtag('config', 'G-3DZPQBGPBJ');
 </script>
 
-<style>html.embedded-dashboard .admin-bar{display:none!important}html.embedded-dashboard header{padding-bottom:18px}html.embedded-dashboard .page-shell{max-width:1200px}</style>
+<style>
+  html.embedded-dashboard .admin-bar,html.embedded-dashboard .page-shell>header{display:none!important}
+  html.embedded-dashboard,html.embedded-dashboard body{min-height:0!important}
+  html.embedded-dashboard .page-shell{max-width:1200px}
+  .public-dashboard{padding-top:12px!important}
+  .public-dashboard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:0 0 16px;flex-wrap:wrap}
+  .public-dashboard-head h2{margin:0;color:var(--dark);font-size:clamp(21px,3vw,28px)}
+  .public-dashboard-head p{margin:6px 0 0;color:var(--muted);font-size:13.5px;line-height:1.6}
+  .public-live{display:inline-flex;align-items:center;gap:7px;background:var(--soft);color:var(--dark);border-radius:999px;padding:7px 11px;font-size:12px;font-weight:700;white-space:nowrap}
+  .public-live:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--mid);display:inline-block}
+  .public-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:16px}
+  .public-kpi{background:var(--white);border:1px solid var(--soft);border-radius:14px;padding:14px 15px;min-width:0;box-shadow:0 2px 10px rgba(0,0,0,.035)}
+  .public-kpi .label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}
+  .public-kpi .value{display:block;color:var(--dark);font-weight:800;font-size:clamp(18px,2vw,25px);line-height:1.45;overflow-wrap:anywhere}
+  .public-kpi small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
+  .public-dashboard-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:14px}
+  .public-card{background:var(--white);border:1px solid var(--soft);border-radius:15px;padding:17px;min-width:0;box-shadow:0 2px 10px rgba(0,0,0,.035)}
+  .public-card.wide{grid-column:1/-1}
+  .public-card h3{font-size:16px;color:var(--dark);margin:0 0 5px}
+  .public-card .sub{font-size:12px;color:var(--muted);line-height:1.55;margin:0 0 13px}
+  .public-trend-row{display:grid;grid-template-columns:52px minmax(0,1fr);gap:10px;align-items:center;margin:11px 0}
+  .public-trend-year{font-weight:700;font-size:12px;color:var(--muted)}
+  .public-bar-pair{display:grid;gap:4px}
+  .public-bar-track{height:10px;background:var(--bg);border-radius:999px;overflow:hidden}
+  .public-bar{height:100%;border-radius:999px;min-width:2px}
+  .public-bar.income{background:var(--mid)}.public-bar.expense{background:var(--brown)}
+  .public-bar-legend{display:flex;gap:13px;flex-wrap:wrap;color:var(--muted);font-size:11px;margin-top:13px}
+  .public-bar-legend span{display:flex;align-items:center;gap:6px}.public-bar-legend i{width:9px;height:9px;border-radius:3px;display:inline-block}
+  .public-category{display:flex;align-items:center;gap:9px;margin:12px 0}
+  .public-category-name{flex:1;min-width:0;overflow-wrap:anywhere;font-size:12.5px;color:var(--text)}
+  .public-category-track{width:36%;max-width:120px;min-width:48px;height:8px;background:var(--bg);border-radius:999px;overflow:hidden}
+  .public-category-track span{display:block;height:100%;background:var(--mid);border-radius:999px}
+  .public-category-pct{width:37px;text-align:right;font-size:12px;font-weight:700;color:var(--dark);font-variant-numeric:tabular-nums}
+  .public-activity{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--soft)}
+  .public-activity:last-child{border-bottom:0}.public-activity b{font-size:12.5px;color:var(--text);font-weight:700}.public-activity small{font-size:11px;color:var(--muted)}
+  .public-type{font-size:11px;font-weight:700;border-radius:999px;padding:4px 8px;white-space:nowrap}.public-type.income{background:var(--soft);color:var(--dark)}.public-type.expense{background:#f8edd6;color:var(--brown)}
+  .public-empty{padding:16px 0;text-align:center;color:var(--muted);font-size:12.5px}
+  .public-privacy-note{margin:13px 0 2px;background:var(--bg);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:11.5px;line-height:1.6}
+  @media(max-width:700px){.public-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.public-dashboard-grid{grid-template-columns:1fr}.public-card.wide{grid-column:auto}.public-dashboard-head{display:block}.public-live{margin-top:10px}.public-activity{grid-template-columns:minmax(0,1fr) auto;gap:7px}.public-activity small{grid-column:1}.public-type{grid-column:2;grid-row:1/3;align-self:center}}
+</style>
 <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embedded-dashboard');</script>
 
 </head>
@@ -605,6 +644,38 @@
     </div>
   </div>
 </header>
+
+<div class="container public-dashboard" id="publicDashboardView">
+  <div class="public-dashboard-head">
+    <div><h2>খামারের অবস্থা এক নজরে</h2><p>পরিকল্পনা, কৃষি কার্যক্রম ও সামগ্রিক প্রবণতা দেখুন। পরিচালনার কাজের জন্য উপরের ভূমিকা অনুযায়ী লগইন করুন।</p></div>
+    <span class="public-live" id="publicSyncState">তথ্য লোড হচ্ছে</span>
+  </div>
+  <div class="public-kpis" aria-label="খামারের সংক্ষিপ্ত তথ্য">
+    <div class="public-kpi"><span class="label">জমির মাপ</span><span class="value">২৪০ × ১২০ ফুট</span><small>প্রায় ৬৬ শতাংশ</small></div>
+    <div class="public-kpi"><span class="label">পরিকল্পনার মেয়াদ</span><span class="value">১০ বছর</span><small>ধাপে ধাপে সম্প্রসারণ</small></div>
+    <div class="public-kpi"><span class="label">ফার্ম ম্যাপ জোন</span><span class="value">৭টি</span><small>৪০ ফুট ফাঁকা অংশসহ</small></div>
+    <div class="public-kpi"><span class="label">অনুমোদিত ইনভেস্টর</span><span class="value" id="publicInvestorCount">০</span><small>সমষ্টিগত সংখ্যা</small></div>
+  </div>
+  <div class="public-dashboard-grid">
+    <section class="public-card">
+      <h3>আয়–ব্যয়ের প্রবণতা</h3>
+      <p class="sub">সাম্প্রতিক বছরের আপেক্ষিক সূচক (০–১০০); এখানে প্রকৃত টাকার অঙ্ক প্রকাশ করা হয় না।</p>
+      <div id="publicTrendChart"><div class="public-empty">ডেটা লোড হচ্ছে…</div></div>
+      <div class="public-bar-legend"><span><i style="background:var(--mid)"></i>আয়ের সূচক</span><span><i style="background:var(--brown)"></i>ব্যয়ের সূচক</span></div>
+    </section>
+    <section class="public-card">
+      <h3>আয়ের প্রধান খাত</h3>
+      <p class="sub">মোট আয়ের তুলনায় খাতভিত্তিক অংশ; টাকার পরিমাণ নয়।</p>
+      <div id="publicCategoryShares"><div class="public-empty">ডেটা লোড হচ্ছে…</div></div>
+    </section>
+    <section class="public-card wide">
+      <h3>সাম্প্রতিক কার্যক্রম</h3>
+      <p class="sub">সাম্প্রতিক রেকর্ডের ধরন ও খাত দেখানো হচ্ছে; ব্যক্তিগত নোট ও অর্থের অঙ্ক প্রকাশ করা হয় না।</p>
+      <div id="publicRecentActivity"><div class="public-empty">ডেটা লোড হচ্ছে…</div></div>
+    </section>
+  </div>
+  <p class="public-privacy-note">পাবলিক ভিউতে কেবল সারসংক্ষেপ ও আপেক্ষিক প্রবণতা দেখানো হয়। বিস্তারিত আয়–ব্যয়, এন্ট্রি, বেতন, স্টাফের ব্যক্তিগত তথ্য ও ইনভেস্টমেন্টের তথ্য অনুমোদিত লগইন অনুযায়ী দেখা যাবে।</p>
+</div>
 
 <div class="container" id="publicView">
   <div class="nav-grid">
@@ -1800,12 +1871,85 @@ function renderCatSummary(){
   renderCatSummaryFor("expense");
 }
 
+function renderPublicDashboard(){
+  const root = document.getElementById("publicDashboardView");
+  if (!root) return;
+  const summary = getMunshiSummary();
+  const syncState = document.getElementById("publicSyncState");
+  if (syncState) syncState.textContent = cloudDocRef ? "ক্লাউড ডেটা" : "লোকাল ডেটা";
+  const investorCount = document.getElementById("publicInvestorCount");
+  if (investorCount) investorCount.textContent = bn(summary.investorsCount || 0);
+
+  const trendWrap = document.getElementById("publicTrendChart");
+  if (trendWrap) {
+    trendWrap.replaceChildren();
+    const trends = Array.isArray(summary.yearlyTrend) ? summary.yearlyTrend : [];
+    if (!trends.length) {
+      const p = document.createElement("div"); p.className = "public-empty";
+      p.textContent = "এখনো পর্যাপ্ত বছরভিত্তিক রেকর্ড নেই। ডেটা যুক্ত হলে প্রবণতার চার্ট এখানে দেখা যাবে।";
+      trendWrap.appendChild(p);
+    } else {
+      trends.forEach(item => {
+        const row = document.createElement("div"); row.className = "public-trend-row";
+        const year = document.createElement("div"); year.className = "public-trend-year"; year.textContent = String(item.year || "—") + " সাল";
+        const pair = document.createElement("div"); pair.className = "public-bar-pair";
+        [["incomeIndex","income","আয়ের আপেক্ষিক সূচক"],["expenseIndex","expense","ব্যয়ের আপেক্ষিক সূচক"]].forEach(([key, klass, label]) => {
+          const track = document.createElement("div"); track.className = "public-bar-track";
+          const bar = document.createElement("div"); bar.className = "public-bar " + klass;
+          const value = Math.max(0, Math.min(100, Number(item[key]) || 0));
+          bar.style.width = value + "%"; bar.title = label + ": " + bn(value) + "/১০০";
+          track.appendChild(bar); pair.appendChild(track);
+        });
+        row.append(year, pair); trendWrap.appendChild(row);
+      });
+    }
+  }
+
+  const categoryWrap = document.getElementById("publicCategoryShares");
+  if (categoryWrap) {
+    categoryWrap.replaceChildren();
+    const shares = Array.isArray(summary.topCategoryShares) ? summary.topCategoryShares : [];
+    if (!shares.length) {
+      const p = document.createElement("div"); p.className = "public-empty"; p.textContent = "আয়ের খাতভিত্তিক তথ্য যুক্ত হলে এখানে সারাংশ দেখা যাবে.";
+      categoryWrap.appendChild(p);
+    } else {
+      shares.forEach(item => {
+        const row = document.createElement("div"); row.className = "public-category";
+        const name = document.createElement("div"); name.className = "public-category-name"; name.textContent = String(item.category || "অন্যান্য");
+        const track = document.createElement("div"); track.className = "public-category-track";
+        const fill = document.createElement("span"); const pct = Math.max(0, Math.min(100, Number(item.sharePct) || 0)); fill.style.width = pct + "%"; track.appendChild(fill);
+        const percent = document.createElement("div"); percent.className = "public-category-pct"; percent.textContent = bn(pct) + "%";
+        row.append(name, track, percent); categoryWrap.appendChild(row);
+      });
+    }
+  }
+
+  const activityWrap = document.getElementById("publicRecentActivity");
+  if (activityWrap) {
+    activityWrap.replaceChildren();
+    const activities = Array.isArray(summary.recentActivity) ? summary.recentActivity : [];
+    if (!activities.length) {
+      const p = document.createElement("div"); p.className = "public-empty"; p.textContent = "এখনো কোনো কার্যক্রমের রেকর্ড নেই।";
+      activityWrap.appendChild(p);
+    } else {
+      activities.forEach(item => {
+        const row = document.createElement("div"); row.className = "public-activity";
+        const name = document.createElement("b"); name.textContent = String(item.category || "খামারের কার্যক্রম");
+        const type = document.createElement("span"); type.className = "public-type " + (item.type === "income" ? "income" : "expense"); type.textContent = item.type === "income" ? "আয়" : "ব্যয়";
+        const date = document.createElement("small"); date.textContent = item.date ? fmtDate(item.date) : (item.year ? String(item.year) + " সাল" : "তারিখ নেই");
+        row.append(name, type, date); activityWrap.appendChild(row);
+      });
+    }
+  }
+}
+
 function renderAll(){
   renderTabs();
   renderStats();
   renderChart();
   renderTable();
   renderCatSummary();
+  renderPublicDashboard();
   broadcastSummary();
 }
 
@@ -2012,24 +2156,29 @@ function applyAdminUI(){
 }
 
 function applyViewMode(){
+  const publicDashboardView = document.getElementById("publicDashboardView");
   const publicView = document.getElementById("publicView");
   const dashboardView = document.getElementById("dashboardView");
   const investorView = document.getElementById("investorView");
   const investorBtn = document.getElementById("investorBtn");
 
   if (isAdmin || isStaff) {
+    if (publicDashboardView) publicDashboardView.style.display = "none";
     publicView.style.display = "none";
     dashboardView.style.display = "block";
     investorView.style.display = "none";
   } else if (investorSession) {
+    if (publicDashboardView) publicDashboardView.style.display = "none";
     publicView.style.display = "none";
     dashboardView.style.display = "none";
     investorView.style.display = "block";
     renderInvestorOwnView();
   } else {
-    publicView.style.display = "block";
+    if (publicDashboardView) publicDashboardView.style.display = "block";
+    publicView.style.display = "none";
     dashboardView.style.display = "none";
     investorView.style.display = "none";
+    renderPublicDashboard();
   }
   investorBtn.textContent = investorSession ? "🔓 ইনভেস্টর লগআউট" : "💼 ইনভেস্টর লগইন";
   investorBtn.style.display = (isAdmin || isStaff) ? "none" : "inline-flex";
@@ -4129,6 +4278,27 @@ if (cloudDocRef) {
 } else {
   startApp();
 }
+</script>
+<script>
+(function(){
+  if (window.parent === window || new URLSearchParams(location.search).get("embed") !== "1") return;
+  let lastHeight = 0;
+  const sendHeight = () => {
+    const shell = document.querySelector(".page-shell");
+    if (!shell) return;
+    // Measure the actual dashboard content, not the iframe viewport; this avoids resize feedback loops.
+    const rect = shell.getBoundingClientRect();
+    const height = Math.ceil(Math.max(shell.scrollHeight, rect.height));
+    if (height > 0 && Math.abs(height - lastHeight) > 8) {
+      lastHeight = height;
+      window.parent.postMessage({type:"munshi-dashboard-height", height}, location.origin);
+    }
+  };
+  window.addEventListener("load", sendHeight);
+  const shell = document.querySelector(".page-shell");
+  if (shell && "ResizeObserver" in window) new ResizeObserver(() => requestAnimationFrame(sendHeight)).observe(shell);
+  [80,250,700,1400].forEach(ms => setTimeout(sendHeight, ms));
+})();
 </script>
 <script>
 (function () {

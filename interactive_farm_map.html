@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Bangla&display=swap" rel="stylesheet">
+  <script>if(new URLSearchParams(location.search).get('public')==='1')document.documentElement.classList.add('public-farm-map');</script>
   <style>
     :root{--forest:#1b4332;--green:#2d6a4f;--leaf:#40916c;--mint:#d8f3dc;--pale:#f2f8f0;--ink:#1d2e24;--muted:#65786c;--line:#d9e7dc;--white:#fff;--gold:#f4a300;--blue:#cfe8f5;--sand:#f8edd6;--rose:#f5dddd;--shadow:0 12px 32px rgba(27,67,50,.09)}
     *{box-sizing:border-box}
@@ -68,7 +69,19 @@
     @media(max-width:1020px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.workspace{grid-template-columns:minmax(0,1fr)}.detail-card{position:static}.detail-card{display:grid;grid-template-columns:.85fr 1.15fr}.detail-top{border-bottom:0;border-right:1px solid #eaf1eb}.detail-form{padding-top:20px}.tips{grid-template-columns:1fr 1fr}}
     @media(max-width:680px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.topbar{padding:17px 14px 20px}.topbar-inner{align-items:flex-start;flex-direction:column}.top-actions{justify-content:flex-start}.btn{font-size:12px;padding:9px 11px}.brand-mark{width:45px;height:45px}.brand p{font-size:11px}main{padding:19px 12px 28px}.intro{display:block}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.stat{padding:12px}.card-head{padding:15px 15px 12px}.map-scroll{padding:10px 8px 5px}.map-caption{padding:0 12px 13px;display:block}.detail-card{display:block}.detail-top{border-right:0;border-bottom:1px solid #eaf1eb;padding:17px}.detail-form{padding:17px}.tips{grid-template-columns:1fr}.farm-svg{min-width:660px}footer{padding:0 12px 22px}}
     @media print{body{background:#fff}.topbar,.top-actions,.detail-form,.tips,footer,.toast{display:none!important}main{padding:0;max-width:none}.intro{margin:0 0 12px}.stats{grid-template-columns:repeat(4,1fr)}.workspace{display:block}.map-card{box-shadow:none;break-inside:avoid}.detail-card{display:none}.map-scroll{overflow:visible}.farm-svg{min-width:0;width:100%}.legend{display:flex}.card{box-shadow:none}.map-caption{font-size:9px}}
-  </style>
+  
+    html.public-farm-map .topbar,html.public-farm-map .intro,html.public-farm-map .detail-form,html.public-farm-map .tips,html.public-farm-map footer,html.public-farm-map .toast{display:none!important}
+    html.public-farm-map main{padding:10px 8px 14px}
+    html.public-farm-map .stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}
+    html.public-farm-map .stats .stat:last-child{display:none!important}
+    html.public-farm-map .workspace{grid-template-columns:minmax(0,1fr) minmax(240px,.55fr);gap:12px}
+    html.public-farm-map .detail-card{position:static}
+    html.public-farm-map #zoneStatusBadge{display:none!important}
+    html.public-farm-map .map-caption{font-size:11px}
+    html.public-farm-map .map-caption span:first-child{font-size:0}
+    html.public-farm-map .map-caption span:first-child:after{content:'জমির যেকোনো অংশে ক্লিক করে সংক্ষিপ্ত বিবরণ দেখুন।';font-size:11px}
+    @media(max-width:680px){html.public-farm-map .stats{grid-template-columns:repeat(2,minmax(0,1fr))}html.public-farm-map .workspace{grid-template-columns:minmax(0,1fr)}html.public-farm-map .detail-card{display:block}}
+</style>
 </head>
 <body>
   <header class="topbar">
@@ -131,34 +144,34 @@
             <!-- Zone: pond and fish -->
             <g class="farm-zone selected" data-zone="pond" tabindex="0" role="button" aria-label="পুকুর ও মৎস্য জোন নির্বাচন করুন" aria-pressed="true">
               <rect class="zone-bg" x="75" y="113" width="267" height="200" rx="10" fill="url(#pondPattern)"/>
-              <text class="zone-emoji" x="208" y="184">🐟</text><text class="zone-title" x="208" y="220">পুকুর ও মৎস্য</text><text class="zone-sub" x="208" y="246">পানি • মাছ • পরিচর্যা</text><text class="zone-sub" x="208" y="270">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="208" y="184">🐟</text><text class="zone-title" x="208" y="220">পুকুর ও মৎস্য</text><text class="zone-sub" x="208" y="246">পানি • মাছ • পরিচর্যা</text><text class="zone-sub" x="208" y="270">বিস্তারিত দেখুন</text>
             </g>
             <!-- Zone: livestock -->
             <g class="farm-zone" data-zone="livestock" tabindex="0" role="button" aria-label="পশুপালন জোন নির্বাচন করুন" aria-pressed="false">
               <rect class="zone-bg" x="346" y="113" width="250" height="200" rx="10" fill="#f8edd6"/>
               <rect x="365" y="132" width="212" height="162" rx="8" fill="none" stroke="#e9d3a8" stroke-width="1.5" stroke-dasharray="5 5"/>
-              <text class="zone-emoji" x="471" y="184">🐄</text><text class="zone-title" x="471" y="220">পশুপালন</text><text class="zone-sub" x="471" y="246">গরুর ঘর • খাদ্য • স্বাস্থ্য</text><text class="zone-sub" x="471" y="270">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="471" y="184">🐄</text><text class="zone-title" x="471" y="220">পশুপালন</text><text class="zone-sub" x="471" y="246">গরুর ঘর • খাদ্য • স্বাস্থ্য</text><text class="zone-sub" x="471" y="270">বিস্তারিত দেখুন</text>
             </g>
             <!-- Zone: orchard -->
             <g class="farm-zone" data-zone="orchard" tabindex="0" role="button" aria-label="ফলজ বাগান জোন নির্বাচন করুন" aria-pressed="false">
               <rect class="zone-bg" x="600" y="113" width="352" height="244" rx="10" fill="url(#orchardPattern)"/>
-              <text class="zone-emoji" x="776" y="192">🌳</text><text class="zone-title" x="776" y="231">ফলজ বাগান</text><text class="zone-sub" x="776" y="257">গাছ • পরিচর্যা • ফল সংগ্রহ</text><text class="zone-sub" x="776" y="281">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="776" y="192">🌳</text><text class="zone-title" x="776" y="231">ফলজ বাগান</text><text class="zone-sub" x="776" y="257">গাছ • পরিচর্যা • ফল সংগ্রহ</text><text class="zone-sub" x="776" y="281">বিস্তারিত দেখুন</text>
             </g>
             <!-- Zone: crops -->
             <g class="farm-zone" data-zone="crops" tabindex="0" role="button" aria-label="সবজি ও ফসল জোন নির্বাচন করুন" aria-pressed="false">
               <rect class="zone-bg" x="75" y="317" width="347" height="320" rx="10" fill="url(#cropPattern)"/>
-              <text class="zone-emoji" x="248" y="420">🌱</text><text class="zone-title" x="248" y="460">সবজি ও ফসল</text><text class="zone-sub" x="248" y="486">বেড • বপন • সেচ • সংগ্রহ</text><text class="zone-sub" x="248" y="510">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="248" y="420">🌱</text><text class="zone-title" x="248" y="460">সবজি ও ফসল</text><text class="zone-sub" x="248" y="486">বেড • বপন • সেচ • সংগ্রহ</text><text class="zone-sub" x="248" y="510">বিস্তারিত দেখুন</text>
             </g>
             <!-- Zone: nursery/floating beds -->
             <g class="farm-zone" data-zone="nursery" tabindex="0" role="button" aria-label="চারা ও ভাসমান কৃষি জোন নির্বাচন করুন" aria-pressed="false">
               <rect class="zone-bg" x="426" y="317" width="170" height="320" rx="10" fill="#dcefe9"/>
               <path d="M447 353 Q460 341 473 353 T499 353 T525 353 T551 353" fill="none" stroke="#a2d1c3" stroke-width="3"/><path d="M447 365 Q460 353 473 365 T499 365 T525 365 T551 365" fill="none" stroke="#a2d1c3" stroke-width="3"/>
-              <text class="zone-emoji" x="511" y="420">🪴</text><text class="zone-title" x="511" y="460" style="font-size:19px">চারা ও ভাসমান</text><text class="zone-title" x="511" y="485" style="font-size:19px">কৃষি</text><text class="zone-sub" x="511" y="512">চারা • বেড • পরীক্ষা</text><text class="zone-sub" x="511" y="537">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="511" y="420">🪴</text><text class="zone-title" x="511" y="460" style="font-size:19px">চারা ও ভাসমান</text><text class="zone-title" x="511" y="485" style="font-size:19px">কৃষি</text><text class="zone-sub" x="511" y="512">চারা • বেড • পরীক্ষা</text><text class="zone-sub" x="511" y="537">বিস্তারিত দেখুন</text>
             </g>
             <!-- Zone: compost/circular resources -->
             <g class="farm-zone" data-zone="compost" tabindex="0" role="button" aria-label="কম্পোস্ট ও রিসাইক্লিং জোন নির্বাচন করুন" aria-pressed="false">
               <rect class="zone-bg" x="600" y="362" width="352" height="275" rx="10" fill="url(#compostPattern)"/>
-              <text class="zone-emoji" x="776" y="440">♻️</text><text class="zone-title" x="776" y="480" style="font-size:20px">কম্পোস্ট ও রিসাইক্লিং</text><text class="zone-sub" x="776" y="506">জৈব সম্পদ • বর্জ্য ব্যবস্থাপনা</text><text class="zone-sub" x="776" y="530">ক্লিক করে বিস্তারিত</text>
+              <text class="zone-emoji" x="776" y="440">♻️</text><text class="zone-title" x="776" y="480" style="font-size:20px">কম্পোস্ট ও রিসাইক্লিং</text><text class="zone-sub" x="776" y="506">জৈব সম্পদ • বর্জ্য ব্যবস্থাপনা</text><text class="zone-sub" x="776" y="530">বিস্তারিত দেখুন</text>
             </g>
             <!-- Reserved strip: deliberately no road shown -->
             <g class="farm-zone" data-zone="reserve" tabindex="0" role="button" aria-label="৪০ ফুট ফাঁকা সংরক্ষিত অংশ নির্বাচন করুন" aria-pressed="false">
@@ -166,7 +179,7 @@
               <text class="zone-emoji" x="1042" y="270">🌿</text>
               <text class="zone-title" x="1042" y="307" style="font-size:19px">৪০ ফুট</text><text class="zone-title" x="1042" y="334" style="font-size:19px">ফাঁকা অংশ</text>
               <line x1="980" y1="356" x2="1105" y2="356" stroke="#b7cfb3" stroke-width="1.5" stroke-dasharray="4 5"/>
-              <text class="zone-sub" x="1042" y="384">কোনো রাস্তা নয়</text><text class="zone-sub" x="1042" y="410">ফাঁকা রাখার জন্য</text><text class="zone-sub" x="1042" y="448">ক্লিক করে নোট</text>
+              <text class="zone-sub" x="1042" y="384">কোনো রাস্তা নয়</text><text class="zone-sub" x="1042" y="410">ফাঁকা রাখার জন্য</text><text class="zone-sub" x="1042" y="448">বিস্তারিত দেখুন</text>
             </g>
             <text x="602" y="666" text-anchor="middle" class="dimension-small">নমুনা পরিকল্পনা • ভিতরের জোনগুলোর অবস্থান ও আকার বাস্তব জমির চূড়ান্ত মাপ নয়</text>
           </svg>
@@ -219,19 +232,20 @@
   <script>
     (() => {
       'use strict';
+      const IS_PUBLIC_VIEW = new URLSearchParams(location.search).get('public') === '1';
       const STORAGE_KEY = 'munshiAgroInteractiveFarmMap_v1';
       const statusLabels = { planned: 'পরিকল্পিত', active: 'চলমান', done: 'সম্পন্ন', paused: 'সাময়িক বিরতি' };
       const zones = {
-        pond: {title:'পুকুর ও মৎস্য', icon:'🐟', type:'মৎস্য ব্যবস্থাপনা', description:'পুকুরের প্রস্তুতি, মাছের পোনা, খাবার, পানি ও উৎপাদনের তথ্য গুছিয়ে রাখো.', activity:'', responsible:'', status:'planned', notes:''},
-        livestock: {title:'পশুপালন', icon:'🐄', type:'পশু ব্যবস্থাপনা', description:'গরুর ঘর, খাদ্য, স্বাস্থ্য পরীক্ষা, টিকা, দুধ বা অন্যান্য উৎপাদন-সংক্রান্ত নোট রাখো.', activity:'', responsible:'', status:'planned', notes:''},
-        orchard: {title:'ফলজ বাগান', icon:'🌳', type:'বাগান ব্যবস্থাপনা', description:'গাছের ধরন, রোপণের তারিখ, সার, ছাঁটাই, পরিচর্যা ও ফল সংগ্রহের কাজ লিখে রাখো.', activity:'', responsible:'', status:'planned', notes:''},
-        crops: {title:'সবজি ও ফসল', icon:'🌱', type:'ফসল ব্যবস্থাপনা', description:'বীজ, বপন, সেচ, সার, রোগবালাই এবং ফসল সংগ্রহের কার্যক্রম গুছিয়ে রাখো.', activity:'', responsible:'', status:'planned', notes:''},
-        nursery: {title:'চারা ও ভাসমান কৃষি', icon:'🪴', type:'চারা ও পরীক্ষামূলক চাষ', description:'চারা উৎপাদন, ভাসমান বেড, বীজতলা এবং নতুন চাষপদ্ধতির পরীক্ষা-নিরীক্ষা লিখে রাখো.', activity:'', responsible:'', status:'planned', notes:''},
-        compost: {title:'কম্পোস্ট ও রিসাইক্লিং', icon:'♻️', type:'সার্কুলার কৃষি', description:'জৈব বর্জ্য আলাদা করা, কম্পোস্ট তৈরি এবং খামারের এক অংশের সম্পদ অন্য অংশে ব্যবহারের নোট রাখো.', activity:'', responsible:'', status:'planned', notes:''},
+        pond: {title:'পুকুর ও মৎস্য', icon:'🐟', type:'মৎস্য ব্যবস্থাপনা', description:'পুকুরের প্রস্তুতি, মাছের পোনা, খাবার, পানির যত্ন ও মৎস্য উৎপাদন-সংক্রান্ত কার্যক্রমের জন্য নির্ধারিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
+        livestock: {title:'পশুপালন', icon:'🐄', type:'পশু ব্যবস্থাপনা', description:'গরুর ঘর, খাদ্য, স্বাস্থ্য পরীক্ষা, টিকা, দুধ ও অন্যান্য পশুপালন কার্যক্রমের জন্য নির্ধারিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
+        orchard: {title:'ফলজ বাগান', icon:'🌳', type:'বাগান ব্যবস্থাপনা', description:'গাছের ধরন, রোপণ, সার, ছাঁটাই, পরিচর্যা ও ফল সংগ্রহের জন্য পরিকল্পিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
+        crops: {title:'সবজি ও ফসল', icon:'🌱', type:'ফসল ব্যবস্থাপনা', description:'বীজ বপন, সেচ, সার, রোগবালাই পর্যবেক্ষণ ও ফসল সংগ্রহের জন্য নির্ধারিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
+        nursery: {title:'চারা ও ভাসমান কৃষি', icon:'🪴', type:'চারা ও পরীক্ষামূলক চাষ', description:'চারা উৎপাদন, ভাসমান বেড, বীজতলা ও পরীক্ষামূলক চাষের জন্য পরিকল্পিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
+        compost: {title:'কম্পোস্ট ও রিসাইক্লিং', icon:'♻️', type:'সার্কুলার কৃষি', description:'জৈব বর্জ্য ব্যবস্থাপনা, কম্পোস্ট তৈরি ও খামারের সম্পদ পুনর্ব্যবহারের জন্য পরিকল্পিত অংশ।', activity:'', responsible:'', status:'planned', notes:''},
         reserve: {title:'৪০ ফুট ফাঁকা অংশ', icon:'🌿', type:'সংরক্ষিত ফাঁকা এলাকা', description:'এই অংশটি ফাঁকা রাখার জন্য চিহ্নিত। এখানে কোনো রাস্তা দেখানো হয়নি। বাস্তব নকশা অনুযায়ী এই অংশের অবস্থান নিশ্চিত করো.', activity:'ফাঁকা রাখা', responsible:'', status:'planned', notes:'এই অংশে কোনো রাস্তা হবে না।'}
       };
       let selectedId = 'pond';
-      let state = loadState();
+      let state = IS_PUBLIC_VIEW ? {} : loadState();
       const $ = id => document.getElementById(id);
       const fieldIds = { activity:'activityInput', responsible:'responsibleInput', status:'statusSelect', notes:'notesInput' };
       function loadState(){
@@ -244,6 +258,7 @@
       }
       function dataFor(id){ return {...zones[id], ...(state[id] || {})}; }
       function persistState(){
+        if (IS_PUBLIC_VIEW) return false;
         try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
         catch (err) { showToast('ব্রাউজারে সংরক্ষণ করা যায়নি। স্টোরেজ সীমা বা প্রাইভেট মোড পরীক্ষা করো।'); return false; }
       }
@@ -270,13 +285,14 @@
       }
       function updateStats(){
         const completed=Object.keys(zones).filter(id=>(state[id]?.status || zones[id].status)==='done').length;
-        $('completedCount').textContent=`${completed} / ${Object.keys(zones).length}`;
-        $('zoneStatusBadge').textContent=statusLabels[dataFor(selectedId).status] || statusLabels.planned;
+        if ($('completedCount')) $('completedCount').textContent=`${completed} / ${Object.keys(zones).length}`;
+        if ($('zoneStatusBadge')) $('zoneStatusBadge').textContent=statusLabels[dataFor(selectedId).status] || statusLabels.planned;
       }
       document.querySelectorAll('.farm-zone').forEach(el=>{
         el.addEventListener('click',()=>selectZone(el.dataset.zone));
         el.addEventListener('keydown',ev=>{ if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();selectZone(el.dataset.zone);} });
       });
+      if (!IS_PUBLIC_VIEW) {
       $('statusSelect').addEventListener('change',()=>{ $('zoneStatusBadge').textContent=statusLabels[$('statusSelect').value] || statusLabels.planned; });
       $('zoneForm').addEventListener('submit',ev=>{
         ev.preventDefault();
@@ -304,6 +320,7 @@
         a.href=url; a.download='munshi-agro-farm-map-notes.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
         showToast('জোনের নোট JSON ফাইলে এক্সপোর্ট হয়েছে।');
       });
+      }
       selectZone(selectedId); updateStats();
     })();
   </script>

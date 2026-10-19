@@ -72,14 +72,15 @@
   .role-login-btn:disabled{opacity:.55;cursor:not-allowed;transform:none}
   .workspace-toggle{background:#fff;color:#1B4332;border-color:#D8F3DC}
   .role-login-controls [hidden],#dashboardWorkspace[hidden]{display:none!important}
-  #dashboardWorkspace{background:#f3f8f1;min-height:65vh;padding:22px 0 36px}
-  .workspace-wrap{width:min(1200px,calc(100% - 28px));margin:0 auto}
-  .workspace-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 14px;padding:12px 16px;background:#fff;border:1px solid #d8e8d9;border-radius:14px}
-  .workspace-head h2{margin:0;color:#1B4332;font-size:clamp(20px,3vw,28px)}
-  .workspace-head p{margin:4px 0 0;color:#587065;font-size:14px}
-  .management-frame-shell{background:#fff;border:1px solid #d8e8d9;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(27,67,50,.08)}
-  #heroTrackerFrame{display:block;width:100%;height:min(82vh,1100px);min-height:780px;border:0;background:#f3f8f1}
-  /* The hero introduction card was removed; the interactive map appears in its own section below. */
+  #dashboardWorkspace{display:block;background:#f3f8f1;min-height:0;padding:8px 0 18px}
+  .workspace-wrap{width:min(1240px,calc(100% - 20px));margin:0 auto}
+  .workspace-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 8px;padding:10px 14px;background:#fff;border:1px solid #d8e8d9;border-radius:12px}
+  .workspace-head h2{margin:0;color:#1B4332;font-size:clamp(18px,2.5vw,24px)}
+  .workspace-head p{margin:4px 0 0;color:#587065;font-size:13px}
+  .workspace-head .workspace-toggle{display:none!important}
+  .management-frame-shell{background:transparent;border:0;border-radius:0;overflow:visible;box-shadow:none}
+  #heroTrackerFrame{display:block;width:100%;height:850px;min-height:740px;border:0;background:#f3f8f1}
+  .site-nav,.nav-toggle{display:none!important}
   .hero-grid{grid-template-columns:minmax(0,1fr)!important}
   .farm-map-section{padding:clamp(26px,4vw,54px) 0;background:#f3f8f1}
   .farm-map-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:18px}
@@ -114,7 +115,7 @@
       <a href="#about" data-nav>সম্পর্কে</a>
       <a href="#focus" data-nav>কাজের ক্ষেত্র</a>
       <a href="#projects" data-nav>প্রজেক্ট</a>
-      <a href="#farm-map" data-nav>🗺️ ফার্ম ম্যাপ</a>
+      <a href="#farm-map" data-nav>জমির নকশা</a>
       <a href="#contact" data-nav>যোগাযোগ</a>
     </nav>
     <div class="role-login-controls" aria-label="ব্যবহারকারী লগইন">
@@ -127,12 +128,12 @@
 </header>
 
 
-<section id="dashboardWorkspace" hidden aria-label="ব্যবস্থাপনা ড্যাশবোর্ড">
+<section id="dashboardWorkspace" aria-label="পাবলিক ও ব্যবস্থাপনা ড্যাশবোর্ড">
   <div class="workspace-wrap">
     <div class="workspace-head">
       <div>
-        <h2 id="workspaceTitle">মুন্সী এগ্রো ব্যবস্থাপনা ড্যাশবোর্ড</h2>
-        <p id="workspaceStatus" role="status">প্রবেশ করতে উপরের Admin, Staff অথবা Investor Login নির্বাচন করুন।</p>
+        <h2 id="workspaceTitle">মুন্সী এগ্রো — পাবলিক ড্যাশবোর্ড</h2>
+        <p id="workspaceStatus" role="status">সারসংক্ষেপ ও জমির নকশা সবার জন্য; পরিচালনার কাজে উপরের লগইন অপশন ব্যবহার করুন।</p>
       </div>
       <button type="button" class="workspace-toggle" id="workspaceBackButton">← হোমপেজে ফিরুন</button>
     </div>
@@ -278,12 +279,11 @@
       <div class="farm-map-heading">
         <div>
           <h2>ইন্টারঅ্যাকটিভ ফার্ম ম্যাপ</h2>
-          <p>জমির জোনে ক্লিক করে কার্যক্রম, দায়িত্বপ্রাপ্ত ব্যক্তি ও কাজের অবস্থা দেখুন।</p>
+          <p>জমির অংশে ক্লিক করে নকশা ও অঞ্চল সম্পর্কে বিবরণ দেখুন। কার্যক্রম পরিচালনার জন্য উপরের Admin বা Staff Login ব্যবহার করুন।</p>
         </div>
-        <a class="btn btn-primary" href="interactive_farm_map.html" target="_blank" rel="noopener">পূর্ণ পেজে খুলুন ↗</a>
       </div>
       <div class="farm-map-frame-shell">
-        <iframe id="farmMapFrame" src="interactive_farm_map.html" title="মুন্সী এগ্রো ইন্টারঅ্যাকটিভ ফার্ম ম্যাপ" loading="lazy"></iframe>
+        <iframe id="farmMapFrame" src="interactive_farm_map.html?public=1" title="মুন্সী এগ্রোর পাবলিক জমির নকশা" loading="lazy"></iframe>
       </div>
       <p class="farm-map-note">নোট: ম্যাপের অবস্থানগুলো ধারণাগত। ৪০ ফুট ফাঁকা অংশে কোনো রাস্তা দেখানো হয়নি। ম্যাপের নোট আপাতত এই ব্রাউজারে সংরক্ষিত হয়; ক্লাউড সিঙ্ক আলাদা ধাপে যুক্ত করতে হবে।</p>
     </div>
@@ -508,14 +508,16 @@
   function setDashboardMode(on) {
     dashboardMode = !!on;
     document.body.classList.toggle('dashboard-mode', dashboardMode);
-    workspace.hidden = !dashboardMode;
-    toggle.hidden = dashboardMode || !activeRole;
+    workspace.hidden = false; // পাবলিক ড্যাশবোর্ড লগইন ছাড়াও index-এ দৃশ্যমান থাকবে
+    toggle.hidden = true;     // একই ভূমিকা-বাটন থেকে লগআউট করা যাবে
+    const title = document.getElementById('workspaceTitle');
+    if (title) title.textContent = activeRole ? `${roleNames[activeRole]} ড্যাশবোর্ড` : 'মুন্সী এগ্রো — পাবলিক ড্যাশবোর্ড';
     if (dashboardMode) {
-      toggle.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
-      back.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
+      back.hidden = true;
+      status.textContent = activeRole
+        ? `${roleNames[activeRole]} হিসেবে লগইন করা আছে। আপনার অনুমোদিত ড্যাশবোর্ড ব্যবহার করুন।`
+        : 'লগইন ফর্ম খুলেছে। অনুমোদিত অ্যাকাউন্ট দিয়ে প্রবেশ করুন।';
       window.scrollTo({top:0, behavior:'smooth'});
-    } else {
-      toggle.textContent = 'ড্যাশবোর্ডে ফিরুন';
     }
   }
 
@@ -531,7 +533,7 @@
       if (btn.disabled) btn.title = `আগে ${roleNames[activeRole]} সেশন থেকে লগআউট করুন`;
       else btn.title = loggedIn ? 'লগআউট করতে ক্লিক করুন' : `${roleNames[role]} হিসেবে প্রবেশ করুন`;
     });
-    toggle.hidden = dashboardMode || !activeRole;
+    toggle.hidden = true;
     if (dashboardMode) {
       toggle.textContent = activeRole ? '← মূল ওয়েবসাইটে ফিরুন' : '← হোমপেজে ফিরুন';
       back.textContent = toggle.textContent;
@@ -572,15 +574,15 @@
       clickInnerRole(role);
       return;
     }
-    setDashboardMode(true);
     status.textContent = `${roleNames[role]} লগইন ফর্ম খোলা হচ্ছে…`;
+    workspace.scrollIntoView({top:0, behavior:'smooth', block:'start'});
     if (frameReady) clickInnerRole(role);
     else pendingRole = role;
   }
 
   function clickDashboardAction(actionId) {
     pendingRole = null;
-    setDashboardMode(true);
+    if (activeRole) setDashboardMode(true);
     if (!frameReady) { pendingAction = actionId; return; }
     try {
       const target = frame.contentDocument && frame.contentDocument.getElementById(actionId);
@@ -600,11 +602,20 @@
   window.addEventListener('message', (event) => {
     if (event.origin !== location.origin || event.source !== frame.contentWindow) return;
     const data = event.data;
-    if (!data || data.type !== 'munshi-role-state') return;
+    if (!data || typeof data !== 'object') return;
+    if (data.type === 'munshi-dashboard-height') {
+      const height = Number(data.height);
+      if (Number.isFinite(height) && height >= 500 && height <= 12000) frame.style.height = Math.ceil(height + 8) + 'px';
+      return;
+    }
+    if (data.type !== 'munshi-role-state') return;
     const nextRole = ['admin','staff','investor'].includes(data.role) ? data.role : null;
     const previousRole = activeRole;
     activeRole = nextRole;
     refreshRoleButtons();
+    const title = document.getElementById('workspaceTitle');
+    const roleTitle = {admin:'Admin ড্যাশবোর্ড', staff:'Staff ড্যাশবোর্ড', investor:'Investor ড্যাশবোর্ড'};
+    if (title) title.textContent = activeRole ? roleTitle[activeRole] : 'মুন্সী এগ্রো — পাবলিক ড্যাশবোর্ড';
     if (!firstRoleMessageSeen) {
       firstRoleMessageSeen = true;
       if (activeRole) setDashboardMode(true);
