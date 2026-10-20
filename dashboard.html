@@ -2318,7 +2318,73 @@ function saveState(){
   }
 }
 
-async function uploadProductImageToStorage(file, productId){
+function formatProductFileSize(bytes){
+  const n = Number(bytes) || 0;
+  return n >= 1024 * 1024 ? (n / (1024 * 1024)).toFixed(2) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
+}
+function setProductImageUploadStatus(message, target, isError){
+  const fallbackTarget = document.getElementById("productAdminStatus") || document.getElementById("newProductAdminStatus");
+  const el = target || fallbackTarget;
+  if (!el) return;
+  el.textContent = message;
+  el.style.color = isError ? "var(--red)" : "var(--mid)";
+}
+/* Resize/compress large photos before sending them to Firebase Storage.
+   A 5 MB phone photo is usually reduced to a few hundred KB for product cards. */
+async function compressProductImageForUpload(file){
+  validateProductImageFile(file);
+  if (file.size <= 300 * 1024) {
+    const objectUrl = URL.createObjectURL(file);
+    try {
+      const dims = await new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve({w: img.naturalWidth || img.width, h: img.naturalHeight || img.height});
+        img.onerror = () => reject(new Error("ছবিটি খোলা যায়নি। অন্য ছবি নির্বাচন করুন।"));
+        img.src = objectUrl;
+      });
+      if (Math.max(dims.w, dims.h) <= 1400) return file;
+    } finally { URL.revokeObjectURL(objectUrl); }
+  }
+  const objectUrl = URL.createObjectURL(file);
+  try {
+    const image = await new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("ছবিটি খোলা যায়নি। অন্য ছবি নির্বাচন করুন।"));
+      img.src = objectUrl;
+    });
+    const sourceW = image.naturalWidth || image.width;
+    const sourceH = image.naturalHeight || image.height;
+    let bestBlob = null;
+    for (const maxDim of [1200, 960, 800]) {
+      const ratio = Math.min(1, maxDim / Math.max(sourceW, sourceH));
+      const width = Math.max(1, Math.round(sourceW * ratio));
+      const height = Math.max(1, Math.round(sourceH * ratio));
+      const canvas = document.createElement("canvas");
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("ছবি কমপ্রেস করা যাচ্ছে না; অন্য ব্রাউজার দিয়ে চেষ্টা করুন।");
+      /* Product catalog images use a clean white background if source has transparency. */
+      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, width, height);
+      ctx.drawImage(image, 0, 0, width, height);
+      for (const quality of [0.82, 0.74]) {
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", quality));
+        if (!blob) continue;
+        if (!bestBlob || blob.size < bestBlob.size) bestBlob = blob;
+        if (blob.size <= 300 * 1024) {
+          const name = String(file.name || "product-image").replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-70) || "product-image";
+          return new File([blob], name + "-optimized.jpg", {type: "image/jpeg", lastModified: Date.now()});
+        }
+      }
+    }
+    if (bestBlob) {
+      const name = String(file.name || "product-image").replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-70) || "product-image";
+      return new File([bestBlob], name + "-optimized.jpg", {type: "image/jpeg", lastModified: Date.now()});
+    }
+    throw new Error("ছবি কমপ্রেস করা যায়নি। অন্য ছবি নির্বাচন করুন।");
+  } finally { URL.revokeObjectURL(objectUrl); }
+}
+async function uploadProductImageToStorage(file, productId, statusElement){
   if (!file) return "";
   if (!isAdmin) throw new Error("পণ্যের ছবি আপলোড করতে Admin Login প্রয়োজন।");
   validateProductImageFile(file);
@@ -2331,7 +2397,14 @@ async function uploadProductImageToStorage(file, productId){
   const safeName = String(file.name || "product-image").replace(/[^a-zA-Z0-9._-]+/g,"-").slice(-80);
   const path = "munshiAgro/products/" + String(productId).replace(/[^a-zA-Z0-9_-]/g,"-") + "/" + Date.now() + "-" + safeName;
   const ref = storage.ref().child(path);
-  const snapshot = await ref.put(file, { contentType: file.type, cacheControl: "public,max-age=3600" });
+  const uploadTask = ref.put(file, { contentType: file.type, cacheControl: "public,max-age=31536000,immutable" });
+  const snapshot = await new Promise((resolve, reject) => {
+    uploadTask.on("state_changed", snap => {
+      const pct = snap.totalBytes ? Math.min(100, Math.round((snap.bytesTransferred / snap.totalBytes) * 100)) : 0;
+      setProductImageUploadStatus("ছবি আপলোড হচ্ছে " + pct + "% · " + formatProductFileSize(snap.bytesTransferred) + " / " + formatProductFileSize(snap.totalBytes), statusElement, false);
+    }, reject, () => resolve(uploadTask.snapshot));
+  });
+  setProductImageUploadStatus("ছবি আপলোড হয়েছে; লিংক তৈরি হচ্ছে…", statusElement, false);
   return await snapshot.ref.getDownloadURL();
 }
 function validProductImageUrl(value){
@@ -2399,18 +2472,23 @@ function checkInlineImageFits(productId, dataUrl, draft){
   // Leave margin below Firestore's 1 MiB document maximum for document/index overhead.
   if (bytes > 900 * 1024) throw new Error("বর্তমান Firebase ডেটার সঙ্গে এই ছবিটি রাখলে ডেটাবেসের নিরাপদ আকার ছাড়িয়ে যাবে। Firebase Console থেকে Storage চালু করে ছবি আপলোড করুন।");
 }
-async function prepareProductImage(file, productId, draft){
+async function prepareProductImage(file, productId, draft, statusElement){
   if (!file) return {imageUrl:"",imageData:"",mode:"none"};
   validateProductImageFile(file);
   if (!isAdmin) throw new Error("পণ্যের ছবি পরিবর্তন করতে Admin Login প্রয়োজন।");
+  const originalSize = file.size || 0;
+  setProductImageUploadStatus("ছবি ছোট করা হচ্ছে… আসল ফাইল " + formatProductFileSize(originalSize), statusElement, false);
+  const uploadFile = await compressProductImageForUpload(file);
+  setProductImageUploadStatus("ছবি প্রস্তুত: " + formatProductFileSize(originalSize) + " → " + formatProductFileSize(uploadFile.size) + "। আপলোড শুরু হচ্ছে…", statusElement, false);
   try {
-    const url=await uploadProductImageToStorage(file,productId);
-    return {imageUrl:url,imageData:"",mode:"firebase-storage"};
+    const url=await uploadProductImageToStorage(uploadFile,productId,statusElement);
+    return {imageUrl:url,imageData:"",mode:"firebase-storage",originalSize,uploadedSize:uploadFile.size};
   } catch(storageError) {
     console.warn("Firebase Storage image upload failed; trying small-image fallback", storageError);
-    const dataUrl=await compressProductImageForFallback(file);
+    setProductImageUploadStatus("Firebase Storage-এ আপলোড হয়নি। ছোট বিকল্প ছবি সংরক্ষণের চেষ্টা হচ্ছে…", statusElement, false);
+    const dataUrl=await compressProductImageForFallback(uploadFile);
     checkInlineImageFits(productId,dataUrl,draft || {});
-    return {imageUrl:"",imageData:dataUrl,mode:"firestore-fallback",storageError};
+    return {imageUrl:"",imageData:dataUrl,mode:"firestore-fallback",storageError,originalSize,uploadedSize:uploadFile.size};
   }
 }
 async function persistProductChanges(){
@@ -2518,7 +2596,7 @@ if (productAdminListEl) {
     button.textContent = imageFile ? "ছবি আপলোড হচ্ছে…" : "সংরক্ষণ হচ্ছে…";
     try {
       let imageResult=null;
-      if (imageFile) imageResult = await prepareProductImage(imageFile,id,p);
+      if (imageFile) imageResult = await prepareProductImage(imageFile,id,p,document.getElementById("productAdminStatus"));
       let finalImageUrl = String(p.imageUrl || "");
       let finalImageData = String(p.imageData || "");
       if (imageResult) {
@@ -2592,11 +2670,11 @@ if (newProductAdminForm) newProductAdminForm.addEventListener("submit", async ev
   const oldData=JSON.stringify(DATA);
   const submitButton = newProductAdminForm.querySelector('button[type="submit"]');
   const originalText = submitButton ? submitButton.textContent : "+ পণ্য যোগ করুন";
-  if (submitButton) { submitButton.disabled = true; submitButton.textContent = imageFile ? "ছবি সংরক্ষণ হচ্ছে…" : "পণ্য সংরক্ষণ হচ্ছে…"; }
+  if (submitButton) { submitButton.disabled = true; submitButton.textContent = imageFile ? "ছবি কমপ্রেস ও আপলোড হচ্ছে…" : "পণ্য সংরক্ষণ হচ্ছে…"; }
   try {
     let saveMode="none";
     if (imageFile) {
-      const imageResult=await prepareProductImage(imageFile,productId,newProduct);
+      const imageResult=await prepareProductImage(imageFile,productId,newProduct,status);
       newProduct.imageUrl=imageResult.imageUrl;
       if(imageResult.imageData)newProduct.imageData=imageResult.imageData;
       saveMode=imageResult.mode;
