@@ -35,6 +35,7 @@
 <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-app-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-firestore-compat.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-auth-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-storage-compat.js"></script>
 <style>
   :root {
     --dark: #1B4332;
@@ -631,6 +632,20 @@
   @media(max-width:900px){.product-admin-form{grid-template-columns:repeat(2,minmax(0,1fr))}.product-admin-form .field.full{grid-column:1/-1}.product-admin-form button{grid-column:1/-1}}
   @media(max-width:680px){.product-admin-row{grid-template-columns:1fr auto;gap:9px}.product-admin-name{grid-column:1/-1}.product-admin-prices{grid-column:1/-1}.product-admin-active{grid-column:1}.product-admin-save{grid-column:2;grid-row:3}.product-admin-price-field{min-width:120px}}
 
+
+  .product-admin-image-cell{display:flex;flex-direction:column;align-items:stretch;gap:7px;min-width:0}
+  .product-admin-image-thumb{display:block;width:76px;height:68px;object-fit:contain;padding:5px;border:1px solid var(--soft);border-radius:10px;background:#f6faf4}
+  .product-admin-image-placeholder{display:grid;place-items:center;width:76px;height:68px;border:1px dashed var(--mid);border-radius:10px;background:var(--soft);color:var(--dark);font-size:26px}
+  .product-admin-image-picker{display:block;cursor:pointer;text-align:center;border:1px solid var(--soft);border-radius:8px;padding:7px 5px;background:var(--white);color:var(--dark);font-size:12px!important;font-weight:700}
+  .product-admin-image-picker input[type=file]{max-width:100%;font-size:12px!important}
+  .product-admin-file-input{display:block;width:100%;min-width:0;max-width:100%;padding:8px 7px;border:1.5px solid var(--soft);border-radius:9px;background:var(--white);color:var(--text);font:inherit;font-size:12px!important;cursor:pointer}
+  .product-admin-file-name{display:block;max-width:100%;overflow-wrap:anywhere;color:var(--muted);font-size:11.5px;line-height:1.5;margin-top:2px}
+  .product-image-help{display:block;color:var(--muted);font-size:12px;line-height:1.65;margin-top:6px}
+  .product-admin-image-url{width:100%;min-width:0;max-width:180px;padding:7px 8px;border:1px solid var(--soft);border-radius:8px;background:var(--bg);color:var(--text);font-size:12px!important}
+  .product-admin-image-preview{display:block;max-width:140px;max-height:90px;margin-top:6px;object-fit:contain;border:1px solid var(--soft);border-radius:8px;background:var(--white)}
+  @media(max-width:900px){.product-admin-row{grid-template-columns:84px minmax(0,1fr);align-items:start}.product-admin-image-cell{grid-row:span 2}.product-admin-prices{grid-column:2/-1}.product-admin-active{grid-column:2}.product-admin-save{grid-column:2;grid-row:auto}}
+  @media(max-width:640px){.product-admin-row{grid-template-columns:72px minmax(0,1fr);padding:10px;gap:9px}.product-admin-image-thumb,.product-admin-image-placeholder{width:66px;height:62px}.product-admin-image-picker{font-size:11px!important;padding:6px 3px}.product-admin-image-url{font-size:11px!important}.product-admin-prices{gap:7px}.product-admin-price-field{min-width:110px}}
+
 </style>
 <!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DZPQBGPBJ"></script>
@@ -680,6 +695,63 @@
   .public-empty{padding:16px 0;text-align:center;color:var(--muted);font-size:12.5px}
   .public-privacy-note{margin:13px 0 2px;background:var(--bg);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:11.5px;line-height:1.6}
   @media(max-width:700px){.public-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.public-dashboard-grid{grid-template-columns:1fr}.public-card.wide{grid-column:auto}.public-dashboard-head{display:block}.public-live{margin-top:10px}.public-activity{grid-template-columns:minmax(0,1fr) auto;gap:7px}.public-activity small{grid-column:1}.public-type{grid-column:2;grid-row:1/3;align-self:center}}
+
+  /* ---------- Tiro Bangla typography system: readable on desktop and mobile ---------- */
+  html,body{font-family:'Tiro Bangla','Noto Serif Bengali',serif!important}
+  body,body *{font-family:'Tiro Bangla','Noto Serif Bengali',serif!important}
+  body{font-size:16px!important;line-height:1.72}
+  body p{font-size:15px;line-height:1.8}
+  body label{font-size:14px}
+  body input,body select,body textarea{font-size:15px}
+  body button{line-height:1.5}
+  .page-shell>header h1{font-size:clamp(29px,4vw,36px)!important;line-height:1.35}
+  .page-shell>header p{font-size:16px!important;line-height:1.75}
+  .stat-card .label{font-size:15px!important;line-height:1.55}
+  .tab{font-size:15px!important}
+  .card h2{font-size:21px!important;line-height:1.45}
+  .nav-card .nav-label{font-size:14px!important;line-height:1.55}
+  .view-note,.product-admin-intro{font-size:14px!important;line-height:1.8!important}
+  .product-admin-form label{font-size:14px!important}
+  .product-admin-form input,.product-admin-form select{font-size:15px!important;min-height:43px}
+  .product-admin-name{font-size:15px!important;line-height:1.6!important}
+  .product-admin-cat{font-size:13px!important;line-height:1.6!important}
+  .product-admin-price-field label{font-size:12px!important}
+  .product-admin-price-field input{font-size:15px!important;min-height:41px}
+  .product-admin-active{font-size:13px!important;white-space:normal}
+  .product-admin-save{font-size:14px!important;line-height:1.45;padding:10px 13px}
+  .product-admin-status{font-size:14px!important;line-height:1.7}
+  .orders-kpi-label,.orders-kpi-value,.order-card,.order-customer,.order-item-list{font-size:14px}
+  .login-field label,.login-sub,.login-msg,.login-hint{font-size:14px!important;line-height:1.7!important}
+  .login-field input{font-size:16px!important;min-height:46px}
+  .product-admin-image-cell{display:flex;flex-direction:column;align-items:stretch;gap:7px;min-width:0}
+  .product-admin-image-thumb{display:block;width:76px;height:68px;object-fit:contain;padding:5px;border:1px solid var(--soft);border-radius:10px;background:#f6faf4}
+  .product-admin-image-placeholder{display:grid;place-items:center;width:76px;height:68px;border:1px dashed var(--mid);border-radius:10px;background:var(--soft);color:var(--dark);font-size:26px}
+  .product-admin-image-picker{display:block;cursor:pointer;text-align:center;border:1px solid var(--soft);border-radius:8px;padding:7px 5px;background:var(--white);color:var(--dark);font-size:12px!important;font-weight:700}
+  .product-admin-image-picker input[type=file]{max-width:100%;font-size:12px!important}
+  .product-admin-image-url{width:100%;min-width:0;max-width:180px;padding:7px 8px;border:1px solid var(--soft);border-radius:8px;background:var(--bg);color:var(--text);font-size:12px!important}
+  .product-admin-image-preview{display:block;max-width:140px;max-height:90px;margin-top:6px;object-fit:contain;border:1px solid var(--soft);border-radius:8px;background:var(--white)}
+  @media(max-width:900px){
+    .product-admin-row{grid-template-columns:84px minmax(0,1fr);align-items:start}
+    .product-admin-image-cell{grid-row:span 2}
+    .product-admin-prices{grid-column:2/-1}
+    .product-admin-active{grid-column:2}
+    .product-admin-save{grid-column:2;grid-row:auto}
+  }
+  @media(max-width:640px){
+    body{font-size:16px!important}
+    .page-shell>header h1{font-size:28px!important}
+    .page-shell>header p{font-size:15px!important}
+    .card{padding:15px!important}
+    .card h2{font-size:20px!important}
+    .nav-card .nav-label{font-size:14px!important}
+    .product-admin-row{grid-template-columns:72px minmax(0,1fr);padding:10px;gap:9px}
+    .product-admin-image-thumb,.product-admin-image-placeholder{width:66px;height:62px}
+    .product-admin-image-picker{font-size:11px!important;padding:6px 3px}
+    .product-admin-image-url{font-size:11px!important}
+    .product-admin-prices{gap:7px}
+    .product-admin-price-field{min-width:110px}
+  }
+
 </style>
 <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embedded-dashboard');</script>
 
@@ -1121,7 +1193,9 @@
       <div class="field"><label for="newProductCategory">বিভাগ *</label><select id="newProductCategory" required><option>পশুপালন ও প্রাণিসম্পদ</option><option>ক্যানেল মৎস্য চাষ</option><option>ফলজ বাগান</option><option>মাচা, ভাসমান কৃষি ও সবজি</option><option>বাই-প্রোডাক্ট ও অন্যান্য</option></select></div>
       <div class="field"><label for="newProductPrice">দাম (৳) *</label><input id="newProductPrice" required type="number" min="0" step="0.01" placeholder="0"></div>
       <div class="field"><label for="newProductUnit">একক *</label><input id="newProductUnit" required maxlength="40" placeholder="কেজি / পিস"></div>
-      <div class="field full"><label for="newProductDescription">ছোট বিবরণ (ঐচ্ছিক)</label><input id="newProductDescription" maxlength="220" placeholder="পণ্যের সংক্ষিপ্ত বিবরণ"></div>
+      <div class="field full"><label for="newProductDescription">পণ্যের বিস্তারিত / ছোট বিবরণ</label><input id="newProductDescription" maxlength="220" placeholder="পণ্যের বৈশিষ্ট্য, উৎপাদনের তথ্য, একক ইত্যাদি"></div>
+      <div class="field full product-image-upload-field"><label for="newProductImage">পণ্যের ছবি নির্বাচন করুন (JPG, PNG বা WebP; সর্বোচ্চ ৫ MB)</label><input id="newProductImage" class="product-admin-file-input" type="file" accept="image/jpeg,image/png,image/webp"><small id="newProductImageFileName" class="product-admin-file-name">এখনো কোনো ছবি নির্বাচন করা হয়নি।</small><img id="newProductImagePreview" class="product-admin-image-preview" alt="নতুন পণ্যের ছবির প্রিভিউ" hidden><small class="product-image-help">ছবি নির্বাচন করলে প্রিভিউ দেখা যাবে। Firebase Storage চালু থাকলে ছবিটি সেখানে আপলোড হবে; Storage কাজ না করলে সীমিত আকারে কমপ্রেস করে ডেটাবেসে রাখার চেষ্টা করবে।</small></div>
+      <div class="field full"><label for="newProductImageUrl">অথবা সরাসরি ছবির HTTPS URL (ঐচ্ছিক)</label><input id="newProductImageUrl" type="url" maxlength="1000" placeholder="https://... ছবির লিংক"></div>
       <button type="submit" class="btn">+ পণ্য যোগ করুন</button>
     </form>
     <p class="product-admin-status" id="newProductAdminStatus" role="status"></p>
@@ -2050,7 +2124,7 @@ function broadcastProductCatalog(){
     const publicProducts = (Array.isArray(DATA.products) ? DATA.products : []).map(p => ({
       id: String(p.id || ""), name: String(p.name || ""), category: String(p.category || ""),
       price: Number(p.price) || 0, unit: String(p.unit || "একক"), description: String(p.description || ""),
-      iconType: String(p.iconType || "greens"), active: p.active !== false,
+      iconType: String(p.iconType || "greens"), imageUrl: String(p.imageUrl || ""), imageData: String(p.imageData || ""), active: p.active !== false,
       options: Array.isArray(p.options) ? p.options.map(o => ({label:String(o.label || o.unit || "একক"), unit:String(o.unit || p.unit || "একক"), price:Number(o.price)||0})) : undefined
     }));
     window.parent.postMessage({ type: "munshi-product-catalog", products: publicProducts }, location.origin);
@@ -2207,6 +2281,121 @@ function saveState(){
   }
 }
 
+async function uploadProductImageToStorage(file, productId){
+  if (!file) return "";
+  if (!isAdmin) throw new Error("পণ্যের ছবি আপলোড করতে Admin Login প্রয়োজন।");
+  validateProductImageFile(file);
+  if (!FIREBASE_ENABLED || !authInstance) throw new Error("Firebase Authentication সংযোগ পাওয়া যায়নি।");
+  if (!authInstance.currentUser || authInstance.currentUser.isAnonymous) {
+    throw new Error("Firebase Admin সেশন প্রস্তুত নয়। আবার Admin Login করে চেষ্টা করুন।");
+  }
+  if (!window.firebase || typeof firebase.storage !== "function") throw new Error("Firebase Storage SDK লোড হয়নি।");
+  const storage = firebase.storage();
+  const safeName = String(file.name || "product-image").replace(/[^a-zA-Z0-9._-]+/g,"-").slice(-80);
+  const path = "munshiAgro/products/" + String(productId).replace(/[^a-zA-Z0-9_-]/g,"-") + "/" + Date.now() + "-" + safeName;
+  const ref = storage.ref().child(path);
+  const snapshot = await ref.put(file, { contentType: file.type, cacheControl: "public,max-age=3600" });
+  return await snapshot.ref.getDownloadURL();
+}
+function validProductImageUrl(value){
+  const url = String(value || "").trim();
+  return !url || /^https:\/\//i.test(url);
+}
+function validateProductImageFile(file){
+  if (!file) return;
+  if (!file.type || !["image/jpeg","image/png","image/webp"].includes(file.type)) throw new Error("JPG, PNG অথবা WebP ফাইল নির্বাচন করুন।");
+  if (file.size > 5 * 1024 * 1024) throw new Error("ছবির ফাইল ৫ MB-এর মধ্যে হতে হবে।");
+}
+function blobAsDataUrl(blob){
+  return new Promise((resolve,reject)=>{
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result || ""));
+    reader.onerror = () => reject(new Error("ছবির প্রিভিউ/ডেটা পড়া যায়নি।"));
+    reader.readAsDataURL(blob);
+  });
+}
+async function compressProductImageForFallback(file){
+  validateProductImageFile(file);
+  const objectUrl = URL.createObjectURL(file);
+  try {
+    const image = await new Promise((resolve,reject)=>{
+      const img = new Image(); img.onload=()=>resolve(img); img.onerror=()=>reject(new Error("ছবিটি খোলা যায়নি। অন্য ছবি নির্বাচন করুন.")); img.src=objectUrl;
+    });
+    const maxBlobBytes = 18 * 1024;
+    let bestBlob = null;
+    const dimensions = [520,440,360,300,240];
+    const qualities = [0.76,0.66,0.56,0.46,0.36];
+    for (const maxDim of dimensions) {
+      const ratio = Math.min(1, maxDim / Math.max(image.naturalWidth || image.width, image.naturalHeight || image.height));
+      const width = Math.max(1, Math.round((image.naturalWidth || image.width) * ratio));
+      const height = Math.max(1, Math.round((image.naturalHeight || image.height) * ratio));
+      const canvas = document.createElement("canvas"); canvas.width=width; canvas.height=height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) throw new Error("ছবি কমপ্রেস করা যাচ্ছে না; অন্য ব্রাউজার দিয়ে চেষ্টা করুন।");
+      ctx.clearRect(0,0,width,height); ctx.drawImage(image,0,0,width,height);
+      for (const quality of qualities) {
+        let blob = await new Promise(resolve=>canvas.toBlob(resolve,"image/webp",quality));
+        if (!blob || blob.type !== "image/webp") {
+          ctx.save(); ctx.globalCompositeOperation="destination-over"; ctx.fillStyle="#ffffff"; ctx.fillRect(0,0,width,height); ctx.restore();
+          blob = await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",quality));
+        }
+        if (!blob) continue;
+        if (!bestBlob || blob.size < bestBlob.size) bestBlob=blob;
+        if (blob.size <= maxBlobBytes) return await blobAsDataUrl(blob);
+      }
+    }
+    if (bestBlob && bestBlob.size <= 24 * 1024) return await blobAsDataUrl(bestBlob);
+    throw new Error("ছবিটি ডেটাবেসের বিকল্প সংরক্ষণের জন্য যথেষ্ট ছোট করা যায়নি। Firebase Storage চালু করে আবার চেষ্টা করুন।");
+  } finally { URL.revokeObjectURL(objectUrl); }
+}
+function estimateJsonBytes(value){
+  const raw=JSON.stringify(value);
+  return new Blob([raw]).size;
+}
+function checkInlineImageFits(productId, dataUrl, draft){
+  const candidate = JSON.parse(JSON.stringify(DATA || {}));
+  candidate.products = Array.isArray(candidate.products) ? candidate.products : [];
+  const existing = candidate.products.find(item=>String(item.id)===String(productId));
+  if (existing) { existing.imageUrl=""; existing.imageData=dataUrl; }
+  else candidate.products.push({...draft,imageUrl:"",imageData:dataUrl});
+  const bytes=estimateJsonBytes(candidate);
+  // Leave margin below Firestore's 1 MiB document maximum for document/index overhead.
+  if (bytes > 900 * 1024) throw new Error("বর্তমান Firebase ডেটার সঙ্গে এই ছবিটি রাখলে ডেটাবেসের নিরাপদ আকার ছাড়িয়ে যাবে। Firebase Console থেকে Storage চালু করে ছবি আপলোড করুন।");
+}
+async function prepareProductImage(file, productId, draft){
+  if (!file) return {imageUrl:"",imageData:"",mode:"none"};
+  validateProductImageFile(file);
+  if (!isAdmin) throw new Error("পণ্যের ছবি পরিবর্তন করতে Admin Login প্রয়োজন।");
+  try {
+    const url=await uploadProductImageToStorage(file,productId);
+    return {imageUrl:url,imageData:"",mode:"firebase-storage"};
+  } catch(storageError) {
+    console.warn("Firebase Storage image upload failed; trying small-image fallback", storageError);
+    const dataUrl=await compressProductImageForFallback(file);
+    checkInlineImageFits(productId,dataUrl,draft || {});
+    return {imageUrl:"",imageData:dataUrl,mode:"firestore-fallback",storageError};
+  }
+}
+async function persistProductChanges(){
+  const serialized=JSON.stringify(DATA);
+  const bytes=new Blob([serialized]).size;
+  if (bytes > 900 * 1024) throw new Error("পণ্যের তথ্য সংরক্ষণের আগে ডেটাবেসের আকার কমাতে হবে। Firebase Storage-এ ছবি রাখুন, যাতে Firestore ডকুমেন্টের সীমা না ছাড়ায়।");
+  if (cloudDocRef) {
+    try { await cloudDocRef.set(DATA); }
+    catch(err) {
+      console.error("Product cloud save failed",err);
+      const code=String(err && err.code || "");
+      if (code.includes("resource-exhausted") || code.includes("invalid-argument")) throw new Error("Firebase ডেটাবেসে পণ্য সংরক্ষণ হয়নি—ডেটার আকার বেশি হতে পারে। Firebase Storage চালু করে আবার চেষ্টা করুন।");
+      if (code.includes("permission-denied") || code.includes("unauthorized")) throw new Error("Firebase অনুমতি দেয়নি। Admin Login এবং Firestore Security Rules পরীক্ষা করুন।");
+      throw new Error("Firebase-এ পণ্য সংরক্ষণ করা যায়নি। ইন্টারনেট সংযোগ ও Firebase Rules পরীক্ষা করুন।");
+    }
+  }
+  try { localStorage.setItem(STORAGE_KEY,serialized); }
+  catch(err) { if (!cloudDocRef) throw new Error("ব্রাউজারে ডেটা সংরক্ষণের জায়গা নেই।"); console.warn("Local product cache not saved",err); }
+  broadcastProductCatalog();
+  broadcastSummary();
+  return {cloud:!!cloudDocRef,bytes};
+}
 function renderProductAdminList(){
   const container = document.getElementById("productAdminList");
   if (!container) return;
@@ -2216,40 +2405,128 @@ function renderProductAdminList(){
   container.innerHTML = list.map(p => {
     const opts = Array.isArray(p.options) && p.options.length ? p.options : [{label:"প্রতি "+(p.unit||"একক"),unit:p.unit||"একক",price:Number(p.price)||0}];
     const prices = opts.map((o,i) => `<div class="product-admin-price-field"><label>${esc(o.label || o.unit || "দাম")}</label><input type="number" min="0" step="0.01" data-product-price="${esc(p.id)}" data-option-index="${i}" value="${Number(o.price)||0}" aria-label="${esc(p.name)} - ${esc(o.label || "দাম")}"></div>`).join("");
-    return `<div class="product-admin-row" data-product-admin-row="${esc(p.id)}"><div><div class="product-admin-name">${esc(p.name)}</div><span class="product-admin-cat">${esc(p.category)} · একক: ${esc(p.unit||"একক")}</span></div><div class="product-admin-prices">${prices}</div><label class="product-admin-active"><input type="checkbox" data-product-active="${esc(p.id)}" ${p.active===false?"":"checked"}> দোকানে দেখাবে</label><button type="button" class="product-admin-save" data-save-product="${esc(p.id)}">সংরক্ষণ</button></div>`;
+    const image = String(p.imageUrl || p.imageData || "");
+    const urlValue = String(p.imageUrl || "");
+    const imageCell = `<div class="product-admin-image-cell">${image ? `<img class="product-admin-image-thumb" data-product-image-preview="${esc(p.id)}" src="${esc(image)}" alt="${esc(p.name)}-এর ছবি">` : `<div class="product-admin-image-placeholder" data-product-image-placeholder="${esc(p.id)}" aria-label="ছবি নেই">🌱</div><img class="product-admin-image-thumb" data-product-image-preview="${esc(p.id)}" src="" alt="${esc(p.name)}-এর ছবি" hidden>`}<label for="product-image-${esc(p.id)}">ছবি পরিবর্তন করুন</label><input id="product-image-${esc(p.id)}" class="product-admin-file-input" type="file" accept="image/jpeg,image/png,image/webp" data-product-image="${esc(p.id)}"><small class="product-admin-file-name" data-product-image-name="${esc(p.id)}">নতুন ছবি নির্বাচন করা হয়নি।</small><input type="url" class="product-admin-image-url" data-product-image-url="${esc(p.id)}" value="${esc(urlValue)}" placeholder="অথবা HTTPS ছবির URL" aria-label="${esc(p.name)}-এর ছবি URL"></div>`;
+    return `<div class="product-admin-row" data-product-admin-row="${esc(p.id)}">${imageCell}<div><div class="product-admin-name">${esc(p.name)}</div><span class="product-admin-cat">${esc(p.category)} · একক: ${esc(p.unit||"একক")}</span></div><div class="product-admin-prices">${prices}</div><label class="product-admin-active"><input type="checkbox" data-product-active="${esc(p.id)}" ${p.active===false?"":"checked"}> দোকানে দেখাবে</label><button type="button" class="product-admin-save" data-save-product="${esc(p.id)}">সংরক্ষণ</button></div>`;
   }).join("");
 }
-
 function notifyProductAdminStatus(message, error){
   const el = document.getElementById("productAdminStatus");
   if (el) { el.textContent = message; el.style.color = error ? "var(--red)" : "var(--mid)"; }
 }
 
 const productAdminListEl = document.getElementById("productAdminList");
-if (productAdminListEl) productAdminListEl.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-save-product]");
-  if (!button) return;
-  if (!isAdmin) { notifyProductAdminStatus("পণ্যের দাম পরিবর্তন করতে Admin Login প্রয়োজন।", true); return; }
-  const id = button.dataset.saveProduct;
-  const p = (DATA.products || []).find(item => String(item.id) === id);
-  const row = button.closest("[data-product-admin-row]");
-  if (!p || !row) return;
-  const priceInputs = [...row.querySelectorAll("[data-product-price]")];
-  const values = priceInputs.map(input => Number(input.value));
-  if (values.some(value => !Number.isFinite(value) || value < 0)) { notifyProductAdminStatus("সব দাম শূন্য বা তার বেশি সংখ্যা হতে হবে।", true); return; }
-  if (Array.isArray(p.options) && p.options.length) {
-    p.options.forEach((option,index) => { if (values[index] !== undefined) option.price = values[index]; });
-    p.price = Number(p.options[0].price) || 0;
-  } else if (values.length) p.price = values[0];
-  const activeInput = row.querySelector(`[data-product-active="${CSS.escape(id)}"]`);
-  p.active = !!(activeInput && activeInput.checked);
-  saveState();
-  renderProductAdminList();
-  notifyProductAdminStatus(`“${p.name}” পণ্যের দাম ও দৃশ্যমানতা সংরক্ষণ হয়েছে।`, false);
-});
+if (productAdminListEl) {
+  productAdminListEl.addEventListener("change", event => {
+    const fileInput = event.target.closest("[data-product-image]");
+    if (fileInput && fileInput.files && fileInput.files[0]) {
+      const id = fileInput.dataset.productImage;
+      const row = fileInput.closest("[data-product-admin-row]");
+      const preview = row && row.querySelector(`[data-product-image-preview="${CSS.escape(id)}"]`);
+      const placeholder = row && row.querySelector(`[data-product-image-placeholder="${CSS.escape(id)}"]`);
+      const fileName = row && row.querySelector(`[data-product-image-name="${CSS.escape(id)}"]`);
+      const file=fileInput.files[0];
+      try { validateProductImageFile(file); }
+      catch(err) { fileInput.value=""; notifyProductAdminStatus(err.message,true); return; }
+      if (preview) {
+        if (preview.dataset.objectUrl) URL.revokeObjectURL(preview.dataset.objectUrl);
+        const objectUrl = URL.createObjectURL(file);
+        preview.dataset.objectUrl = objectUrl;
+        preview.src = objectUrl;
+        preview.hidden = false;
+      }
+      if (placeholder) placeholder.hidden = true;
+      if (fileName) fileName.textContent = `${file.name} · ${(file.size/1024).toFixed(0)} KB · সংরক্ষণ চাপুন`;
+      notifyProductAdminStatus("ছবি নির্বাচিত হয়েছে। পরিবর্তন স্থায়ী করতে ওই পণ্যের ‘সংরক্ষণ’ বাটনে চাপুন।",false);
+    }
+    const urlInput = event.target.closest("[data-product-image-url]");
+    if (urlInput) {
+      const id = urlInput.dataset.productImageUrl;
+      const row = urlInput.closest("[data-product-admin-row]");
+      const preview = row && row.querySelector(`[data-product-image-preview="${CSS.escape(id)}"]`);
+      const placeholder = row && row.querySelector(`[data-product-image-placeholder="${CSS.escape(id)}"]`);
+      const value = urlInput.value.trim();
+      if (value && /^https:\/\//i.test(value) && preview) { preview.src = value; preview.hidden = false; if (placeholder) placeholder.hidden = true; }
+      else if (!value && preview && !preview.dataset.objectUrl) { preview.hidden = true; if (placeholder) placeholder.hidden = false; }
+    }
+  });
+  productAdminListEl.addEventListener("click", async (event) => {
+    const button = event.target.closest("[data-save-product]");
+    if (!button) return;
+    if (!isAdmin) { notifyProductAdminStatus("পণ্যের দাম বা ছবি পরিবর্তন করতে Admin Login প্রয়োজন।", true); return; }
+    const id = button.dataset.saveProduct;
+    const p = (DATA.products || []).find(item => String(item.id) === id);
+    const row = button.closest("[data-product-admin-row]");
+    if (!p || !row) return;
+    const oldData = JSON.stringify(DATA);
+    const priceInputs = [...row.querySelectorAll("[data-product-price]")];
+    const values = priceInputs.map(input => Number(input.value));
+    if (values.some(value => !Number.isFinite(value) || value < 0)) { notifyProductAdminStatus("সব দাম শূন্য বা তার বেশি সংখ্যা হতে হবে।", true); return; }
+    const imageFileInput = row.querySelector(`[data-product-image="${CSS.escape(id)}"]`);
+    const imageFile = imageFileInput && imageFileInput.files ? imageFileInput.files[0] : null;
+    const imageUrlInput = row.querySelector(`[data-product-image-url="${CSS.escape(id)}"]`);
+    const newImageUrl = imageUrlInput ? imageUrlInput.value.trim() : "";
+    if (!validProductImageUrl(newImageUrl)) { notifyProductAdminStatus("ছবির URL অবশ্যই https:// দিয়ে শুরু হতে হবে।", true); return; }
+    const oldButtonText = button.textContent;
+    button.disabled = true;
+    button.textContent = imageFile ? "ছবি আপলোড হচ্ছে…" : "সংরক্ষণ হচ্ছে…";
+    try {
+      let imageResult=null;
+      if (imageFile) imageResult = await prepareProductImage(imageFile,id,p);
+      let finalImageUrl = String(p.imageUrl || "");
+      let finalImageData = String(p.imageData || "");
+      if (imageResult) {
+        finalImageUrl = imageResult.imageUrl;
+        finalImageData = imageResult.imageData;
+      } else if (newImageUrl !== String(p.imageUrl || "")) {
+        finalImageUrl = newImageUrl;
+        finalImageData = "";
+      }
+      if (Array.isArray(p.options) && p.options.length) {
+        p.options.forEach((option,index) => { if (values[index] !== undefined) option.price = values[index]; });
+        p.price = Number(p.options[0].price) || 0;
+      } else if (values.length) p.price = values[0];
+      const activeInput = row.querySelector(`[data-product-active="${CSS.escape(id)}"]`);
+      p.active = !!(activeInput && activeInput.checked);
+      p.imageUrl = finalImageUrl;
+      if(finalImageData) p.imageData=finalImageData; else delete p.imageData;
+      const saved=await persistProductChanges();
+      renderProductAdminList();
+      if(imageResult && imageResult.mode==="firestore-fallback") notifyProductAdminStatus(`“${p.name}”-এর ছবি কমপ্রেস করে Firebase ডেটাবেসে রাখা হয়েছে। Storage চালু করলে ভবিষ্যতে মূল ছবি আলাদা ফাইলে রাখা যাবে।`,false);
+      else if(!saved.cloud) notifyProductAdminStatus(`“${p.name}” এই ডিভাইসে সংরক্ষিত হয়েছে; Firebase Cloud সক্রিয় না থাকায় অন্য ডিভাইসে এখনো দেখা যাবে না।`,false);
+      else notifyProductAdminStatus(`“${p.name}” পণ্যের দাম, ছবি ও দৃশ্যমানতা Firebase-এ সংরক্ষণ হয়েছে।`,false);
+    } catch (err) {
+      console.error("Product update failed", err);
+      try { DATA=normalizeData(JSON.parse(oldData)); renderProductAdminList(); } catch(ignore){}
+      notifyProductAdminStatus(err && err.message ? err.message : "পণ্যের পরিবর্তন সংরক্ষণ করা যায়নি। Firebase Storage/Firestore Rules পরীক্ষা করুন।", true);
+    } finally {
+      button.disabled = false;
+      button.textContent = oldButtonText;
+    }
+  });
+}
 
 const newProductAdminForm = document.getElementById("newProductAdminForm");
-if (newProductAdminForm) newProductAdminForm.addEventListener("submit", event => {
+const newProductImageInput = document.getElementById("newProductImage");
+const newProductImagePreview = document.getElementById("newProductImagePreview");
+const newProductImageFileName = document.getElementById("newProductImageFileName");
+if (newProductImageInput && newProductImagePreview) {
+  newProductImageInput.addEventListener("change", () => {
+    const file = newProductImageInput.files && newProductImageInput.files[0];
+    if (!file) { newProductImagePreview.hidden = true; newProductImagePreview.removeAttribute("src"); if(newProductImageFileName)newProductImageFileName.textContent="এখনো কোনো ছবি নির্বাচন করা হয়নি।"; return; }
+    try { validateProductImageFile(file); }
+    catch(err) { newProductImageInput.value=""; newProductImagePreview.hidden=true; newProductImagePreview.removeAttribute("src"); if(newProductImageFileName)newProductImageFileName.textContent="ছবিটি গ্রহণযোগ্য নয়।"; const s=document.getElementById("newProductAdminStatus");if(s)s.textContent=err.message; return; }
+    if (newProductImagePreview.dataset.objectUrl) URL.revokeObjectURL(newProductImagePreview.dataset.objectUrl);
+    const objectUrl = URL.createObjectURL(file);
+    newProductImagePreview.dataset.objectUrl = objectUrl;
+    newProductImagePreview.src = objectUrl;
+    newProductImagePreview.hidden = false;
+    if(newProductImageFileName)newProductImageFileName.textContent=`${file.name} · ${(file.size/1024).toFixed(0)} KB`;
+    const s=document.getElementById("newProductAdminStatus");if(s)s.textContent="ছবি নির্বাচিত হয়েছে। পণ্য যোগ করুন চাপলে ছবি সংরক্ষণ হবে।";
+  });
+}
+if (newProductAdminForm) newProductAdminForm.addEventListener("submit", async event => {
   event.preventDefault();
   const status = document.getElementById("newProductAdminStatus");
   if (!isAdmin) { status.textContent = "নতুন পণ্য যোগ করতে Admin Login প্রয়োজন।"; return; }
@@ -2258,15 +2535,46 @@ if (newProductAdminForm) newProductAdminForm.addEventListener("submit", event =>
   const price = Number(document.getElementById("newProductPrice").value);
   const unit = document.getElementById("newProductUnit").value.trim();
   const description = document.getElementById("newProductDescription").value.trim();
+  const imageFile = newProductImageInput && newProductImageInput.files ? newProductImageInput.files[0] : null;
+  const imageUrlField = document.getElementById("newProductImageUrl");
+  let imageUrl = imageUrlField ? imageUrlField.value.trim() : "";
   if (!name || !unit || !Number.isFinite(price) || price < 0) { status.textContent = "পণ্যের নাম, বৈধ দাম ও একক দিন।"; return; }
+  if (!validProductImageUrl(imageUrl)) { status.textContent = "ছবির URL অবশ্যই https:// দিয়ে শুরু হতে হবে।"; return; }
+  if (imageFile) { try { validateProductImageFile(imageFile); } catch(err) { status.textContent=err.message; return; } }
   const iconByCategory = {"পশুপালন ও প্রাণিসম্পদ":"calf","ক্যানেল মৎস্য চাষ":"fish","ফলজ বাগান":"lemon","মাচা, ভাসমান কৃষি ও সবজি":"greens","বাই-প্রোডাক্ট ও অন্যান্য":"compost"};
-  DATA.products = Array.isArray(DATA.products) ? DATA.products : [];
-  DATA.products.push({ id: "prod-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,6), name, category, price, unit, description, iconType: iconByCategory[category] || "greens", active: true });
-  saveState();
-  renderProductAdminList();
-  newProductAdminForm.reset();
-  status.textContent = `“${name}” পণ্যটি যোগ হয়েছে এবং পাবলিক দোকানে দেখানোর জন্য প্রস্তুত।`;
+  const productId = "prod-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2,6);
+  const newProduct = { id: productId, name, category, price, unit, description, imageUrl, iconType: iconByCategory[category] || "greens", active: true };
+  const oldData=JSON.stringify(DATA);
+  const submitButton = newProductAdminForm.querySelector('button[type="submit"]');
+  const originalText = submitButton ? submitButton.textContent : "+ পণ্য যোগ করুন";
+  if (submitButton) { submitButton.disabled = true; submitButton.textContent = imageFile ? "ছবি সংরক্ষণ হচ্ছে…" : "পণ্য সংরক্ষণ হচ্ছে…"; }
+  try {
+    let saveMode="none";
+    if (imageFile) {
+      const imageResult=await prepareProductImage(imageFile,productId,newProduct);
+      newProduct.imageUrl=imageResult.imageUrl;
+      if(imageResult.imageData)newProduct.imageData=imageResult.imageData;
+      saveMode=imageResult.mode;
+    }
+    DATA.products = Array.isArray(DATA.products) ? DATA.products : [];
+    DATA.products.push(newProduct);
+    const saved=await persistProductChanges();
+    renderProductAdminList();
+    newProductAdminForm.reset();
+    if (newProductImagePreview) { if(newProductImagePreview.dataset.objectUrl)URL.revokeObjectURL(newProductImagePreview.dataset.objectUrl); newProductImagePreview.hidden = true; newProductImagePreview.removeAttribute("src"); delete newProductImagePreview.dataset.objectUrl; }
+    if(newProductImageFileName)newProductImageFileName.textContent="এখনো কোনো ছবি নির্বাচন করা হয়নি।";
+    if(saveMode==="firestore-fallback") status.textContent=`“${name}” যোগ হয়েছে। ছবিটি কমপ্রেস করে Firebase ডেটাবেসে রাখা হয়েছে; Storage চালু করলে উন্নত মানের ছবি আলাদা ফাইলে রাখা যাবে।`;
+    else if(!saved.cloud) status.textContent=`“${name}” এই ডিভাইসে যোগ হয়েছে, কিন্তু Firebase Cloud সক্রিয় না থাকায় অন্য ডিভাইসে দেখা যাবে না।`;
+    else status.textContent = `“${name}” পণ্যটি যোগ হয়েছে এবং Firebase-এ সংরক্ষণ হয়েছে।`;
+  } catch (err) {
+    console.error("New product save failed", err);
+    try { DATA=normalizeData(JSON.parse(oldData)); renderProductAdminList(); } catch(ignore){}
+    status.textContent = err && err.message ? err.message : "পণ্য সংরক্ষণ করা যায়নি। Firebase Storage/Firestore Rules পরীক্ষা করুন।";
+  } finally {
+    if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
+  }
 });
+
 
 /* ---------- Order inbox: Admin + Staff ---------- */
 let activeOrdersFilter = "all";
