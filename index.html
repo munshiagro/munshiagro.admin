@@ -619,7 +619,7 @@
         <div>
           <span class="shop-kicker">MUNSHI AGRO · FARM SHOP</span>
           <h2 id="shopTitle">খামার থেকে সরাসরি আপনার কাছে</h2>
-          <p>মুন্সী এগ্রোর সম্ভাব্য উৎপাদিত পণ্য দেখুন, পছন্দের পণ্য কার্টে যোগ করুন এবং WhatsApp-এ অর্ডারের তথ্য পাঠান।</p>
+          <p>মুন্সী এগ্রোর সম্ভাব্য উৎপাদিত পণ্য দেখুন, পছন্দের পণ্য কার্টে যোগ করুন এবং ওয়েবসাইট থেকে অর্ডার জমা দিন।</p>
         </div>
         <button type="button" class="shop-cart-open" id="shopOpenCart" aria-haspopup="dialog" aria-controls="shopCartOverlay">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="19" height="19" aria-hidden="true"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2 3h2l2.6 12.2a2 2 0 0 0 2 1.6h9.6a2 2 0 0 0 1.9-1.4L22 8H5"/></svg>
@@ -853,13 +853,15 @@
       <div class="shop-cart-total" id="shopCartTotalRow" hidden><span>মোট আনুমানিক মূল্য</span><strong id="shopCartTotal">৳০</strong></div>
       <h3 class="shop-checkout-title">অর্ডারের তথ্য</h3>
       <form class="shop-checkout-form" id="shopCheckoutForm">
-        <div class="shop-form-field"><label for="shopCustomerName">তোমার নাম *</label><input id="shopCustomerName" name="name" required maxlength="100" autocomplete="name" placeholder="পূর্ণ নাম"></div>
+        <div class="shop-form-field"><label for="shopCustomerName">ক্রেতার পূর্ণ নাম *</label><input id="shopCustomerName" name="name" required maxlength="100" autocomplete="name" placeholder="পূর্ণ নাম"></div>
         <div class="shop-form-field"><label for="shopCustomerPhone">মোবাইল নম্বর *</label><input id="shopCustomerPhone" name="phone" type="tel" required maxlength="24" autocomplete="tel" placeholder="01XXXXXXXXX"></div>
-        <div class="shop-form-field"><label for="shopCustomerAddress">ডেলিভারি / সংগ্রহের ঠিকানা *</label><textarea id="shopCustomerAddress" name="address" required maxlength="500" autocomplete="street-address" placeholder="গ্রাম, ইউনিয়ন, উপজেলা, জেলা"></textarea></div>
-        <div class="shop-form-field"><label for="shopCustomerNote">অতিরিক্ত নোট (ঐচ্ছিক)</label><textarea id="shopCustomerNote" name="note" maxlength="500" placeholder="ডেলিভারি সময়, পণ্যের পছন্দ ইত্যাদি"></textarea></div>
-        <button type="submit" class="shop-order-btn" id="shopSubmitOrder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="m22 2-7 20-4-9-9-4Z"/></svg>WhatsApp-এ অর্ডার পাঠান</button>
-        <p class="shop-order-help">এই বাটন WhatsApp-এ অর্ডারের খসড়া খুলবে। WhatsApp-এ গিয়ে Send চাপলে অর্ডারটি পাঠানো হবে। ওয়েবসাইটে অনলাইন পেমেন্ট এখনো চালু নেই।</p>
-        <div class="shop-order-feedback" id="shopOrderFeedback" role="status"></div>
+        <div class="shop-form-field"><label for="shopCustomerDistrict">জেলা *</label><input id="shopCustomerDistrict" name="district" required maxlength="80" autocomplete="address-level1" placeholder="যেমন: বরগুনা"></div>
+        <div class="shop-form-field"><label for="shopCourierService">কুরিয়ার সার্ভিস / শাখার নাম</label><input id="shopCourierService" name="courierService" maxlength="120" placeholder="যেমন: সুন্দরবন / এস এ পরিবহন / নির্দিষ্ট শাখা"></div>
+        <div class="shop-form-field"><label for="shopCourierAddress">কুরিয়ার অফিস / শাখার পূর্ণ ঠিকানা *</label><textarea id="shopCourierAddress" name="courierAddress" required maxlength="500" placeholder="জেলা, উপজেলা, বাজার, শাখা/কাউন্টারের নির্দিষ্ট ঠিকানা"></textarea></div>
+        <div class="shop-form-field"><label for="shopCustomerNote">অতিরিক্ত নোট (ঐচ্ছিক)</label><textarea id="shopCustomerNote" name="note" maxlength="500" placeholder="বিকল্প ফোন, ডেলিভারি নির্দেশনা বা পণ্যের পছন্দ"></textarea></div>
+        <button type="submit" class="shop-order-btn" id="shopSubmitOrder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m7 12 3 3 7-7"/></svg>অর্ডার জমা দিন</button>
+        <p class="shop-order-help">অর্ডার জমা হলে Admin ও অনুমোদিত Staff ড্যাশবোর্ডে দেখবে। তারা ফোনে নিশ্চিত করে কুরিয়ার করবে। অনলাইন পেমেন্ট এখনো চালু নেই।</p>
+        <div class="shop-order-feedback" id="shopOrderFeedback" role="status" aria-live="polite"></div>
       </form>
     </div>
   </aside>
@@ -1162,18 +1164,71 @@
   el('shopOpenCart').addEventListener('click',openCart);el('shopCloseCart').addEventListener('click',closeCart);el('shopCartOverlay').addEventListener('click',ev=>{if(ev.target===el('shopCartOverlay'))closeCart();});
   document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&!el('shopCartOverlay').hidden)closeCart();});
   el('shopCartList').addEventListener('click',ev=>{const b=ev.target.closest('[data-cart-inc],[data-cart-dec],[data-cart-remove]');if(!b)return;const id=b.dataset.cartInc||b.dataset.cartDec||b.dataset.cartRemove;const oi=Number(b.dataset.optionIndex)||0;const row=cart.find(x=>x.id===id&&x.optionIndex===oi);if(!row)return;if(b.hasAttribute('data-cart-remove'))cart=cart.filter(x=>!(x.id===id&&x.optionIndex===oi));else if(b.hasAttribute('data-cart-inc'))row.qty=Math.min(999,row.qty+1);else if(row.qty>1)row.qty--;else cart=cart.filter(x=>!(x.id===id&&x.optionIndex===oi));saveAndRenderCart();});
-  el('shopCheckoutForm').addEventListener('submit',ev=>{
-    ev.preventDefault();const {rows,total}=cartTotals();if(!rows.length){showToast('অর্ডার দেওয়ার আগে কার্টে পণ্য যোগ করো।');return;}
-    const name=el('shopCustomerName').value.trim(),phone=el('shopCustomerPhone').value.trim(),address=el('shopCustomerAddress').value.trim(),note=el('shopCustomerNote').value.trim();
-    if(!name||!phone||!address){showToast('নাম, মোবাইল ও ঠিকানা পূরণ করো।');return;}
-    const lines=rows.map((r,i)=>`${i+1}. ${r.product.name} — ${r.qty} ${r.option.unit||r.product.unit} × ${formatMoney(r.option.price)} = ${formatMoney(r.lineTotal)}`);
-    const message=['আসসালামু আলাইকুম, মুন্সী এগ্রো থেকে অর্ডার করতে চাই।','','অর্ডারের তালিকা:',...lines,'',`মোট আনুমানিক মূল্য: ${formatMoney(total)}`,'',`ক্রেতার নাম: ${name}`,`মোবাইল: ${phone}`,`ঠিকানা: ${address}`,note?`অতিরিক্ত নোট: ${note}`:'','দয়া করে পণ্যের প্রাপ্যতা, চূড়ান্ত দাম ও ডেলিভারি/সংগ্রহের বিষয়টি নিশ্চিত করুন।'].filter(v=>v!==null&&v!==undefined).join('\n');
-    const url='https://wa.me/8801581477854?text='+encodeURIComponent(message);const w=window.open(url,'_blank','noopener,noreferrer');
-    const feedback=el('shopOrderFeedback');feedback.textContent=w?'WhatsApp-এ অর্ডারের বার্তা প্রস্তুত হয়েছে। WhatsApp-এ গিয়ে Send চাপুন।':'ব্রাউজার নতুন ট্যাব ব্লক করতে পারে। নিচের লিংক খুলে অর্ডার পাঠান।';feedback.classList.add('show');
-    if(!w){const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener';a.textContent='WhatsApp-এ অর্ডার খুলুন';a.style.cssText='display:inline-block;margin-top:8px;color:#1b6a41;font-weight:800';feedback.appendChild(document.createElement('br'));feedback.appendChild(a);}
+  const pendingOrderRequests = new Map();
+  function submitOrderToDashboard(order){
+    return new Promise((resolve,reject)=>{
+      const frame=el('heroTrackerFrame');
+      if(!frame||!frame.contentWindow){reject(new Error('ড্যাশবোর্ড সংযোগ পাওয়া যায়নি। পেজ রিফ্রেশ করে আবার চেষ্টা করুন।'));return;}
+      const requestId='shop-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);
+      let attempts=0;
+      const send=()=>{
+        attempts++;
+        try{frame.contentWindow.postMessage({type:'munshi-submit-order',requestId,order},location.origin);}catch(e){}
+        if(attempts>=30){clearInterval(retryTimer);clearTimeout(timeoutTimer);pendingOrderRequests.delete(requestId);reject(new Error('অর্ডার জমা দেওয়ার উত্তর পাওয়া যায়নি। পেজ রিফ্রেশ করে আবার চেষ্টা করুন।'));}
+      };
+      const retryTimer=setInterval(send,500);
+      const timeoutTimer=setTimeout(()=>{clearInterval(retryTimer);pendingOrderRequests.delete(requestId);reject(new Error('Firebase থেকে উত্তর আসেনি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।'));},16000);
+      pendingOrderRequests.set(requestId,{resolve,reject,retryTimer,timeoutTimer});
+      send();
+    });
+  }
+  el('shopCheckoutForm').addEventListener('submit',async ev=>{
+    ev.preventDefault();
+    const {rows,total}=cartTotals();
+    if(!rows.length){showToast('অর্ডার দেওয়ার আগে কার্টে পণ্য যোগ করো।');return;}
+    const name=el('shopCustomerName').value.trim();
+    const phone=el('shopCustomerPhone').value.trim();
+    const district=el('shopCustomerDistrict').value.trim();
+    const courierService=el('shopCourierService').value.trim();
+    const courierAddress=el('shopCourierAddress').value.trim();
+    const note=el('shopCustomerNote').value.trim();
+    if(!name||!phone||!district||!courierAddress){showToast('নাম, মোবাইল, জেলা ও কুরিয়ার ঠিকানা পূরণ করো।');return;}
+    const now=new Date();
+    const stamp=now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0');
+    const orderId='MA-'+stamp+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+    const order={
+      orderId, createdAt:now.toISOString(), status:'pending', statusUpdatedAt:null, statusUpdatedBy:null,
+      source:'public-website', currency:'BDT',
+      customer:{name,phone,district,courierService,courierAddress,note},
+      items:rows.map(r=>({id:String(r.product.id),name:String(r.product.name),category:String(r.product.category||''),quantity:Number(r.qty)||1,unit:String(r.option.unit||r.product.unit||'একক'),unitPrice:Number(r.option.price)||0,optionLabel:String(r.option.label||r.option.unit||''),subtotal:Number(r.lineTotal)||0})),
+      total:Number(total)||0
+    };
+    const submit=el('shopSubmitOrder'),feedback=el('shopOrderFeedback');
+    submit.disabled=true;submit.textContent='অর্ডার জমা হচ্ছে…';feedback.textContent='অর্ডারের তথ্য Firebase-এ জমা দেওয়া হচ্ছে।';feedback.classList.add('show');
+    try{
+      const result=await submitOrderToDashboard(order);
+      if(!result||!result.success)throw new Error(result&&result.message?result.message:'অর্ডার জমা করা যায়নি।');
+      cart=[];saveAndRenderCart();el('shopCheckoutForm').reset();
+      feedback.textContent=`অর্ডার সফলভাবে জমা হয়েছে। অর্ডার নম্বর: ${orderId}। Admin/Staff ফোনে যোগাযোগ করে অর্ডার নিশ্চিত করবেন।`;
+      showToast('অর্ডার Firebase-এ জমা হয়েছে।');
+    }catch(err){
+      feedback.textContent=err&&err.message?err.message:'অর্ডার জমা করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।';
+      showToast('অর্ডার জমা হয়নি—আবার চেষ্টা করুন।');
+    }finally{
+      submit.disabled=cartTotals().rows.length===0;
+      submit.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m7 12 3 3 7-7"/></svg>অর্ডার জমা দিন';
+    }
   });
   function acceptCatalog(next){if(!Array.isArray(next)||!next.length)return;products=next.filter(p=>p&&p.id&&p.name).map(p=>({...p,price:Number(p.price)||0,active:p.active!==false,options:Array.isArray(p.options)?p.options.map(o=>({...o,price:Number(o.price)||0})):undefined}));renderFilters();renderProducts();saveAndRenderCart();}
-  window.addEventListener('message',ev=>{if(ev.origin!==location.origin||ev.source!==el('heroTrackerFrame').contentWindow)return;const d=ev.data;if(d&&d.type==='munshi-product-catalog')acceptCatalog(d.products);});
+  window.addEventListener('message',ev=>{
+    if(ev.origin!==location.origin||ev.source!==el('heroTrackerFrame').contentWindow)return;
+    const d=ev.data;if(!d)return;
+    if(d.type==='munshi-product-catalog')acceptCatalog(d.products);
+    if(d.type==='munshi-order-submit-result'&&d.requestId&&pendingOrderRequests.has(d.requestId)){
+      const pending=pendingOrderRequests.get(d.requestId);pendingOrderRequests.delete(d.requestId);clearInterval(pending.retryTimer);clearTimeout(pending.timeoutTimer);
+      if(d.success)pending.resolve(d);else pending.reject(new Error(d.message||'অর্ডার জমা করা যায়নি।'));
+    }
+  });
   function requestCatalog(){const frame=el('heroTrackerFrame');if(frame&&frame.contentWindow)frame.contentWindow.postMessage({type:'munshi-request-product-catalog'},location.origin);}
   el('heroTrackerFrame').addEventListener('load',requestCatalog);window.addEventListener('load',requestCatalog);
   renderFilters();renderProducts();saveAndRenderCart();

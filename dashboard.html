@@ -291,6 +291,45 @@
     margin-bottom: 18px !important;
   }
   .section-panel.admin-hidden { display: none !important; max-height: 0 !important; }
+  /* ---------- Order management ---------- */
+  .orders-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 18px}
+  .orders-kpi{padding:13px 14px;border:1px solid var(--soft);border-radius:13px;background:var(--bg)}
+  .orders-kpi span{display:block;font-size:12px;color:var(--muted);font-weight:650;margin-bottom:5px}
+  .orders-kpi strong{font-size:23px;line-height:1.15;color:var(--dark)}
+  .orders-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+  .orders-toolbar input{flex:1 1 220px;min-width:0;padding:10px 12px;border:1.5px solid var(--soft);border-radius:10px;background:var(--white);color:var(--text);font:inherit}
+  .orders-filter{border:1px solid var(--soft);background:var(--white);color:var(--muted);border-radius:999px;padding:8px 13px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer}
+  .orders-filter.active{background:var(--dark);border-color:var(--dark);color:#fff}
+  .orders-list{display:grid;gap:13px}
+  .order-admin-card{border:1px solid var(--soft);border-radius:15px;padding:15px;background:var(--white);box-shadow:0 2px 8px rgba(20,55,34,.035)}
+  .order-admin-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .order-admin-id{font-size:12px;font-weight:850;color:var(--dark);letter-spacing:.02em}
+  .order-admin-date{font-size:11px;color:var(--muted);margin-top:4px}
+  .order-status-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:850;white-space:nowrap}
+  .order-status-pill.pending{background:#fff1cc;color:#815a07}
+  .order-status-pill.complete{background:#dcf3e3;color:#20623b}
+  .order-admin-customer{font-size:16px;font-weight:850;color:var(--text);margin-bottom:5px}
+  .order-admin-contact{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:12px}
+  .order-admin-contact a{color:var(--green);font-weight:850;text-decoration:none;border:1px solid var(--soft);border-radius:8px;padding:5px 9px}
+  .order-admin-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}
+  .order-admin-detail{padding:10px 11px;background:var(--bg);border-radius:10px;min-width:0}
+  .order-admin-detail small{display:block;font-size:10.5px;color:var(--muted);font-weight:750;margin-bottom:4px}
+  .order-admin-detail div{font-size:12.5px;line-height:1.6;overflow-wrap:anywhere;color:var(--text)}
+  .order-items-box{margin-top:12px;border-top:1px solid var(--soft);padding-top:11px}
+  .order-items-box h4{margin:0 0 7px;color:var(--dark);font-size:12px}
+  .order-item-row{display:flex;justify-content:space-between;gap:12px;padding:5px 0;font-size:12px;border-bottom:1px dashed rgba(88,112,101,.18)}
+  .order-item-row:last-child{border-bottom:0}
+  .order-item-row span:first-child{min-width:0;overflow-wrap:anywhere}
+  .order-item-row strong{white-space:nowrap;color:var(--dark)}
+  .order-admin-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--soft)}
+  .order-admin-total{font-size:12px;color:var(--muted)}.order-admin-total strong{display:block;margin-top:3px;font-size:21px;color:var(--dark)}
+  .order-admin-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .order-call-btn,.order-status-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:9px;padding:10px 13px;font:700 12px system-ui,sans-serif;cursor:pointer;text-decoration:none}
+  .order-call-btn{background:var(--soft);color:var(--dark)}.order-status-btn{background:var(--dark);color:#fff}.order-status-btn.is-complete{background:#fff1cc;color:#815a07}
+  .orders-empty{padding:26px 15px;text-align:center;border:1px dashed var(--soft);border-radius:13px;color:var(--muted);background:var(--bg);font-size:13px;line-height:1.7}
+  .orders-security-note{font-size:11.5px;line-height:1.6}
+  @media(max-width:560px){.orders-kpis{gap:6px}.orders-kpi{padding:10px}.orders-kpi span{font-size:10px}.orders-kpi strong{font-size:19px}.order-admin-details{grid-template-columns:1fr}.order-admin-card{padding:12px}.orders-toolbar input{flex-basis:100%}.order-admin-bottom{align-items:flex-start}.order-admin-actions{width:100%}.order-call-btn,.order-status-btn{flex:1}}
+
   @media (prefers-reduced-motion: reduce) {
     .section-panel { transition: none; }
   }
@@ -786,6 +825,7 @@
     <button type="button" class="nav-card" data-panel="panelTable"><span class="nav-icon">🧾</span><span class="nav-label">সব এন্ট্রি</span></button>
     <button type="button" class="nav-card admin-hidden" data-panel="panelStaff" id="staffNavCard"><span class="nav-icon">🛂</span><span class="nav-label">স্টাফ ব্যবস্থাপনা</span></button>
     <button type="button" class="nav-card admin-hidden" data-panel="panelMyWork" id="myWorkNavCard"><span class="nav-icon">🗓️</span><span class="nav-label">হাজিরা ও রিপোর্ট</span></button>
+    <button type="button" class="nav-card admin-hidden" data-panel="panelOrders" id="ordersNavCard"><span class="nav-icon">📦</span><span class="nav-label">অর্ডার</span></button>
     <button type="button" class="nav-card admin-hidden" data-panel="panelInvestors" id="investorNavCard"><span class="nav-icon">💼</span><span class="nav-label">ইনভেস্টর</span></button>
     <button type="button" class="nav-card admin-hidden" data-panel="panelProducts" id="productsNavCard"><span class="nav-icon">🛍️</span><span class="nav-label">পণ্য ব্যবস্থাপনা</span></button>
     <button type="button" class="nav-card admin-hidden" data-panel="panelManage" id="manageNavCard"><span class="nav-icon">⚙️</span><span class="nav-label">এডমিন ম্যানেজ</span></button>
@@ -1005,6 +1045,30 @@
 
     <h3 style="font-size:15px; margin:6px 0 8px;">আমার সাম্প্রতিক রিপোর্ট</h3>
     <div id="myReportsList" style="margin-bottom:20px;"></div>
+  </div>
+
+  <div class="card section-panel admin-hidden" id="ordersCard" data-panel-id="panelOrders">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+      <div>
+        <h2 style="margin-bottom:5px;">📦 অর্ডার ব্যবস্থাপনা</h2>
+        <p class="view-note" style="margin:0;">ক্রেতার সঙ্গে ফোনে কথা বলে পণ্য, পরিমাণ ও কুরিয়ার ঠিকানা নিশ্চিত করুন। কুরিয়ার সম্পন্ন হলে অর্ডারটি “সম্পন্ন” হিসেবে চিহ্নিত করুন।</p>
+      </div>
+      <button type="button" class="btn-outline" id="ordersRefreshBtn">↻ রিফ্রেশ</button>
+    </div>
+    <div class="orders-kpis">
+      <div class="orders-kpi"><span>মোট অর্ডার</span><strong id="ordersKpiTotal">০</strong></div>
+      <div class="orders-kpi"><span>অপেক্ষমাণ</span><strong id="ordersKpiPending">০</strong></div>
+      <div class="orders-kpi"><span>সম্পন্ন</span><strong id="ordersKpiComplete">০</strong></div>
+    </div>
+    <div class="orders-toolbar">
+      <input type="search" id="ordersSearchInput" placeholder="অর্ডার নম্বর, নাম, ফোন বা জেলা দিয়ে খুঁজুন…" aria-label="অর্ডার খুঁজুন">
+      <button type="button" class="orders-filter active" data-orders-filter="all">সব অর্ডার</button>
+      <button type="button" class="orders-filter" data-orders-filter="pending">অপেক্ষমাণ</button>
+      <button type="button" class="orders-filter" data-orders-filter="complete">সম্পন্ন</button>
+    </div>
+    <div id="ordersSaveStatus" class="view-note" role="status" style="display:none;"></div>
+    <div class="orders-list" id="ordersList"><div class="orders-empty">অর্ডার লোড হচ্ছে…</div></div>
+    <p class="view-note orders-security-note" style="margin-top:16px;">অর্ডারে ক্রেতার ব্যক্তিগত তথ্য থাকে। Firebase Security Rules-এ অর্ডার পড়া ও পরিবর্তনের অধিকার শুধুমাত্র অনুমোদিত Admin/Staff-এর জন্য সীমিত রাখতে হবে; শুধু এই প্যানেল লুকিয়ে রাখা ডেটা-নিরাপত্তার বিকল্প নয়।</p>
   </div>
 
   <div class="card section-panel admin-hidden" id="investorAdminCard" data-panel-id="panelInvestors">
@@ -1388,6 +1452,7 @@ if (!DATA.pdfs) DATA.pdfs = { project: null, invest: null };
 if (!DATA.videos) DATA.videos = [];
 const DEFAULT_PRODUCT_CATALOG = [{"id":"calf","name":"ষাঁড়/গাভীর প্রজননকৃত বাছুর (উন্নত জাত)","category":"পশুপালন ও প্রাণিসম্পদ","price":50000,"unit":"টি","description":"ষাঁড়/গাভীর প্রজননকৃত উন্নত জাতের বাছুর।","iconType":"calf","active":true},{"id":"goat-kid","name":"ছাগলের বাচ্চা / খাসি","category":"পশুপালন ও প্রাণিসম্পদ","price":4000,"unit":"টি","description":"দেশী / ব্লাক বেঙ্গল জাত।","iconType":"goat","active":true},{"id":"cow-milk","name":"খাঁটি গরুর দুধ","category":"পশুপালন ও প্রাণিসম্পদ","price":80,"unit":"লিটার","description":"খামারের দুধ; অর্ডার নিশ্চিত করার সময় প্রাপ্যতা জানানো হবে।","iconType":"milk","active":true},{"id":"duck-eggs","name":"হাঁসের ডিম (খাকি ক্যাম্পবেল)","category":"পশুপালন ও প্রাণিসম্পদ","price":15,"unit":"পিস","description":"প্রতি পিস ১৫ টাকা অথবা ১৮০ টাকা ডজন।","iconType":"duckEgg","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":15},{"label":"ডজন","unit":"ডজন","price":180}]},{"id":"chicken-eggs","name":"দেশী মুরগির ডিম","category":"পশুপালন ও প্রাণিসম্পদ","price":10,"unit":"পিস","description":"প্রতি পিস ১০ টাকা অথবা ১২০ টাকা ডজন।","iconType":"chickenEgg","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":10},{"label":"ডজন","unit":"ডজন","price":120}]},{"id":"poultry-meat","name":"খামারের হাঁস/মুরগি (মাংসের জন্য)","category":"পশুপালন ও প্রাণিসম্পদ","price":500,"unit":"কেজি","description":"মাংসের জন্য; দাম প্রতি কেজি।","iconType":"poultry","active":true},{"id":"rui","name":"রুই মাছ","category":"ক্যানেল মৎস্য চাষ","price":330,"unit":"কেজি","description":"ক্যানেলে চাষকৃত রুই মাছ।","iconType":"fish","active":true},{"id":"katla","name":"কাতলা মাছ","category":"ক্যানেল মৎস্য চাষ","price":360,"unit":"কেজি","description":"ক্যানেলে চাষকৃত কাতলা মাছ।","iconType":"fishKatla","active":true},{"id":"mrigel","name":"মৃগেল / কার্প মাছ","category":"ক্যানেল মৎস্য চাষ","price":260,"unit":"কেজি","description":"মৃগেল ও অন্যান্য কার্প মাছ।","iconType":"fishSilver","active":true},{"id":"tilapia","name":"তেলাপিয়া মাছ","category":"ক্যানেল মৎস্য চাষ","price":210,"unit":"কেজি","description":"তাজা তেলাপিয়া মাছ।","iconType":"tilapia","active":true},{"id":"pangasius","name":"পাঙ্গাস / সিলভার কার্প","category":"ক্যানেল মৎস্য চাষ","price":170,"unit":"কেজি","description":"পাঙ্গাস অথবা সিলভার কার্প মাছ।","iconType":"fishSilver","active":true},{"id":"lemon","name":"কাপ্তাই কাগজি / কাটিমন লেবু","category":"ফলজ বাগান","price":2,"unit":"পিস","description":"প্রতি পিস ২ টাকা অথবা ২০০ টাকা ১০০টি।","iconType":"lemon","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":2},{"label":"১০০টি","unit":"১০০টি","price":200}]},{"id":"guava","name":"থাই পেয়ারা","category":"ফলজ বাগান","price":70,"unit":"কেজি","description":"বাগানের থাই পেয়ারা।","iconType":"guava","active":true},{"id":"jujube","name":"বাউ কুল / আপেল কুল","category":"ফলজ বাগান","price":80,"unit":"কেজি","description":"মৌসুমভিত্তিক ফল; প্রাপ্যতা অর্ডারে নিশ্চিত হবে।","iconType":"jujube","active":true},{"id":"papaya","name":"থাই পেঁপে","category":"ফলজ বাগান","price":50,"unit":"কেজি","description":"খামারের ফলজ বাগানের পেঁপে।","iconType":"papaya","active":true},{"id":"bottle-gourd","name":"ক্যানেলের মাচার লাউ","category":"মাচা, ভাসমান কৃষি ও সবজি","price":60,"unit":"টি","description":"ক্যানেলের মাচায় উৎপাদিত লাউ।","iconType":"gourd","active":true},{"id":"pumpkin","name":"মিষ্টি কুমড়া","category":"মাচা, ভাসমান কৃষি ও সবজি","price":40,"unit":"কেজি","description":"তাজা মিষ্টি কুমড়া।","iconType":"pumpkin","active":true},{"id":"beans","name":"শিম","category":"মাচা, ভাসমান কৃষি ও সবজি","price":60,"unit":"কেজি","description":"মৌসুমভিত্তিক তাজা শিম।","iconType":"beans","active":true},{"id":"eggplant","name":"বেগুন","category":"মাচা, ভাসমান কৃষি ও সবজি","price":50,"unit":"কেজি","description":"খামারের সবজি।","iconType":"eggplant","active":true},{"id":"leafy-greens","name":"লাল শাক / পালং শাক / ডাঁটা শাক","category":"মাচা, ভাসমান কৃষি ও সবজি","price":20,"unit":"আটি","description":"প্রতি আটি ২০ টাকা; শাকের ধরন প্রাপ্যতা অনুযায়ী।","iconType":"greens","active":true},{"id":"rice","name":"ধান (ধান সেকশন থেকে উৎপাদিত)","category":"মাচা, ভাসমান কৃষি ও সবজি","price":1300,"unit":"মন (৪০ কেজি)","description":"প্রতি মন (৪০ কেজি) ১,৩০০ টাকা।","iconType":"rice","active":true},{"id":"organic-manure","name":"জৈব সার / প্রক্রিয়াজাত গোবর","category":"বাই-প্রোডাক্ট ও অন্যান্য","price":12,"unit":"কেজি","description":"প্রতি কেজি ১২ টাকা।","iconType":"compost","active":true},{"id":"napier-cutting","name":"পাকচং / নেপিয়ার ঘাসের কাটিং","category":"বাই-প্রোডাক্ট ও অন্যান্য","price":2,"unit":"কাটিং","description":"পশুখাদ্যের জন্য ঘাসের কাটিং।","iconType":"grass","active":true}];
 if (!Array.isArray(DATA.products)) DATA.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCT_CATALOG));
+if (!Array.isArray(DATA.orders)) DATA.orders = [];
 function ensureStaffExtras(rec){
   if (rec.salary === undefined || rec.salary === null) rec.salary = 0;
   if (!rec.attendance) rec.attendance = {};
@@ -2203,6 +2268,85 @@ if (newProductAdminForm) newProductAdminForm.addEventListener("submit", event =>
   status.textContent = `“${name}” পণ্যটি যোগ হয়েছে এবং পাবলিক দোকানে দেখানোর জন্য প্রস্তুত।`;
 });
 
+/* ---------- Order inbox: Admin + Staff ---------- */
+let activeOrdersFilter = "all";
+function orderEscape(value){
+  return String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+}
+function getOrderDisplayStatus(order){ return String(order && order.status || "pending") === "complete" ? "complete" : "pending"; }
+function renderOrders(){
+  const listEl = document.getElementById("ordersList");
+  if (!listEl) return;
+  const orders = (Array.isArray(DATA.orders) ? DATA.orders : []).slice().sort((a,b)=>String(b.createdAt||"").localeCompare(String(a.createdAt||"")));
+  const pendingCount = orders.filter(o=>getOrderDisplayStatus(o)==="pending").length;
+  const completeCount = orders.length-pendingCount;
+  document.getElementById("ordersKpiTotal").textContent = bn(orders.length);
+  document.getElementById("ordersKpiPending").textContent = bn(pendingCount);
+  document.getElementById("ordersKpiComplete").textContent = bn(completeCount);
+  const query = String((document.getElementById("ordersSearchInput")||{}).value||"").trim().toLowerCase();
+  const filtered = orders.filter(order=>{
+    const status=getOrderDisplayStatus(order);
+    if(activeOrdersFilter!=="all"&&status!==activeOrdersFilter)return false;
+    const c=order.customer||{};
+    const haystack=[order.orderId,c.name,c.phone,c.district,c.courierService,c.courierAddress,(order.items||[]).map(i=>i.name).join(" ")].join(" ").toLowerCase();
+    return haystack.includes(query);
+  });
+  if(!filtered.length){listEl.innerHTML=`<div class="orders-empty">${orders.length?"এই ফিল্টারে কোনো অর্ডার পাওয়া যায়নি।":"এখনো কোনো অর্ডার জমা হয়নি। পাবলিক ওয়েবসাইট থেকে নতুন অর্ডার এলে এখানে দেখা যাবে।"}</div>`;return;}
+  listEl.innerHTML=filtered.map(order=>{
+    const c=order.customer||{};
+    const status=getOrderDisplayStatus(order);
+    const created=order.createdAt?new Date(order.createdAt):null;
+    const dateText=created&&!Number.isNaN(created.getTime())?created.toLocaleString("bn-BD",{dateStyle:"medium",timeStyle:"short"}):"তারিখ পাওয়া যায়নি";
+    const phone=String(c.phone||"");
+    const tel=phone.replace(/[^0-9+]/g,"");
+    const items=Array.isArray(order.items)?order.items:[];
+    const itemsHtml=items.map(item=>`<div class="order-item-row"><span>${orderEscape(item.name||"পণ্য")} · ${bn(item.quantity||1)} ${orderEscape(item.unit||"")}${item.optionLabel?` <small>(${orderEscape(item.optionLabel)})</small>`:""}</span><strong>${money(Number(item.subtotal)||0)}</strong></div>`).join("");
+    const updatedText=order.statusUpdatedAt?`সর্বশেষ আপডেট: ${orderEscape(new Date(order.statusUpdatedAt).toLocaleString("bn-BD",{dateStyle:"medium",timeStyle:"short"}))}${order.statusUpdatedBy?` · ${orderEscape(order.statusUpdatedBy)}`:""}`:"";
+    return `<article class="order-admin-card" data-order-card="${orderEscape(order.orderId||"")}">
+      <div class="order-admin-top"><div><div class="order-admin-id">${orderEscape(order.orderId||"অর্ডার নম্বর নেই")}</div><div class="order-admin-date">${orderEscape(dateText)}</div></div><span class="order-status-pill ${status}">${status==="complete"?"✓ সম্পন্ন":"◷ অপেক্ষমাণ"}</span></div>
+      <div class="order-admin-customer">${orderEscape(c.name||"নাম দেওয়া হয়নি")}</div>
+      <div class="order-admin-contact"><span>📞 ${orderEscape(phone||"ফোন নেই")}</span>${tel?`<a href="tel:${orderEscape(tel)}">ফোন করুন</a>`:""}</div>
+      <div class="order-admin-details">
+        <div class="order-admin-detail"><small>জেলা</small><div>${orderEscape(c.district||"—")}</div></div>
+        <div class="order-admin-detail"><small>কুরিয়ার সার্ভিস / শাখা</small><div>${orderEscape(c.courierService||"ক্রেতা উল্লেখ করেননি")}</div></div>
+        <div class="order-admin-detail" style="grid-column:1/-1;"><small>কুরিয়ার অফিস / শাখার পূর্ণ ঠিকানা</small><div>${orderEscape(c.courierAddress||"—")}</div></div>
+        ${c.note?`<div class="order-admin-detail" style="grid-column:1/-1;"><small>অতিরিক্ত নোট</small><div>${orderEscape(c.note)}</div></div>`:""}
+      </div>
+      <div class="order-items-box"><h4>অর্ডারের পণ্য</h4>${itemsHtml||"<div class='orders-empty'>পণ্যের তথ্য নেই।</div>"}</div>
+      <div class="order-admin-bottom"><div class="order-admin-total">মোট আনুমানিক মূল্য<strong>${money(Number(order.total)||0)}</strong><small>${orderEscape(updatedText)}</small></div><div class="order-admin-actions">${status==="complete"?`<button type="button" class="order-status-btn is-complete" data-order-status="pending" data-order-id="${orderEscape(order.orderId||"")}">↶ অপেক্ষমাণ করুন</button>`:`<button type="button" class="order-status-btn" data-order-status="complete" data-order-id="${orderEscape(order.orderId||"")}">✓ সম্পন্ন হিসেবে চিহ্নিত করুন</button>`}</div></div>
+    </article>`;
+  }).join("");
+}
+
+const ordersListElement = document.getElementById("ordersList");
+if (ordersListElement) ordersListElement.addEventListener("click", event=>{
+  const button=event.target.closest("[data-order-status]");
+  if(!button)return;
+  if(!isAdmin&&!isStaff){showToast("অর্ডার আপডেট করতে Admin বা Staff Login প্রয়োজন।","error");return;}
+  const orderId=button.dataset.orderId;
+  const order=(DATA.orders||[]).find(o=>String(o.orderId)===String(orderId));
+  if(!order){showToast("অর্ডারটি পাওয়া যায়নি।","error");return;}
+  const nextStatus=button.dataset.orderStatus==="complete"?"complete":"pending";
+  order.status=nextStatus;
+  order.statusUpdatedAt=new Date().toISOString();
+  const currentStaff=(DATA.staff&&DATA.staff.approved||[]).find(s=>s.email===staffEmail);
+  order.statusUpdatedBy=isAdmin?"Admin":(currentStaff&&currentStaff.name?currentStaff.name:"Staff");
+  saveState();
+  renderOrders();
+  const status=document.getElementById("ordersSaveStatus");
+  if(status){status.style.display="block";status.textContent=nextStatus==="complete"?`অর্ডার ${orderId} সম্পন্ন হিসেবে চিহ্নিত হয়েছে।`: `অর্ডার ${orderId} আবার অপেক্ষমাণ করা হয়েছে।`;}
+});
+
+document.querySelectorAll("[data-orders-filter]").forEach(button=>button.addEventListener("click",()=>{
+  activeOrdersFilter=button.dataset.ordersFilter||"all";
+  document.querySelectorAll("[data-orders-filter]").forEach(b=>b.classList.toggle("active",b===button));
+  renderOrders();
+}));
+const ordersSearchElement=document.getElementById("ordersSearchInput");
+if(ordersSearchElement)ordersSearchElement.addEventListener("input",renderOrders);
+const ordersRefreshElement=document.getElementById("ordersRefreshBtn");
+if(ordersRefreshElement)ordersRefreshElement.addEventListener("click",async()=>{const status=document.getElementById("ordersSaveStatus");if(status){status.style.display="block";status.textContent="Firebase থেকে অর্ডার আপডেট হচ্ছে…";}try{if(cloudDocRef){const snap=await cloudDocRef.get();if(snap.exists)DATA=normalizeData(snap.data());try{localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));}catch(e){}}renderOrders();if(status)status.textContent="অর্ডার তালিকা আপডেট হয়েছে।";}catch(err){if(status)status.textContent="অর্ডার আপডেট করা যায়নি। ইন্টারনেট সংযোগ পরীক্ষা করুন।";}});
+
 function applyAdminUI(){
   const adminBtn = document.getElementById("adminBtn");
   const staffBtn = document.getElementById("staffBtn");
@@ -2266,6 +2410,17 @@ function applyAdminUI(){
     if (productsNavCard) productsNavCard.classList.remove("active");
   }
   if (isAdmin) renderProductAdminList();
+
+  const ordersCard = document.getElementById("ordersCard");
+  const ordersNavCard = document.getElementById("ordersNavCard");
+  const canManageOrders = isAdmin || isStaff;
+  if (ordersCard) ordersCard.classList.toggle("admin-hidden", !canManageOrders);
+  if (ordersNavCard) ordersNavCard.classList.toggle("admin-hidden", !canManageOrders);
+  if (!canManageOrders && ordersCard && ordersCard.classList.contains("open")) {
+    ordersCard.classList.remove("open");
+    if (ordersNavCard) ordersNavCard.classList.remove("active");
+  }
+  if (canManageOrders) renderOrders();
 
   const manageCard = document.getElementById("manageCard");
   const manageNavCard = document.getElementById("manageNavCard");
@@ -4398,6 +4553,7 @@ function startApp(){
 function normalizeData(d){
   if (!d.customCats) d.customCats = { income: [], expense: [] };
   if (!Array.isArray(d.products)) d.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCT_CATALOG));
+  if (!Array.isArray(d.orders)) d.orders = [];
   if (!d.staff) d.staff = { pending: [], approved: [] };
   if (!d.investors) d.investors = { pending: [], approved: [] };
   if (Array.isArray(d.investors)) d.investors = { pending: [], approved: d.investors };
@@ -4405,6 +4561,82 @@ function normalizeData(d){
   (d.staff.approved || []).forEach(ensureStaffExtras);
   return d;
 }
+
+/* ---------- Orders submitted from the public shop iframe parent ---------- */
+let orderDataReady = false;
+const pendingParentOrderMessages = [];
+function replyToParentOrder(requestId, success, message, orderId){
+  if(window.parent===window)return;
+  window.parent.postMessage({type:"munshi-order-submit-result",requestId,success,message,orderId:orderId||null},location.origin);
+}
+function cleanIncomingOrder(raw){
+  if(!raw||typeof raw!=="object")throw new Error("অর্ডারের তথ্য সঠিক নয়।");
+  const orderId=String(raw.orderId||"").slice(0,50);
+  const customer=raw.customer&&typeof raw.customer==="object"?raw.customer:{};
+  const name=String(customer.name||"").trim().slice(0,100);
+  const phone=String(customer.phone||"").trim().slice(0,24);
+  const district=String(customer.district||"").trim().slice(0,80);
+  const courierService=String(customer.courierService||"").trim().slice(0,120);
+  const courierAddress=String(customer.courierAddress||"").trim().slice(0,500);
+  const note=String(customer.note||"").trim().slice(0,500);
+  if(!orderId||!name||!phone||!district||!courierAddress)throw new Error("নাম, ফোন, জেলা ও কুরিয়ার ঠিকানা প্রয়োজন।");
+  if(!Array.isArray(raw.items)||!raw.items.length||raw.items.length>100)throw new Error("অর্ডারে পণ্য পাওয়া যায়নি।");
+  const items=raw.items.map(item=>{
+    const product=(Array.isArray(DATA.products)?DATA.products:[]).find(p=>String(p.id)===String(item.id));
+    if(!product||product.active===false)throw new Error("কার্টের একটি পণ্য এখন আর অর্ডারযোগ্য নয়। পেজ রিফ্রেশ করে আবার চেষ্টা করুন।");
+    const quantity=Math.max(1,Math.min(999,Math.floor(Number(item.quantity)||1)));
+    const options=Array.isArray(product.options)&&product.options.length?product.options:[{label:"প্রতি "+(product.unit||"একক"),unit:product.unit||"একক",price:Number(product.price)||0}];
+    const wantedLabel=String(item.optionLabel||"");
+    const wantedUnit=String(item.unit||"");
+    const wantedPrice=Number(item.unitPrice)||0;
+    const option=options.find(o=>(String(o.label||"")===wantedLabel||String(o.unit||"")===wantedUnit)&&Math.abs((Number(o.price)||0)-wantedPrice)<0.0001);
+    if(!option)throw new Error("“"+String(product.name||"পণ্য")+"” পণ্যের দাম বা প্যাক পরিবর্তিত হয়েছে। পেজ রিফ্রেশ করে নতুন দাম দেখে আবার অর্ডার করুন।");
+    const unitPrice=Math.max(0,Number(option.price)||0);
+    return {id:String(product.id).slice(0,100),name:String(product.name||"পণ্য").slice(0,180),category:String(product.category||"").slice(0,100),quantity,unit:String(option.unit||product.unit||"একক").slice(0,40),unitPrice,optionLabel:String(option.label||option.unit||"").slice(0,80),subtotal:Math.round(unitPrice*quantity*100)/100};
+  });
+  const total=Math.round(items.reduce((sum,item)=>sum+item.subtotal,0)*100)/100;
+  const createdAt=raw.createdAt&&Number.isFinite(Date.parse(raw.createdAt))?new Date(raw.createdAt).toISOString():new Date().toISOString();
+  return {orderId,createdAt,status:"pending",statusUpdatedAt:null,statusUpdatedBy:null,source:"public-website",currency:"BDT",customer:{name,phone,district,courierService,courierAddress,note},items,total};
+}
+async function processParentOrderMessage(message){
+  const {requestId,order}=message;
+  try{
+    if(!cloudDocRef||!FIREBASE_ENABLED)throw new Error("Firebase সংযোগ চালু নেই। অর্ডার নিরাপদে জমা হয়নি। পরে আবার চেষ্টা করুন।");
+    if(!authInstance)throw new Error("Firebase Authentication পাওয়া যায়নি।");
+    if(!authInstance.currentUser){
+      await new Promise((resolve,reject)=>{
+        let unsubscribe=()=>{};
+        const timeout=setTimeout(()=>{unsubscribe();reject(new Error("Firebase লগইন প্রস্তুত হতে সময় লাগছে। আবার চেষ্টা করুন।"));},10000);
+        unsubscribe=authInstance.onAuthStateChanged(user=>{if(user){clearTimeout(timeout);unsubscribe();resolve(user);}},err=>{clearTimeout(timeout);unsubscribe();reject(err);});
+      });
+    }
+    const safeOrder=cleanIncomingOrder(order);
+    const existing=(Array.isArray(DATA.orders)?DATA.orders:[]).some(o=>o&&o.orderId===safeOrder.orderId);
+    if(!existing){
+      await cloudDocRef.set({orders:firebase.firestore.FieldValue.arrayUnion(safeOrder)},{merge:true});
+    }
+    const snap=await cloudDocRef.get();
+    if(snap.exists)DATA=normalizeData(snap.data());
+    else if(!existing)DATA.orders.push(safeOrder);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(DATA));}catch(e){}
+    renderAll();
+    if(isAdmin||isStaff)applyAdminUI();
+    replyToParentOrder(requestId,true,"অর্ডার সফলভাবে Firebase-এ জমা হয়েছে।",safeOrder.orderId);
+  }catch(error){
+    console.error("Order submit failed",error);
+    replyToParentOrder(requestId,false,error&&error.message?error.message:"Firebase-এ অর্ডার জমা করা যায়নি।");
+  }
+}
+function flushPendingParentOrderMessages(){
+  while(pendingParentOrderMessages.length)processParentOrderMessage(pendingParentOrderMessages.shift());
+}
+window.addEventListener("message",event=>{
+  if(window.parent===window||event.origin!==location.origin||event.source!==window.parent)return;
+  const message=event.data;
+  if(!message||message.type!=="munshi-submit-order"||!message.requestId)return;
+  if(!orderDataReady){pendingParentOrderMessages.push(message);return;}
+  processParentOrderMessage(message);
+});
 
 if (cloudDocRef) {
   const cloudLoadStatusEl = document.getElementById("cloudLoadStatus");
@@ -4416,6 +4648,8 @@ if (cloudDocRef) {
       cloudDocRef.set(DATA);
     }
     startApp();
+    orderDataReady = true;
+    flushPendingParentOrderMessages();
     if (cloudLoadStatusEl) cloudLoadStatusEl.style.display = "none";
     cloudDocRef.onSnapshot(snap => {
       if (suppressCloudEcho) { suppressCloudEcho = false; return; }
@@ -4429,10 +4663,14 @@ if (cloudDocRef) {
   }).catch(err => {
     console.error("Firebase load failed, using local data instead", err);
     startApp();
+    orderDataReady = true;
+    flushPendingParentOrderMessages();
     if (cloudLoadStatusEl) cloudLoadStatusEl.style.display = "none";
   });
 } else {
   startApp();
+  orderDataReady = true;
+  flushPendingParentOrderMessages();
 }
 </script>
 <script>
