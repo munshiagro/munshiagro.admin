@@ -292,8 +292,6 @@
     margin-bottom: 18px !important;
   }
   .section-panel.admin-hidden { display: none !important; max-height: 0 !important; }
-  /* Product panel may contain many products: avoid clipping rows after a fixed height. */
-  #productAdminCard.section-panel.open{max-height:none!important;overflow:visible!important}
   /* ---------- Order management ---------- */
   .orders-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0 18px}
   .orders-kpi{padding:13px 14px;border:1px solid var(--soft);border-radius:13px;background:var(--bg)}
@@ -621,42 +619,18 @@
   .video-admin-row .vmeta { font-size: 12px; color: var(--muted); }
 
   .product-admin-intro{padding:12px 14px;border-radius:10px;background:var(--soft);color:var(--muted);font-size:13px;line-height:1.65;margin-bottom:14px}
-  /* Compact responsive product editor: keep every field inside the panel. */
-  .product-admin-form{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;align-items:start;padding:13px;border:1px solid var(--soft);border-radius:12px;background:var(--bg);margin-bottom:16px}
-  .product-admin-form>.field{min-width:0;display:flex;flex-direction:column;gap:4px}
-  .product-admin-form>.field:nth-child(1){grid-column:span 3}
-  .product-admin-form>.field:nth-child(2){grid-column:span 3}
-  .product-admin-form>.field:nth-child(3){grid-column:span 2}
-  .product-admin-form>.field:nth-child(4){grid-column:span 4}
-  .product-admin-form>.field:nth-child(5){grid-column:span 5}
-  .product-admin-form>.product-image-upload-field{grid-column:span 7}
-  .product-admin-form>.field:nth-child(7){grid-column:span 8}
-  .product-admin-form>button[type=submit]{grid-column:span 4;align-self:end;min-height:42px;white-space:normal}
-  .product-admin-form .field{min-width:0}.product-admin-form label{display:block;font-size:12px;color:var(--muted);font-weight:700;line-height:1.45;margin:0 0 2px;overflow-wrap:anywhere}
-  .product-admin-form input,.product-admin-form select{width:100%;min-width:0;max-width:100%;padding:8px 10px;border:1.5px solid var(--soft);border-radius:9px;background:var(--white);color:var(--text);font:inherit;font-size:13px;min-height:39px}
-  .product-admin-form input[type=file]{padding:6px 7px;font-size:12px!important;min-height:36px;overflow:hidden}
-  .product-admin-form .product-admin-image-preview{width:82px;height:60px;max-width:82px;max-height:60px;margin-top:3px;padding:3px;object-fit:contain;border:1px solid var(--soft);border-radius:7px;background:var(--white)}
-  .product-admin-form .product-image-help{font-size:11px;line-height:1.45;margin-top:2px}
-  .product-admin-form .product-admin-file-name{font-size:11px;line-height:1.4;margin-top:1px}
-  .product-admin-toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 12px}
-  .product-admin-toolbar input{flex:1 1 240px;min-width:0;padding:10px 12px;border:1.5px solid var(--soft);border-radius:10px;background:var(--white);color:var(--text);font:inherit;font-size:14px}
-  .product-admin-count{flex:0 0 auto;color:var(--muted);font-size:12px;font-weight:800;padding:7px 10px;border-radius:999px;background:var(--soft)}
-  .product-admin-list{display:grid;gap:8px;min-width:0}
+  .product-admin-form{display:grid;grid-template-columns:2fr 1.4fr 1fr .8fr 2fr auto;gap:9px;align-items:end;padding:14px;border:1px solid var(--soft);border-radius:12px;background:var(--bg);margin-bottom:18px}
+  .product-admin-form .field{min-width:0}.product-admin-form label{display:block;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:5px}
+  .product-admin-form input,.product-admin-form select{width:100%;min-width:0;padding:9px 10px;border:1.5px solid var(--soft);border-radius:9px;background:var(--white);color:var(--text);font:inherit;font-size:13px}
+  .product-admin-list{display:grid;gap:9px}
   .product-admin-row{display:grid;grid-template-columns:minmax(145px,1.3fr) minmax(230px,1.8fr) auto auto;gap:12px;align-items:center;padding:12px;border:1px solid var(--soft);border-radius:12px;background:var(--white)}
   .product-admin-name{font-size:13px;color:var(--dark);font-weight:800;line-height:1.5;overflow-wrap:anywhere}.product-admin-cat{display:block;margin-top:3px;font-size:11px;color:var(--muted);line-height:1.4}
   .product-admin-prices{display:flex;gap:8px;flex-wrap:wrap}.product-admin-price-field{display:grid;gap:4px;min-width:90px;flex:1}.product-admin-price-field label{font-size:10px;color:var(--muted);font-weight:700}.product-admin-price-field input{width:100%;min-width:80px;padding:8px;border:1.5px solid var(--soft);border-radius:8px;background:var(--bg);color:var(--text);font:inherit;font-size:13px}
   .product-admin-active{display:flex;align-items:center;gap:6px;white-space:nowrap;color:var(--muted);font-size:11px;font-weight:700}.product-admin-active input{accent-color:var(--mid)}
   .product-admin-save{border:0;border-radius:9px;padding:9px 12px;background:var(--dark);color:white;font:700 12px system-ui,sans-serif;cursor:pointer}.product-admin-save:hover{background:var(--mid)}
   .product-admin-status{min-height:20px;margin:7px 0 0;color:var(--mid);font-size:12px}
-  @media(max-width:900px){
-    .product-admin-form{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:12px}
-    .product-admin-form>.field:nth-child(1),.product-admin-form>.field:nth-child(2),.product-admin-form>.field:nth-child(3),.product-admin-form>.field:nth-child(4){grid-column:span 1}
-    .product-admin-form>.field:nth-child(5),.product-admin-form>.product-image-upload-field,.product-admin-form>.field:nth-child(7),.product-admin-form>button[type=submit]{grid-column:1/-1}
-    .product-admin-row{grid-template-columns:84px minmax(0,1fr);align-items:start}
-    .product-admin-image-cell{grid-row:span 2}.product-admin-prices{grid-column:2/-1}.product-admin-active{grid-column:2}.product-admin-save{grid-column:2;grid-row:auto}
-  }
-  @media(max-width:680px){.product-admin-row{grid-template-columns:72px minmax(0,1fr);padding:10px;gap:9px}.product-admin-name{grid-column:2;grid-row:1}.product-admin-prices{grid-column:1/-1}.product-admin-active{grid-column:1}.product-admin-save{grid-column:2;grid-row:auto}.product-admin-price-field{min-width:110px}}
-  @media(max-width:420px){.product-admin-form{grid-template-columns:minmax(0,1fr)}.product-admin-form>.field:nth-child(n),.product-admin-form>button[type=submit]{grid-column:1/-1}.product-admin-form>.product-image-upload-field{grid-column:1/-1}.product-admin-toolbar{align-items:stretch}.product-admin-toolbar input{flex-basis:100%}}
+  @media(max-width:900px){.product-admin-form{grid-template-columns:repeat(2,minmax(0,1fr))}.product-admin-form .field.full{grid-column:1/-1}.product-admin-form button{grid-column:1/-1}}
+  @media(max-width:680px){.product-admin-row{grid-template-columns:1fr auto;gap:9px}.product-admin-name{grid-column:1/-1}.product-admin-prices{grid-column:1/-1}.product-admin-active{grid-column:1}.product-admin-save{grid-column:2;grid-row:3}.product-admin-price-field{min-width:120px}}
 
 
   .product-admin-image-cell{display:flex;flex-direction:column;align-items:stretch;gap:7px;min-width:0}
@@ -1225,11 +1199,7 @@
       <button type="submit" class="btn">+ পণ্য যোগ করুন</button>
     </form>
     <p class="product-admin-status" id="newProductAdminStatus" role="status"></p>
-    <h3 style="font-size:15px;margin:18px 0 10px;">বিদ্যমান পণ্যের দাম, ছবি ও দৃশ্যমানতা</h3>
-    <div class="product-admin-toolbar">
-      <input type="search" id="productAdminSearch" placeholder="পণ্যের নাম বা বিভাগ দিয়ে খুঁজুন…" aria-label="পণ্য খুঁজুন">
-      <span class="product-admin-count" id="productAdminCount">মোট ০টি পণ্য</span>
-    </div>
+    <h3 style="font-size:15px;margin:18px 0 10px;">বিদ্যমান পণ্যের দাম ও দৃশ্যমানতা</h3>
     <div class="product-admin-list" id="productAdminList"></div>
     <p class="product-admin-status" id="productAdminStatus" role="status"></p>
   </div>
@@ -1556,13 +1526,6 @@ if (!DATA.pdfs) DATA.pdfs = { project: null, invest: null };
 if (!DATA.videos) DATA.videos = [];
 const DEFAULT_PRODUCT_CATALOG = [{"id":"calf","name":"ষাঁড়/গাভীর প্রজননকৃত বাছুর (উন্নত জাত)","category":"পশুপালন ও প্রাণিসম্পদ","price":50000,"unit":"টি","description":"ষাঁড়/গাভীর প্রজননকৃত উন্নত জাতের বাছুর।","iconType":"calf","active":true},{"id":"goat-kid","name":"ছাগলের বাচ্চা / খাসি","category":"পশুপালন ও প্রাণিসম্পদ","price":4000,"unit":"টি","description":"দেশী / ব্লাক বেঙ্গল জাত।","iconType":"goat","active":true},{"id":"cow-milk","name":"খাঁটি গরুর দুধ","category":"পশুপালন ও প্রাণিসম্পদ","price":80,"unit":"লিটার","description":"খামারের দুধ; অর্ডার নিশ্চিত করার সময় প্রাপ্যতা জানানো হবে।","iconType":"milk","active":true},{"id":"duck-eggs","name":"হাঁসের ডিম (খাকি ক্যাম্পবেল)","category":"পশুপালন ও প্রাণিসম্পদ","price":15,"unit":"পিস","description":"প্রতি পিস ১৫ টাকা অথবা ১৮০ টাকা ডজন।","iconType":"duckEgg","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":15},{"label":"ডজন","unit":"ডজন","price":180}]},{"id":"chicken-eggs","name":"দেশী মুরগির ডিম","category":"পশুপালন ও প্রাণিসম্পদ","price":10,"unit":"পিস","description":"প্রতি পিস ১০ টাকা অথবা ১২০ টাকা ডজন।","iconType":"chickenEgg","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":10},{"label":"ডজন","unit":"ডজন","price":120}]},{"id":"poultry-meat","name":"খামারের হাঁস/মুরগি (মাংসের জন্য)","category":"পশুপালন ও প্রাণিসম্পদ","price":500,"unit":"কেজি","description":"মাংসের জন্য; দাম প্রতি কেজি।","iconType":"poultry","active":true},{"id":"rui","name":"রুই মাছ","category":"ক্যানেল মৎস্য চাষ","price":330,"unit":"কেজি","description":"ক্যানেলে চাষকৃত রুই মাছ।","iconType":"fish","active":true},{"id":"katla","name":"কাতলা মাছ","category":"ক্যানেল মৎস্য চাষ","price":360,"unit":"কেজি","description":"ক্যানেলে চাষকৃত কাতলা মাছ।","iconType":"fishKatla","active":true},{"id":"mrigel","name":"মৃগেল / কার্প মাছ","category":"ক্যানেল মৎস্য চাষ","price":260,"unit":"কেজি","description":"মৃগেল ও অন্যান্য কার্প মাছ।","iconType":"fishSilver","active":true},{"id":"tilapia","name":"তেলাপিয়া মাছ","category":"ক্যানেল মৎস্য চাষ","price":210,"unit":"কেজি","description":"তাজা তেলাপিয়া মাছ।","iconType":"tilapia","active":true},{"id":"pangasius","name":"পাঙ্গাস / সিলভার কার্প","category":"ক্যানেল মৎস্য চাষ","price":170,"unit":"কেজি","description":"পাঙ্গাস অথবা সিলভার কার্প মাছ।","iconType":"fishSilver","active":true},{"id":"lemon","name":"কাপ্তাই কাগজি / কাটিমন লেবু","category":"ফলজ বাগান","price":2,"unit":"পিস","description":"প্রতি পিস ২ টাকা অথবা ২০০ টাকা ১০০টি।","iconType":"lemon","active":true,"options":[{"label":"প্রতি পিস","unit":"পিস","price":2},{"label":"১০০টি","unit":"১০০টি","price":200}]},{"id":"guava","name":"থাই পেয়ারা","category":"ফলজ বাগান","price":70,"unit":"কেজি","description":"বাগানের থাই পেয়ারা।","iconType":"guava","active":true},{"id":"jujube","name":"বাউ কুল / আপেল কুল","category":"ফলজ বাগান","price":80,"unit":"কেজি","description":"মৌসুমভিত্তিক ফল; প্রাপ্যতা অর্ডারে নিশ্চিত হবে।","iconType":"jujube","active":true},{"id":"papaya","name":"থাই পেঁপে","category":"ফলজ বাগান","price":50,"unit":"কেজি","description":"খামারের ফলজ বাগানের পেঁপে।","iconType":"papaya","active":true},{"id":"bottle-gourd","name":"ক্যানেলের মাচার লাউ","category":"মাচা, ভাসমান কৃষি ও সবজি","price":60,"unit":"টি","description":"ক্যানেলের মাচায় উৎপাদিত লাউ।","iconType":"gourd","active":true},{"id":"pumpkin","name":"মিষ্টি কুমড়া","category":"মাচা, ভাসমান কৃষি ও সবজি","price":40,"unit":"কেজি","description":"তাজা মিষ্টি কুমড়া।","iconType":"pumpkin","active":true},{"id":"beans","name":"শিম","category":"মাচা, ভাসমান কৃষি ও সবজি","price":60,"unit":"কেজি","description":"মৌসুমভিত্তিক তাজা শিম।","iconType":"beans","active":true},{"id":"eggplant","name":"বেগুন","category":"মাচা, ভাসমান কৃষি ও সবজি","price":50,"unit":"কেজি","description":"খামারের সবজি।","iconType":"eggplant","active":true},{"id":"leafy-greens","name":"লাল শাক / পালং শাক / ডাঁটা শাক","category":"মাচা, ভাসমান কৃষি ও সবজি","price":20,"unit":"আটি","description":"প্রতি আটি ২০ টাকা; শাকের ধরন প্রাপ্যতা অনুযায়ী।","iconType":"greens","active":true},{"id":"rice","name":"ধান (ধান সেকশন থেকে উৎপাদিত)","category":"মাচা, ভাসমান কৃষি ও সবজি","price":1300,"unit":"মন (৪০ কেজি)","description":"প্রতি মন (৪০ কেজি) ১,৩০০ টাকা।","iconType":"rice","active":true},{"id":"organic-manure","name":"জৈব সার / প্রক্রিয়াজাত গোবর","category":"বাই-প্রোডাক্ট ও অন্যান্য","price":12,"unit":"কেজি","description":"প্রতি কেজি ১২ টাকা।","iconType":"compost","active":true},{"id":"napier-cutting","name":"পাকচং / নেপিয়ার ঘাসের কাটিং","category":"বাই-প্রোডাক্ট ও অন্যান্য","price":2,"unit":"কাটিং","description":"পশুখাদ্যের জন্য ঘাসের কাটিং।","iconType":"grass","active":true}];
 if (!Array.isArray(DATA.products)) DATA.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCT_CATALOG));
-else {
-  // Ensure the full built-in 23-product catalogue remains available even if an older saved copy was incomplete.
-  const knownProductIds = new Set(DATA.products.map(product => String(product && product.id || "")));
-  DEFAULT_PRODUCT_CATALOG.forEach(product => {
-    if (!knownProductIds.has(String(product.id))) DATA.products.push(JSON.parse(JSON.stringify(product)));
-  });
-}
 if (!Array.isArray(DATA.orders)) DATA.orders = [];
 function ensureStaffExtras(rec){
   if (rec.salary === undefined || rec.salary === null) rec.salary = 0;
@@ -2318,73 +2281,7 @@ function saveState(){
   }
 }
 
-function formatProductFileSize(bytes){
-  const n = Number(bytes) || 0;
-  return n >= 1024 * 1024 ? (n / (1024 * 1024)).toFixed(2) + " MB" : Math.max(1, Math.round(n / 1024)) + " KB";
-}
-function setProductImageUploadStatus(message, target, isError){
-  const fallbackTarget = document.getElementById("productAdminStatus") || document.getElementById("newProductAdminStatus");
-  const el = target || fallbackTarget;
-  if (!el) return;
-  el.textContent = message;
-  el.style.color = isError ? "var(--red)" : "var(--mid)";
-}
-/* Resize/compress large photos before sending them to Firebase Storage.
-   A 5 MB phone photo is usually reduced to a few hundred KB for product cards. */
-async function compressProductImageForUpload(file){
-  validateProductImageFile(file);
-  if (file.size <= 300 * 1024) {
-    const objectUrl = URL.createObjectURL(file);
-    try {
-      const dims = await new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve({w: img.naturalWidth || img.width, h: img.naturalHeight || img.height});
-        img.onerror = () => reject(new Error("ছবিটি খোলা যায়নি। অন্য ছবি নির্বাচন করুন।"));
-        img.src = objectUrl;
-      });
-      if (Math.max(dims.w, dims.h) <= 1400) return file;
-    } finally { URL.revokeObjectURL(objectUrl); }
-  }
-  const objectUrl = URL.createObjectURL(file);
-  try {
-    const image = await new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error("ছবিটি খোলা যায়নি। অন্য ছবি নির্বাচন করুন।"));
-      img.src = objectUrl;
-    });
-    const sourceW = image.naturalWidth || image.width;
-    const sourceH = image.naturalHeight || image.height;
-    let bestBlob = null;
-    for (const maxDim of [1200, 960, 800]) {
-      const ratio = Math.min(1, maxDim / Math.max(sourceW, sourceH));
-      const width = Math.max(1, Math.round(sourceW * ratio));
-      const height = Math.max(1, Math.round(sourceH * ratio));
-      const canvas = document.createElement("canvas");
-      canvas.width = width; canvas.height = height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) throw new Error("ছবি কমপ্রেস করা যাচ্ছে না; অন্য ব্রাউজার দিয়ে চেষ্টা করুন।");
-      /* Product catalog images use a clean white background if source has transparency. */
-      ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, width, height);
-      ctx.drawImage(image, 0, 0, width, height);
-      for (const quality of [0.82, 0.74]) {
-        const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/jpeg", quality));
-        if (!blob) continue;
-        if (!bestBlob || blob.size < bestBlob.size) bestBlob = blob;
-        if (blob.size <= 300 * 1024) {
-          const name = String(file.name || "product-image").replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-70) || "product-image";
-          return new File([blob], name + "-optimized.jpg", {type: "image/jpeg", lastModified: Date.now()});
-        }
-      }
-    }
-    if (bestBlob) {
-      const name = String(file.name || "product-image").replace(/\.[^.]+$/, "").replace(/[^a-zA-Z0-9._-]+/g, "-").slice(-70) || "product-image";
-      return new File([bestBlob], name + "-optimized.jpg", {type: "image/jpeg", lastModified: Date.now()});
-    }
-    throw new Error("ছবি কমপ্রেস করা যায়নি। অন্য ছবি নির্বাচন করুন।");
-  } finally { URL.revokeObjectURL(objectUrl); }
-}
-async function uploadProductImageToStorage(file, productId, statusElement){
+async function uploadProductImageToStorage(file, productId){
   if (!file) return "";
   if (!isAdmin) throw new Error("পণ্যের ছবি আপলোড করতে Admin Login প্রয়োজন।");
   validateProductImageFile(file);
@@ -2397,14 +2294,7 @@ async function uploadProductImageToStorage(file, productId, statusElement){
   const safeName = String(file.name || "product-image").replace(/[^a-zA-Z0-9._-]+/g,"-").slice(-80);
   const path = "munshiAgro/products/" + String(productId).replace(/[^a-zA-Z0-9_-]/g,"-") + "/" + Date.now() + "-" + safeName;
   const ref = storage.ref().child(path);
-  const uploadTask = ref.put(file, { contentType: file.type, cacheControl: "public,max-age=31536000,immutable" });
-  const snapshot = await new Promise((resolve, reject) => {
-    uploadTask.on("state_changed", snap => {
-      const pct = snap.totalBytes ? Math.min(100, Math.round((snap.bytesTransferred / snap.totalBytes) * 100)) : 0;
-      setProductImageUploadStatus("ছবি আপলোড হচ্ছে " + pct + "% · " + formatProductFileSize(snap.bytesTransferred) + " / " + formatProductFileSize(snap.totalBytes), statusElement, false);
-    }, reject, () => resolve(uploadTask.snapshot));
-  });
-  setProductImageUploadStatus("ছবি আপলোড হয়েছে; লিংক তৈরি হচ্ছে…", statusElement, false);
+  const snapshot = await ref.put(file, { contentType: file.type, cacheControl: "public,max-age=3600" });
   return await snapshot.ref.getDownloadURL();
 }
 function validProductImageUrl(value){
@@ -2472,23 +2362,18 @@ function checkInlineImageFits(productId, dataUrl, draft){
   // Leave margin below Firestore's 1 MiB document maximum for document/index overhead.
   if (bytes > 900 * 1024) throw new Error("বর্তমান Firebase ডেটার সঙ্গে এই ছবিটি রাখলে ডেটাবেসের নিরাপদ আকার ছাড়িয়ে যাবে। Firebase Console থেকে Storage চালু করে ছবি আপলোড করুন।");
 }
-async function prepareProductImage(file, productId, draft, statusElement){
+async function prepareProductImage(file, productId, draft){
   if (!file) return {imageUrl:"",imageData:"",mode:"none"};
   validateProductImageFile(file);
   if (!isAdmin) throw new Error("পণ্যের ছবি পরিবর্তন করতে Admin Login প্রয়োজন।");
-  const originalSize = file.size || 0;
-  setProductImageUploadStatus("ছবি ছোট করা হচ্ছে… আসল ফাইল " + formatProductFileSize(originalSize), statusElement, false);
-  const uploadFile = await compressProductImageForUpload(file);
-  setProductImageUploadStatus("ছবি প্রস্তুত: " + formatProductFileSize(originalSize) + " → " + formatProductFileSize(uploadFile.size) + "। আপলোড শুরু হচ্ছে…", statusElement, false);
   try {
-    const url=await uploadProductImageToStorage(uploadFile,productId,statusElement);
-    return {imageUrl:url,imageData:"",mode:"firebase-storage",originalSize,uploadedSize:uploadFile.size};
+    const url=await uploadProductImageToStorage(file,productId);
+    return {imageUrl:url,imageData:"",mode:"firebase-storage"};
   } catch(storageError) {
     console.warn("Firebase Storage image upload failed; trying small-image fallback", storageError);
-    setProductImageUploadStatus("Firebase Storage-এ আপলোড হয়নি। ছোট বিকল্প ছবি সংরক্ষণের চেষ্টা হচ্ছে…", statusElement, false);
-    const dataUrl=await compressProductImageForFallback(uploadFile);
+    const dataUrl=await compressProductImageForFallback(file);
     checkInlineImageFits(productId,dataUrl,draft || {});
-    return {imageUrl:"",imageData:dataUrl,mode:"firestore-fallback",storageError,originalSize,uploadedSize:uploadFile.size};
+    return {imageUrl:"",imageData:dataUrl,mode:"firestore-fallback",storageError};
   }
 }
 async function persistProductChanges(){
@@ -2514,14 +2399,8 @@ async function persistProductChanges(){
 function renderProductAdminList(){
   const container = document.getElementById("productAdminList");
   if (!container) return;
-  const allProducts = Array.isArray(DATA.products) ? DATA.products : [];
-  const searchEl = document.getElementById("productAdminSearch");
-  const query = String(searchEl && searchEl.value || "").trim().toLocaleLowerCase("bn-BD");
-  const list = allProducts.filter(p => !query || `${p.name||""} ${p.category||""} ${p.description||""}`.toLocaleLowerCase("bn-BD").includes(query));
-  const count = document.getElementById("productAdminCount");
-  if (count) count.textContent = query ? `${list.length} / ${allProducts.length}টি পণ্য` : `মোট ${allProducts.length}টি পণ্য`;
-  if (!allProducts.length) { container.innerHTML = '<div class="empty">এখনো কোনো পণ্য যোগ করা হয়নি।</div>'; return; }
-  if (!list.length) { container.innerHTML = '<div class="empty">এই নামে কোনো পণ্য পাওয়া যায়নি। অন্য নাম দিয়ে খুঁজুন।</div>'; return; }
+  const list = Array.isArray(DATA.products) ? DATA.products : [];
+  if (!list.length) { container.innerHTML = '<div class="empty">এখনো কোনো পণ্য যোগ করা হয়নি।</div>'; return; }
   const esc = value => String(value == null ? "" : value).replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
   container.innerHTML = list.map(p => {
     const opts = Array.isArray(p.options) && p.options.length ? p.options : [{label:"প্রতি "+(p.unit||"একক"),unit:p.unit||"একক",price:Number(p.price)||0}];
@@ -2532,8 +2411,6 @@ function renderProductAdminList(){
     return `<div class="product-admin-row" data-product-admin-row="${esc(p.id)}">${imageCell}<div><div class="product-admin-name">${esc(p.name)}</div><span class="product-admin-cat">${esc(p.category)} · একক: ${esc(p.unit||"একক")}</span></div><div class="product-admin-prices">${prices}</div><label class="product-admin-active"><input type="checkbox" data-product-active="${esc(p.id)}" ${p.active===false?"":"checked"}> দোকানে দেখাবে</label><button type="button" class="product-admin-save" data-save-product="${esc(p.id)}">সংরক্ষণ</button></div>`;
   }).join("");
 }
-const productAdminSearchEl = document.getElementById("productAdminSearch");
-if (productAdminSearchEl) productAdminSearchEl.addEventListener("input", renderProductAdminList);
 function notifyProductAdminStatus(message, error){
   const el = document.getElementById("productAdminStatus");
   if (el) { el.textContent = message; el.style.color = error ? "var(--red)" : "var(--mid)"; }
@@ -2596,7 +2473,7 @@ if (productAdminListEl) {
     button.textContent = imageFile ? "ছবি আপলোড হচ্ছে…" : "সংরক্ষণ হচ্ছে…";
     try {
       let imageResult=null;
-      if (imageFile) imageResult = await prepareProductImage(imageFile,id,p,document.getElementById("productAdminStatus"));
+      if (imageFile) imageResult = await prepareProductImage(imageFile,id,p);
       let finalImageUrl = String(p.imageUrl || "");
       let finalImageData = String(p.imageData || "");
       if (imageResult) {
@@ -2670,11 +2547,11 @@ if (newProductAdminForm) newProductAdminForm.addEventListener("submit", async ev
   const oldData=JSON.stringify(DATA);
   const submitButton = newProductAdminForm.querySelector('button[type="submit"]');
   const originalText = submitButton ? submitButton.textContent : "+ পণ্য যোগ করুন";
-  if (submitButton) { submitButton.disabled = true; submitButton.textContent = imageFile ? "ছবি কমপ্রেস ও আপলোড হচ্ছে…" : "পণ্য সংরক্ষণ হচ্ছে…"; }
+  if (submitButton) { submitButton.disabled = true; submitButton.textContent = imageFile ? "ছবি সংরক্ষণ হচ্ছে…" : "পণ্য সংরক্ষণ হচ্ছে…"; }
   try {
     let saveMode="none";
     if (imageFile) {
-      const imageResult=await prepareProductImage(imageFile,productId,newProduct,status);
+      const imageResult=await prepareProductImage(imageFile,productId,newProduct);
       newProduct.imageUrl=imageResult.imageUrl;
       if(imageResult.imageData)newProduct.imageData=imageResult.imageData;
       saveMode=imageResult.mode;
@@ -4984,13 +4861,6 @@ function startApp(){
 function normalizeData(d){
   if (!d.customCats) d.customCats = { income: [], expense: [] };
   if (!Array.isArray(d.products)) d.products = JSON.parse(JSON.stringify(DEFAULT_PRODUCT_CATALOG));
-  else {
-    // Restore any missing built-in products without overwriting admin-edited price/image data.
-    const knownProductIds = new Set(d.products.map(product => String(product && product.id || "")));
-    DEFAULT_PRODUCT_CATALOG.forEach(product => {
-      if (!knownProductIds.has(String(product.id))) d.products.push(JSON.parse(JSON.stringify(product)));
-    });
-  }
   if (!Array.isArray(d.orders)) d.orders = [];
   if (!d.staff) d.staff = { pending: [], approved: [] };
   if (!d.investors) d.investors = { pending: [], approved: [] };
