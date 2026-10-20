@@ -112,14 +112,23 @@
   .pitch-points{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:23px 0 24px;padding:0;list-style:none}
   .pitch-points li{display:flex;align-items:flex-start;gap:9px;padding:11px 12px;border:1px solid rgba(211,226,213,.95);border-radius:13px;background:rgba(255,255,255,.78);color:#395646;font-size:12px;line-height:1.6;box-shadow:0 3px 12px rgba(23,63,50,.025)}
   .pitch-icon{flex:none;font-size:17px;line-height:1.35}
-  .hero-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0}
+  .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:540px;margin:24px 0 0}
   .hero-actions .btn,.project-card .btn{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:11px 15px;border-radius:11px;font:700 13px/1.3 system-ui,sans-serif;text-decoration:none;border:1px solid transparent;cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s}
-  .hero-actions .btn:hover,.project-card .btn:hover{transform:translateY(-1px)}
-  .hero-cta-primary{background:var(--ma-forest)!important;color:#fff!important;box-shadow:0 7px 16px rgba(23,63,50,.15)}
-  .hero-cta-primary:hover{background:#0d3024!important}
-  .hero-cta-secondary{background:#fff!important;border-color:#d7e5d8!important;color:var(--ma-forest)!important}
-  .hero-actions .btn-whatsapp{background:#e7f3e9!important;color:#24623c!important;border-color:#d3e6d6!important}
-  .install-inline{display:inline-flex;gap:5px;align-items:center;flex-wrap:wrap}
+  .hero-actions .btn:hover,.project-card .btn:hover{transform:translateY(-2px)}
+  .hero-actions .hero-action-card{width:100%;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:9px;padding:10px 12px;min-height:58px;text-align:left;border-radius:13px;box-shadow:0 5px 15px rgba(23,63,50,.055)}
+  .hero-action-label{display:flex;align-items:center;gap:9px;min-width:0}
+  .hero-action-icon{display:grid;place-items:center;flex:none;width:34px;height:34px;border-radius:10px;background:rgba(255,255,255,.16);font-size:17px}
+  .hero-action-text{font-size:12.5px;font-weight:800;line-height:1.4}
+  .hero-action-arrow{font-size:17px;opacity:.8;flex:none}
+  .hero-action-project{background:var(--ma-forest)!important;color:#fff!important;box-shadow:0 7px 16px rgba(23,63,50,.15)!important}
+  .hero-action-project:hover{background:#0d3024!important}
+  .hero-action-invest-info{background:#fff!important;border-color:#d7e5d8!important;color:var(--ma-forest)!important}
+  .hero-action-invest-info .hero-action-icon,.hero-action-videos .hero-action-icon{background:#e8f2e8}
+  .hero-action-videos{background:#e8f2e8!important;border-color:#d5e5d6!important;color:var(--ma-forest)!important}
+  .hero-action-invest-now{background:var(--ma-gold)!important;border-color:#e0a933!important;color:#24362b!important;box-shadow:0 7px 16px rgba(231,179,76,.18)!important}
+  .hero-action-invest-now .hero-action-icon{background:rgba(255,255,255,.4)}
+  .hero-support-note{margin-top:13px;color:#66796c;font-size:11px;line-height:1.7}
+  .install-inline{display:inline-flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:8px}
   .hero-visual{position:relative;min-height:450px;height:clamp(380px,42vw,535px);overflow:hidden;border:7px solid rgba(255,255,255,.9);border-radius:28px;background:linear-gradient(145deg,#a5c7a5,#3a7451 48%,#183f2e);box-shadow:0 24px 55px rgba(23,63,50,.17)}
   .hero-visual>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block}
   .hero-visual-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,37,26,.02) 20%,rgba(9,37,26,.12) 46%,rgba(9,37,26,.83) 100%);pointer-events:none}
@@ -239,8 +248,8 @@
     .hero-tagline{font-size:12px}.hero-copy h1{font-size:33px;line-height:1.22;margin-bottom:13px}
     .hero-lede{font-size:13.5px;line-height:1.8}
     .pitch-points{grid-template-columns:1fr;gap:7px;margin:17px 0}.pitch-points li{font-size:12px;padding:10px 11px}
-    .hero-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.hero-actions .btn{width:100%;min-height:43px;font-size:11.5px;padding:10px 8px}
-    .hero-actions .btn-whatsapp{grid-column:1/-1}.hero-visual{height:310px;min-height:260px}.hero-visual-caption{left:16px;right:16px;bottom:16px}.hero-visual-caption strong{font-size:23px}.hero-floating-stat{top:12px;right:12px;padding:10px 12px;min-width:114px}.hero-floating-stat strong{font-size:19px}
+    .hero-actions{grid-template-columns:1fr 1fr;gap:8px;margin-top:19px}.hero-actions .btn{width:100%;min-height:51px;font-size:11.5px;padding:9px 8px}.hero-action-icon{width:29px;height:29px;font-size:15px;border-radius:8px}.hero-action-text{font-size:11px}.hero-action-arrow{font-size:15px}.hero-support-note{font-size:10.5px}
+    .hero-visual{height:310px;min-height:260px}.hero-visual-caption{left:16px;right:16px;bottom:16px}.hero-visual-caption strong{font-size:23px}.hero-floating-stat{top:12px;right:12px;padding:10px 12px;min-width:114px}.hero-floating-stat strong{font-size:19px}
     .workspace-head{align-items:flex-start;flex-direction:column}.workspace-head .workspace-toggle{width:auto}#heroTrackerFrame{min-height:660px;height:740px}
     .farm-map-heading{align-items:flex-start;flex-direction:column}.farm-map-heading h2{font-size:25px}.farm-map-heading p{font-size:12.5px}#farmMapFrame{height:1050px}
     .dashboard-section{padding:16px 0 38px}.accordion-header{padding:15px 16px;font-size:14px}.accordion-panel{padding:0 15px 16px}.accordion-panel h3{font-size:18px}
@@ -349,19 +358,29 @@
           <li><span class="pitch-icon" aria-hidden="true">🗺️</span>১০ বছরের ধাপভিত্তিক পরিকল্পনা — অগ্রগতি নিয়মিত পর্যালোচনা</li>
           <li><span class="pitch-icon" aria-hidden="true">🤝</span>স্থানীয় কর্মসংস্থান তৈরি — উপকূলীয় তরুণদের জন্য টেকসই কাজের সুযোগ</li>
         </ul>
-        <div class="hero-actions">
-          <a href="#farm-map" class="btn btn-primary hero-cta-primary">🗺️ খামারের নকশা দেখুন</a>
-          <a href="#public-dashboard" class="btn btn-ghost hero-cta-secondary">📊 কৃষি ড্যাশবোর্ড</a>
-          <a href="https://wa.me/8801581477854" class="btn btn-whatsapp" target="_blank" rel="noopener">💬 যোগাযোগ করুন</a>
-          <span class="install-inline" id="installPill" hidden>
-            <button type="button" class="btn btn-ghost install-btn-inline" id="installBtn">📲 অ্যাপ ইনস্টল করুন</button>
-            <button type="button" class="install-close-inline" id="installClose" aria-label="বন্ধ করুন">✕</button>
-            <span class="install-hint" id="installHint" hidden>Safari-তে নিচের শেয়ার (⬆️) বাটন চেপে "Add to Home Screen" বাছুন।</span>
-          </span>
+        <div class="hero-actions" aria-label="প্রজেক্ট ও বিনিয়োগের দ্রুত অপশন">
+          <button type="button" class="btn hero-action-card hero-action-project" data-dashboard-action="btnProjectInfo">
+            <span class="hero-action-label"><span class="hero-action-icon" aria-hidden="true">📄</span><span class="hero-action-text">প্রজেক্ট সম্পর্কে</span></span><span class="hero-action-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button type="button" class="btn hero-action-card hero-action-invest-info" data-dashboard-action="btnInvestInfo">
+            <span class="hero-action-label"><span class="hero-action-icon" aria-hidden="true">📘</span><span class="hero-action-text">ইনভেস্ট সম্পর্কে</span></span><span class="hero-action-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button type="button" class="btn hero-action-card hero-action-videos" data-dashboard-action="btnVideos">
+            <span class="hero-action-label"><span class="hero-action-icon" aria-hidden="true">▶️</span><span class="hero-action-text">প্রজেক্ট ভিডিও</span></span><span class="hero-action-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button type="button" class="btn hero-action-card hero-action-invest-now" data-dashboard-action="btnInvestNow">
+            <span class="hero-action-label"><span class="hero-action-icon" aria-hidden="true">🤝</span><span class="hero-action-text">ইনভেস্ট করুন</span></span><span class="hero-action-arrow" aria-hidden="true">↗</span>
+          </button>
         </div>
+        <div class="hero-support-note">🗺️ জমির নকশা ও কৃষি ড্যাশবোর্ড দেখতে উপরের মেনু ব্যবহার করুন।</div>
+        <span class="install-inline" id="installPill" hidden>
+          <button type="button" class="btn btn-ghost install-btn-inline" id="installBtn">📲 অ্যাপ ইনস্টল করুন</button>
+          <button type="button" class="install-close-inline" id="installClose" aria-label="বন্ধ করুন">✕</button>
+          <span class="install-hint" id="installHint" hidden>Safari-তে নিচের শেয়ার (⬆️) বাটন চেপে "Add to Home Screen" বাছুন।</span>
+        </span>
       </div>
       <aside class="hero-visual" aria-label="মুন্সী এগ্রোর সমন্বিত কৃষি পরিকল্পনা">
-          <img src="cover.jpg" alt="মুন্সী এগ্রোর কৃষি উদ্যোগের প্রচ্ছদচিত্র" loading="eager" onerror="this.style.display='none'">
+          <img src="munshi-agro-integrated-farm.webp" alt="মুন্সী এগ্রোর সমন্বিত কৃষি—পুকুর, ভাসমান সবজি, ফসল, ফলজ বাগান ও পশুপালনের ভেক্টর-স্টাইল চিত্র" loading="eager" decoding="async">
           <div class="hero-visual-shade"></div>
           <div class="hero-visual-caption">
             <span class="visual-kicker">INTEGRATED AGRICULTURE</span>
@@ -749,6 +768,8 @@
   function clickDashboardAction(actionId) {
     pendingRole = null;
     if (activeRole) setDashboardMode(true);
+    // Public action buttons open existing modals inside dashboard.html; bring that iframe into view first.
+    workspace.scrollIntoView({top:0, behavior:'smooth', block:'start'});
     if (!frameReady) { pendingAction = actionId; return; }
     try {
       const target = frame.contentDocument && frame.contentDocument.getElementById(actionId);
