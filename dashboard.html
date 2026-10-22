@@ -38,11 +38,11 @@
 <script src="https://cdn.jsdelivr.net/npm/firebase@10.12.2/firebase-storage-compat.js"></script>
 <style>
   :root {
-    --dark: #1B4332;
-    --green: #2D6A4F;
-    --mid: #40916C;
-    --soft: #D8F3DC;
-    --bg: #F3F8F1;
+    --dark: #0B3326;
+    --green: #176344;
+    --mid: #3FA66B;
+    --soft: #DCEFE1;
+    --bg: #EDF4ED;
     --amber: #F4A300;
     --amber-soft: #FFF1CC;
     --brown: #8D5B2B;
@@ -210,8 +210,8 @@
   .form-grid .full { grid-column: 1 / -1; }
 
   .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200;
-    display: flex; align-items: center; justify-content: center; padding: 16px;
+    position: fixed; inset: 0; background: rgba(2,20,13,0.72); z-index: 2147483000; overscroll-behavior: contain;
+    display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y:auto;
   }
   .modal-box {
     background: var(--white); border-radius: 16px; padding: 26px 22px; max-width: 480px; width: 100%;
@@ -785,6 +785,11 @@
     .product-admin-price-field{min-width:110px}
   }
 
+
+.pdf-viewer-overlay{z-index:2147483000!important;align-items:center!important;justify-content:center!important}
+.pdf-viewer-box{width:min(1100px,96vw)!important;max-width:1100px!important;max-height:94vh!important;padding:22px!important;background:var(--white)!important}
+.pdf-viewer-box h2{padding-right:42px}
+@media(max-width:600px){.pdf-viewer-box{width:100%!important;max-height:96vh!important;padding:18px 12px!important}.pdf-viewer-box iframe{min-height:55vh!important;height:60vh!important}}
 </style>
 <script>if(new URLSearchParams(location.search).get('embed')==='1')document.documentElement.classList.add('embedded-dashboard');</script>
 
@@ -1364,12 +1369,13 @@
   </div>
 </div>
 
-<div class="modal-overlay" id="pdfInfoOverlay" style="display:none;">
-  <div class="modal-box">
-    <button type="button" class="modal-close" id="pdfInfoClose">✕</button>
+<div class="modal-overlay pdf-viewer-overlay" id="pdfInfoOverlay" style="display:none;">
+  <div class="modal-box pdf-viewer-box">
+    <button type="button" class="modal-close" id="pdfInfoClose" aria-label="বন্ধ করুন">✕</button>
     <h2 id="pdfInfoTitle">PDF</h2>
     <p id="pdfInfoBody" class="view-note"></p>
-    <a id="pdfInfoLink" class="btn btn-primary" href="#" target="_blank" rel="noopener">PDF খুলুন</a>
+    <iframe id="pdfInfoFrame" title="PDF প্রিভিউ" loading="lazy" style="width:100%;height:min(68vh,760px);min-height:360px;border:1px solid var(--soft);border-radius:10px;background:#fff;"></iframe>
+    <p style="margin:10px 0 0"><a id="pdfInfoLink" class="btn btn-primary" href="#" target="_blank" rel="noopener">নতুন ট্যাবে PDF খুলুন</a></p>
   </div>
 </div>
 
@@ -3990,11 +3996,14 @@ window.addEventListener("beforeunload", () => pdfObjectUrls.forEach(url => URL.r
 function openPublicPdfInfo(key, title, message){
   document.getElementById("pdfInfoTitle").textContent = title;
   document.getElementById("pdfInfoBody").textContent = message;
+  const url = resolvePublicPdfUrl(key);
   const link = document.getElementById("pdfInfoLink");
-  link.href = resolvePublicPdfUrl(key);
+  link.href = url;
   link.target = "_blank";
   link.rel = "noopener";
-  link.style.display = "block";
+  link.style.display = "inline-flex";
+  const frame = document.getElementById("pdfInfoFrame");
+  frame.src = url;
   openModal("pdfInfoOverlay");
 }
 document.getElementById("btnProjectInfo").addEventListener("click", () => {
@@ -4003,9 +4012,9 @@ document.getElementById("btnProjectInfo").addEventListener("click", () => {
 document.getElementById("btnInvestInfo").addEventListener("click", () => {
   openPublicPdfInfo("invest", "Invest সম্পর্কে", "বিনিয়োগ বিষয়ক প্রাথমিক তথ্য ও আর্থিক প্রক্ষেপণ PDF দেখতে নিচের বাটনে ক্লিক করুন।");
 });
-document.getElementById("pdfInfoClose").addEventListener("click", () => closeModal("pdfInfoOverlay"));
+document.getElementById("pdfInfoClose").addEventListener("click", () => { closeModal("pdfInfoOverlay"); document.getElementById("pdfInfoFrame").src = "about:blank"; });
 document.getElementById("pdfInfoOverlay").addEventListener("click", (ev)=>{
-  if (ev.target.id === "pdfInfoOverlay") closeModal("pdfInfoOverlay");
+  if (ev.target.id === "pdfInfoOverlay") { closeModal("pdfInfoOverlay"); document.getElementById("pdfInfoFrame").src = "about:blank"; }
 });
 
 document.getElementById("investorForm").addEventListener("submit", (ev)=>{
